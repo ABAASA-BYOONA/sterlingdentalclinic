@@ -377,80 +377,6 @@
       text-align: left;
     }
 
-    /* Footer */
-    footer {
-      background: #005f99;
-      color: white;
-      padding: 30px 20px;
-      margin-top: 40px;
-      font-size: 0.9rem;
-    }
-
-    footer a {
-      color: #cce4ff;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    footer a:hover,
-    footer a:focus {
-      color: #fff;
-      text-decoration: underline;
-      outline: none;
-    }
-
-    footer div {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      text-align: left;
-      gap: 20px;
-    }
-
-    footer h3 {
-      margin-bottom: 15px;
-      font-size: 1.2rem;
-      color: #cce4ff;
-    }
-
-    footer ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    footer ul li {
-      margin-bottom: 8px;
-    }
-
-    footer p {
-      margin: 0 0 10px 0;
-    }
-
-    footer .social-icons {
-      margin-top: 10px;
-    }
-
-    footer .social-icons a {
-      margin: 0 10px;
-      font-size: 20px;
-      color: #cce4ff;
-    }
-
-    footer .social-icons a:hover,
-    footer .social-icons a:focus {
-      color: #fff;
-      outline: none;
-    }
-
-    @media (max-width: 600px) {
-      footer div {
-        flex-direction: column;
-        gap: 30px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -537,29 +463,44 @@
     </div>
   </main>
 
-  <footer>
-    <div>
-      <div>
-        <h3>Contact Us</h3>
-        <p>123 Dental Street, Kampala, Uganda</p>
-        <p>Phone: <a href="tel:+256772488592">+256 772 488 592</a></p>
-        <p>Email: <a href="mailto:info@sterlingdental.co.ug">info@sterlingdental.co.ug</a></p>
+ <footer>
+    <div style="max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; text-align: left;">
+      <div style="flex: 1; min-width: 200px; margin: 10px;">
+        <h3>Sterling Dental Clinic</h3>
+        <p>Providing exceptional dental care to Kampala since 2010.</p>
       </div>
-      <div>
-        <h3>Follow Us</h3>
-        <div class="social-icons" role="list">
-          <a href="https://www.facebook.com/SterlingDentalPractice" style="color: #fff; margin: 0 10px; font-size: 20px;" title="Facebook"><i class="fab fa-facebook"></i></a>
+      <div style="flex: 1; min-width: 200px; margin: 10px;">
+        <h3>Quick Links</h3>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="index.html" style="color: #fff; text-decoration: none;">Home</a></li>
+          <li><a href="services.html" style="color: #fff; text-decoration: none;">Services</a></li>
+          <li><a href="about.html" style="color: #fff; text-decoration: none;">About Us</a></li>
+          <li><a href="#contact" style="color: #fff; text-decoration: none;">Contact</a></li>
+        </ul>
+      </div>
+      <div style="flex: 1; min-width: 200px; margin: 10px;">
+        <h3>Contact Us</h3>
+        <p>
+          <i class="fas fa-map-marker-alt"></i> Garden City Mall, Kampala<br>
+          <i class="fas fa-phone-alt"></i> +256 772 488592<br>
+          <i class="fas fa-envelope"></i> info@kampalasterlingdentalclinic.com
+        </p>
+      </div>
+    </div>
+    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid;">
+      <p>© 2025 Sterling Dental Clinic. All rights reserved.</p>
+      <div style="margin-top: 10px;">
+        <a href="https://www.facebook.com/SterlingDentalPractice" style="color: #fff; margin: 0 10px; font-size: 20px;" title="Facebook"><i class="fab fa-facebook"></i></a>
         <a href="https://www.twitter.com/yourprofile" style="color: #fff; margin: 0 10px; font-size: 20px;" title="Twitter"><i class="fab fa-twitter"></i></a>
         <a href="https://www.linkedin.com/accessibility?openinweb=true" style="color: #fff; margin: 0 10px; font-size: 20px;" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
         <a href="https://www.instagram.com/sterlingdentalclinic?igsh=MjZpdXk1cWsxeHQ1" style="color: #fff; margin: 0 10px; font-size: 20px;" title="Instagram"><i class="fab fa-instagram"></i></a>
         <a href="https://www.snapchat.com/add/sterlingdental?share_id=PbJexKFCMqA&locale=en-US" style="color: #fff; margin: 0 10px; font-size: 20px;" title="Snapchat"><i class="fab fa-snapchat"></i></a>
         <a href="https://www.tiktok.com/@sterlingdentalclinic?_t=ZM-8wcxw0G6gEf&_r=1" style="color: #fff; margin: 0 10px; font-size: 20px;" title="TikTok"><i class="fab fa-tiktok"></i></a>
         <a href="https://wa.me/message/MGRPNC4UBTNFD1" style="color: #fff; margin: 0 10px; font-size: 20px;" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        </div>
       </div>
     </div>
-    <p style="text-align:center; margin-top: 20px;">&copy; 2025 Sterling Dental Clinic. All rights reserved.</p>
   </footer>
+
 
   <script>
     // Responsive burger menu toggle
