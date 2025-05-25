@@ -820,6 +820,7 @@
   </footer>
 
   <script>
+    
     // Loader Script
     setTimeout(() => {
       const loader = document.getElementById('loader');
@@ -861,6 +862,10 @@
     });
 
     // Testimonial Form Script
+    const supabase = Supabase.createClient(
+  'https://emldrnonwflkbbnbughi.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtbGRybm9ud2Zsa2JibmJ1Z2hpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxOTEwMzQsImV4cCI6MjA2Mzc2NzAzNH0.R2PETzSHm0uGa-A62RjN9FJiQ2VSM_J5KcB7NeJ3AEU'
+);
   document.getElementById('testimonial-form').addEventListener('submit', async function (e) {
   e.preventDefault();
 
