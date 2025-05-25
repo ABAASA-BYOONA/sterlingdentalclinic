@@ -25,6 +25,28 @@
     </center>
     <p>Your trusted partner for exceptional dental care in Kampala</p>
      <style>
+
+      body {
+      background-image: url('drive/_OK_9101.jpg');
+      background-repeat: repeat;
+      background-size: auto;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+    }
+
+    /* Transparent Background Overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: inherit;
+      opacity: 0.8;
+      z-index: -1;
+    }
+
   nav {
     padding: 10px 20px;
     display: flex;
@@ -98,6 +120,194 @@
   .burger.active div:nth-child(3) {
     transform: rotate(-45deg) translate(5px, -5px);
   }
+
+   section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #007BFF;
+      font-size: 2rem;
+    }
+
+    p {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+  /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .service-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .service-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .service-card ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+    }
+
+    .service-card li {
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+  
+    /* WhatsApp Buttons */
+    .whatsapp {
+      position: fixed;
+      right: 30px;
+      display: flex;
+      align-items: center;
+      background-color: #25D366;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 9999;
+    }
+
+    .whatsapp:first-of-type {
+      bottom: 100px;
+    }
+
+    .whatsapp:nth-of-type(2) {
+      bottom: 160px;
+    }
+
+    .whatsapp svg {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+    }
+
+    /* AI Chat Styles */
+    #ai-chat-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: transparent;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 10000;
+    }
+
+    #ai-chat-popup {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      width: 320px;
+      max-height: 400px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 10000;
+      font-family: Arial, sans-serif;
+    }
+
+    #ai-chat-header {
+      background-color: #007BFF;
+      color: white;
+      padding: 12px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    #ai-chat-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 14px;
+    }
+
+    #ai-chat-input-container {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+
+    #ai-chat-input {
+      flex: 1;
+      border: none;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    #ai-chat-input:focus {
+      outline: none;
+    }
+
+    #ai-chat-send {
+      background-color: #007BFF;
+      border: none;
+      color: white;
+      padding: 0 15px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .ai-message {
+      margin-bottom: 10px;
+      padding: 8px 12px;
+      border-radius: 15px;
+      max-width: 80%;
+      clear: both;
+    }
+
+    .user-message {
+      background-color: #007BFF;
+      color: white;
+      float: right;
+    }
+
+    .bot-message {
+      background-color: #f1f1f1;
+      color: #333;
+      float: left;
+    }
+
+
+    /* Footer Styles */
+    footer {
+      background: #005f99;
+      color: white;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
 </style>
 
 <nav>
@@ -321,10 +531,10 @@
 
     // Workplace FAQ examples
     if (q.includes('working hours') || q.includes('open') || q.includes('hours')) {
-      return 'Our clinic is open Monday to Friday from 8:00 AM to 6:00 PM, and Saturday from 9:00 AM to 3:00 PM.';
+      return 'Our clinic is open Monday to Friday from 9:00 AM to 6:00 PM, and Saturday from 9:00 AM to 3:00 PM.';
     }
     if (q.includes('location') || q.includes('address')) {
-      return 'We are located at Garden City Mall, Level 3, Kampala, Uganda.';
+      return 'We are located at Garden City Mall, ground floor, Kampala, Uganda.';
     }
     if (q.includes('appointment') || q.includes('book')) {
       return 'You can book an appointment online through our website or call us at +256 772 488592.';
