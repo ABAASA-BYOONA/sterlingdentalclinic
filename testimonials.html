@@ -155,10 +155,7 @@
 
      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
      <script>
-const supabase = Supabase.createClient(
-  'https://emldrnonwflkbbnbughi.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtbGRybm9ud2Zsa2JibmJ1Z2hpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxOTEwMzQsImV4cCI6MjA2Mzc2NzAzNH0.R2PETzSHm0uGa-A62RjN9FJiQ2VSM_J5KcB7NeJ3AEU'
-);
+
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('testimonials-container');
   const testimonials = JSON.parse(localStorage.getItem('testimonials') || '[]');
