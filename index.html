@@ -520,6 +520,15 @@
       </div>
     </div>
   </div>
+  <script>
+    // Loader Script
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      if (loader) {
+        loader.style.display = 'none';
+      }
+    }, 1500);
+  </script>
 
  <header>
   <div class="header-content">
@@ -820,15 +829,6 @@
   </footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script>
-    
-    // Loader Script
-    setTimeout(() => {
-      const loader = document.getElementById('loader');
-      if (loader) {
-        loader.style.display = 'none';
-      }
-    }, 1500);
-
     // Navigation Script
     const burger = document.getElementById('burger');
     const navLinks = document.querySelectorAll('nav a');
