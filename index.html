@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Sterling Dental Clinic in Kampala offers expert dental care including general, cosmetic, and pediatric dentistry. Book your appointment today!">
+  <title>Sterling Dental Clinic | Quality Dental Care in Kampala</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      background: #f4f4f4;
+    }
+
+    /* Loader Styles */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-color, white);
+      z-index: 9999;
+    }
+
+    .loader__content {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .glitch-container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .glitch {
+      width: 50%;
+      max-width: 300px;
+      margin: 0 auto;
+      overflow: hidden;
+      font-size: 5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      position: relative;
+      text-shadow: 0.05em 0 0 var(--accent, #ff0000), 
+                  -0.025em -0.05em 0 var(--secondary, #00ff00),
+                  0.025em 0.05em 0 var(--accent, #ff0000);
+      animation: glitch 2s infinite;
+      white-space: nowrap;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .glitch::before {
+      animation: glitch-effect 3s infinite;
+      clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+    }
+
+    .glitch::after {
+      animation: glitch-effect 2s infinite reverse;
+      clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+      -webkit-clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+    }
+
+    .scan-line {
+      position: absolute;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, transparent, var(--accent, #ff0000), var(--secondary, #00ff00), transparent);
+      filter: blur(2px);
+      animation: scan 3s linear infinite;
+      z-index: 3;
+    }
+
+    .glitch-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(to bottom, transparent 0%, white 0.5%, transparent 1%);
+      animation: overlay 3s linear infinite;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .load {
+      width: 50%;
+      height: auto;
+      max-width: 50%;
+      display: block;
+    }
+
+    @media (max-width: 1200px) {
+      .glitch {
+        font-size: 4rem;
+        max-width: 250px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .glitch {
+        font-size: 3rem;
+        max-width: 50%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .glitch {
+        font-size: 2rem;
+      }
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+
+    @keyframes glitch-effect {
+      0% { transform: translate(0); opacity: 1; }
+      10% { transform: translate(-5px, -5px); opacity: 0.8; }
+      20% { transform: translate(5px, 5px); opacity: 0.9; }
+      30% { transform: translate(-3px, 3px); opacity: 0.7; }
+      40% { transform: translate(3px, -3px); opacity: 0.6; }
+      50% { transform: translate(0); opacity: 1; }
+      100% { transform: translate(0); opacity: 1; }
+    }
+
+    @keyframes scan {
+      0% { top: -50%; }
+      100% { top: 150%; }
+    }
+
+    @keyframes overlay {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 -100%; }
+    }
+
+    /* Header Styles */
+    header {
+      text-align: center;
+      padding: 20px;
+      background: #007BFF;
+      color: white;
+    }
+
+    .logo {
+      max-width: 100px;
+      height: auto;
+      vertical-align: middle;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 10px;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      margin-top: 10px;
+    }
+
+    /* Navigation Styles */
+    nav {
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 1rem;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .burger {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .burger div {
+      width: 25px;
+      height: 3px;
+      background: white;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      nav a {
+        display: none;
+        width: 100%;
+        padding: 12px 0;
+        border-top: 1px solid rgba(255,255,255,0.2);
+        justify-content: center;
+      }
+
+      nav a.active {
+        display: flex;
+      }
+
+      .burger {
+        display: flex;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .burger.active div:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .burger.active div:nth-child(2) {
+        opacity: 0;
+      }
+
+      .burger.active div:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+    }
+
+    /* Section Styles */
+    section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #007BFF;
+      font-size: 2rem;
+    }
+
+    p {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .service-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .service-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .service-card ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+    }
+
+    .service-card li {
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    /* Appointment Form */
+    #appointment-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    #appointment-form input,
+    #appointment-form select,
+    #appointment-form textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    #appointment-form textarea {
+      resize: vertical;
+    }
+
+    #appointment-form button {
+      background-color: #007BFF;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    #appointment-form button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Contact Section */
+    #contact iframe {
+      width: 100%;
+      max-width: 600px;
+      height: 250px;
+      margin: 0 auto;
+      display: block;
+    }
+
+    /* WhatsApp Buttons */
+    .whatsapp {
+      position: fixed;
+      right: 30px;
+      display: flex;
+      align-items: center;
+      background-color: #25D366;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 9999;
+    }
+
+    .whatsapp:first-of-type {
+      bottom: 100px;
+    }
+
+    .whatsapp:nth-of-type(2) {
+      bottom: 160px;
+    }
+
+    .whatsapp svg {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+    }
+
+    /* AI Chat Styles */
+    #ai-chat-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: transparent;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 10000;
+    }
+
+    #ai-chat-popup {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      width: 320px;
+      max-height: 400px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 10000;
+      font-family: Arial, sans-serif;
+    }
+
+    #ai-chat-header {
+      background-color: #007BFF;
+      color: white;
+      padding: 12px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    #ai-chat-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 14px;
+    }
+
+    #ai-chat-input-container {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+
+    #ai-chat-input {
+      flex: 1;
+      border: none;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    #ai-chat-input:focus {
+      outline: none;
+    }
+
+    #ai-chat-send {
+      background-color: #007BFF;
+      border: none;
+      color: white;
+      padding: 0 15px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .ai-message {
+      margin-bottom: 10px;
+      padding: 8px 12px;
+      border-radius: 15px;
+      max-width: 80%;
+      clear: both;
+    }
+
+    .user-message {
+      background-color: #007BFF;
+      color: white;
+      float: right;
+    }
+
+    .bot-message {
+      background-color: #f1f1f1;
+      color: #333;
+      float: left;
+    }
+
+    /* Footer Styles */
+    footer {
+      background: #005f99;
+      color: white;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Testimonial Form */
+    #testimonial-form {
+      max-width: 600px;
+      margin: 40px auto 0;
+      padding: 30px;
+      background: #d9e6ff;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+      font-family: Arial, sans-serif;
+    }
+
+    #star-rating {
+      font-size: 2em;
+      color: #bbb;
+      user-select: none;
+      display: inline-block;
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="loader" class="loader">
+    <div id="loaderContent" class="loader__content">
+      <div class="data-stream">
+        <div class="glitch-container">
+          <div class="glitch" data-text="">
+            <img src="sterlinglogo.jpg" alt="Sterling Dental Clinic Logo" class="load">
+          </div>
+          <div class="scan-line"></div>
+          <div class="glitch-overlay"></div>
+        </div>
+        <canvas id="particleCanvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+ <header>
+  <div class="header-content">
+    <a href="#home" class="logo-link">
+      <img src="sterlinglogo.jpg" alt="Sterling Dental Clinic Logo" class="logo">
+    </a>
+    <div class="header-text">
+      <h1>Sterling Dental Clinic</h1>
+      <p class="tagline">Your trusted partner for exceptional dental care in Kampala</p>
+    </div>
+  </div>
+  <nav>
+    <div class="burger" id="burger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <a href="#home"><i class="fas fa-home"></i> Home</a>
+    <a href="services.html"><i class="fas fa-teeth"></i> Services</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> About Us</a>
+    <a href="#contact"><i class="fas fa-phone-alt"></i> Contact</a>
+    <a href="testimonials.html"><i class="fas fa-quote-right testimonial-icon"></i> Testimonials</a>
+    <a href="gallery.html"><i class="fas fa-images"></i> Gallery</a>
+    <a href="#appointment"><i class="fas fa-calendar-check"></i> Book Appointment</a>
+  </nav>
+</header>
+
+  <section id="home">
+    <h2>Welcome to Sterling Dental Clinic</h2>
+    <p>We provide comprehensive dental care for the whole family with state-of-the-art technology and compassionate service. Your smile is our priority!</p>
+    <div style="text-align: center; margin: 30px 0;">
+      <a href="#appointment" style="background-color: #28a745; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin: 10px;">
+        <i class="fas fa-calendar-alt"></i> Book Appointment
+      </a>
+      <a href="tel:+256772488592" style="background-color: #007BFF; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin: 10px;">
+        <i class="fas fa-phone"></i> Call Now
+      </a>
+    </div>
+  </section>
+
+  <section id="services">
+    <h2>Our Dental Services</h2>
+    <p>We offer a complete range of dental treatments to meet all your oral health needs.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3><i class="fas fa-tooth" style="color: #007BFF;"></i> General Dentistry</h3>
+        <ul>
+          <li>Dental exams & cleanings</li>
+          <li>Fillings & restorations</li>
+          <li>Root canal therapy</li>
+          <li>Gum disease treatment</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <h3><i class="fas fa-star" style="color: #ffc107;"></i> Cosmetic Dentistry</h3>
+        <ul>
+          <li>Teeth whitening</li>
+          <li>Dental veneers</li>
+          <li>Composite bonding</li>
+          <li>Smile makeovers</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <h3><i class="fas fa-teeth-open" style="color: #17a2b8;"></i> Orthodontics</h3>
+        <ul>
+          <li>Traditional braces</li>
+          <li>Invisalign clear aligners</li>
+          <li>Retainers</li>
+          <li>Space maintainers</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <h3><i class="fas fa-baby" style="color: #fd7e14;"></i> Pediatric Dentistry</h3>
+        <ul>
+          <li>Child dental exams</li>
+          <li>Fluoride treatments</li>
+          <li>Dental sealants</li>
+          <li>Early orthodontic care</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <h3><i class="fas fa-ambulance" style="color: #dc3545;"></i> Emergency Care</h3>
+        <ul>
+          <li>Toothache relief</li>
+          <li>Broken tooth repair</li>
+          <li>Knocked-out tooth</li>
+          <li>Dental trauma</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <h3><i class="fas fa-implant" style="color: #6f42c1;"></i> Dental Implants</h3>
+        <ul>
+          <li>Single tooth implants</li>
+          <li>Implant-supported bridges</li>
+          <li>Full arch restoration</li>
+          <li>Bone grafting</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About Our Clinic</h2>
+    <p>Sterling Dental Clinic has been serving the Kampala community since 2010. Our team of experienced dental professionals is committed to providing the highest quality care in a comfortable, modern environment.</p>
+    <div class="about-images">
+      <div class="image-card">
+        <img src="drive/_OK_9183.jpg" alt="Sterling Dental Clinic interior" loading="lazy" />
+        <p>Our state-of-the-art clinic</p>
+      </div>
+      <div class="image-card">
+        <img src="drive/_OK_9406.jpg" alt="Sterling Dental Clinic team" loading="lazy" />
+        <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">DR. BIREN N.YAJNIK</p>
+      </div>
+      <div class="image-card">
+        <img src="drive/_OK_9101.jpg" alt="Sterling Dental Clinic team" loading="lazy" />
+        <p>Our dedicated dental team</p>
+      </div>
+    </div>
+    <div class="mission-vision">
+      <div class="card">
+        <h3><i class="fas fa-certificate"></i> Our Mission</h3>
+        <p>To deliver exceptional dental care through personalized treatment plans, advanced technology, and compassionate service.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-eye"></i> Our Vision</h3>
+        <p>To be Kampala’s most trusted dental clinic, transforming smiles and improving oral health for generations to come.</p>
+      </div>
+    </div>
+    <div class="hours card">
+      <h3><i class="fas fa-clock"></i> Opening Hours</h3>
+      <ul>
+        <li><strong>Monday - Friday:</strong> 8:00 AM - 6:00 PM</li>
+        <li><strong>Saturday:</strong> 9:00 AM - 3:00 PM</li>
+        <li><strong>Sunday:</strong> Emergency only</li>
+      </ul>
+    </div>
+  </section>
+  <style>
+    .image-card img {
+      width: 30%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 50%;
+}
+  
+  </style>
+
+  <section id="appointment">
+    <h2>Book Your Appointment</h2>
+    <p>Schedule your visit online or call us directly. We'll confirm your appointment shortly.</p>
+    <form id="appointment-form" style="max-width: 600px; margin: 0 auto;" method="POST">
+      <input type="text" name="user_name" placeholder="Your Full Name" required>
+      <input type="tel" name="user_phone" placeholder="Phone Number" required>
+      <input type="email" name="user_email" placeholder="Email Address">
+      <select name="service" required>
+        <option value="" disabled selected>Select Service</option>
+        <option value="General Checkup">General Checkup</option>
+        <option value="Dental Cleaning">Dental Cleaning</option>
+        <option value="Tooth Extraction">Tooth Extraction</option>
+        <option value="Cosmetic Consultation">Cosmetic Consultation</option>
+        <option value="Emergency Care">Emergency Care</option>
+        <option value="Other">Other</option>
+      </select>
+      <input type="date" name="appointment_date" required>
+      <textarea name="message" rows="4" placeholder="Additional Information"></textarea>
+      <button type="submit"><i class="fas fa-paper-plane"></i> Request Appointment</button>
+    </form>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Information</h2>
+    <p>We're here to answer your questions and address your dental concerns.</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 30px;">
+      <div style="flex: 1; min-width: 250px;">
+        <h3><i class="fas fa-map-marker-alt" style="color: #007BFF;"></i> Our Location</h3>
+        <p>Garden City Mall, Ground Floor<br>Kampala, Uganda</p>
+        <a href="https://maps.app.goo.gl/8k4z3Z5X9Y2W3Q4A7" target="_blank" style="color: #007BFF; text-decoration: none;">
+          <i class="fas fa-directions"></i> Get Directions
+        </a>
+      </div>
+      <div style="flex: 1; min-width: 250px;">
+        <h3><i class="fas fa-phone-alt" style="color: #007BFF;"></i> Phone Numbers</h3>
+        <p><strong>Main:</strong> <a href="tel:+256772488592" style="color: #007BFF; text-decoration: none;">+256 772 488592</a></p>
+        <p><strong>Alternate:</strong> <a href="tel:+256766526236" style="color: #007BFF; text-decoration: none;">+256 766 526236</a></p>
+        <p><strong>Emergency:</strong> <a href="tel:+256752123456" style="color: #dc3545; text-decoration: none;">+256 752 123456</a></p>
+      </div>
+      <div style="flex: 1; min-width: 250px;">
+        <h3><i class="fas fa-envelope" style="color: #007BFF;"></i> Email</h3>
+        <p><a href="mailto:info@kampalasterlingdentalclinic.com" style="color: #007BFF; text-decoration: none;">
+          info@kampalasterlingdentalclinic.com
+        </a></p>
+        <h3 style="margin-top: 20px;"><i class="fas fa-globe" style="color: #007BFF;"></i> Website</h3>
+        <p><a href="https://www.kampalasterlingdentalclinic.com" style="color: #007BFF; text-decoration: none;">
+          www.kampalasterlingdentalclinic.com
+        </a></p>
+      </div>
+    </div>
+    <div style="margin-top: 40px;">
+      <h3><i class="fas fa-map-marked-alt" style="color: #007BFF;"></i> Find Us on Google Maps</h3>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d388.9752335999721!2d32.5905925!3d0.3202783!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbb8431c0ef21%3A0x8c0b7a8c91d2261c!2sSterling%20Dental%20Clinic!5e1!3m2!1sen!2sug!4v1748168120111!5m2!1sen!2sug"
+        width="100%"
+        height="250"
+        style="border:0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+  </section>
+
+  <section id="testimonial-form" style="max-width: 600px; margin: 40px auto 0; padding: 30px; background: #d9e6ff; border-radius: 10px; box-shadow: 0 3px 8px rgba(0,0,0,0.15); font-family: Arial, sans-serif;">
+    <h2 style="text-align: center; color: #003366; margin-bottom: 20px;">Share Your Testimonial</h2>
+    <form id="testimonialForm" style="color: #000;">
+      <label for="name" style="color: #003366; font-weight: 600;">Name:</label><br />
+      <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #0056b3; border-radius: 5px; color: #000;" /><br />
+      <label for="email" style="color: #003366; font-weight: 600;">Email:</label><br />
+      <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #0056b3; border-radius: 5px; color: #000;" /><br />
+      <label for="rating" style="color: #003366; font-weight: 600; display: block; margin-bottom: 8px;">Rating:</label>
+      <div id="star-rating" style="font-size: 2em; color: #bbb; user-select: none; display: inline-block; margin-bottom: 15px; cursor: pointer;">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+      </div>
+      <input type="hidden" name="rating" id="rating" required>
+      <label for="message" style="color: #003366; font-weight: 600;">Testimonial:</label><br />
+      <textarea id="message" name="message" rows="4" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #0056b3; border-radius: 5px; color: #000;"></textarea><br />
+      <button type="submit" style="background-color: #004085; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 1em; transition: background-color 0.3s ease;">
+        Submit
+      </button>
+    </form>
+  </section>
+
+  <!-- WhatsApp Floating Buttons -->
+  <a href="https://wa.me/256772488592" class="whatsapp" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    Chat: 0772 488592
+  </a>
+  <a href="https://wa.me/256766526236" class="whatsapp" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    Chat: 0766 526236
+  </a>
+
+  <!-- AI Chat Button -->
+  <button id="ai-chat-button" title="Ask AI">🤖</button>
+  <div id="ai-chat-popup" role="dialog" aria-modal="true" aria-labelledby="ai-chat-header">
+    <div id="ai-chat-header">Ask Sterling AI</div>
+    <div id="ai-chat-messages" aria-live="polite" aria-relevant="additions"></div>
+    <div id="ai-chat-input-container">
+      <input type="text" id="ai-chat-input" placeholder="Type your question..." aria-label="Type your question" />
+      <button id="ai-chat-send" aria-label="Send question">➤</button>
+    </div>
+  </div>
+
+  <footer>
+    <div style="max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; text-align: left;">
+      <div style="flex: 1; min-width: 200px; margin: 10px;">
+        <h3>Sterling Dental Clinic</h3>
+        <p>Providing exceptional dental care to Kampala since 2010.</p>
+      </div>
+      <div style="flex: 1; min-width: 200px; margin: 10px;">
+        <h3>Quick Links</h3>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="index.html" style="color: #fff; text-decoration: none;">Home</a></li>
+          <li><a href="services.html" style="color: #fff; text-decoration: none;">Services</a></li>
+          <li><a href="about.html" style="color: #fff; text-decoration: none;">About Us</a></li>
+          <li><a href="#contact" style="color: #fff; text-decoration: none;">Contact</a></li>
+        </ul>
+      </div>
+      <div style="flex: 1; min-width: 200px; margin: 10px;">
+        <h3>Contact Us</h3>
+        <p>
+          <i class="fas fa-map-marker-alt"></i> Garden City Mall, Kampala<br>
+          <i class="fas fa-phone-alt"></i> +256 772 488592<br>
+          <i class="fas fa-envelope"></i> info@kampalasterlingdentalclinic.com
+        </p>
+      </div>
+    </div>
+    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+      <p>© 2025 Sterling Dental Clinic. All rights reserved.</p>
+      <div style="margin-top: 10px;">
+        <a href="https://www.facebook.com/SterlingDentalPractice" style="color: #fff; margin: 0 10px; font-size: 20px;" title="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.twitter.com/yourprofile" style="color: #fff; margin: 0 10px; font-size: 20px;" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.linkedin.com/accessibility?openinweb=true" style="color: #fff; margin: 0 10px; font-size: 20px;" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.instagram.com/sterlingdentalclinic?igsh=MjZpdXk1cWsxeHQ1" style="color: #fff; margin: 0 10px; font-size: 20px;" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.snapchat.com/add/sterlingdental?share_id=PbJexKFCMqA&locale=en-US" style="color: #fff; margin: 0 10px; font-size: 20px;" title="Snapchat"><i class="fab fa-snapchat"></i></a>
+        <a href="https://www.tiktok.com/@sterlingdentalclinic?_t=ZM-8wcxw0G6gEf&_r=1" style="color: #fff; margin: 0 10px; font-size: 20px;" title="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="https://wa.me/message/MGRPNC4UBTNFD1" style="color: #fff; margin: 0 10px; font-size: 20px;" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Loader Script
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      if (loader) {
+        loader.style.display = 'none';
+      }
+    }, 1500);
+
+    // Navigation Script
+    const burger = document.getElementById('burger');
+    const navLinks = document.querySelectorAll('nav a');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      navLinks.forEach(link => {
+        link.classList.toggle('active');
+      });
+    });
+
+    // Appointment Form Script
+    document.getElementById('appointment-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
+      const message = `New Appointment Request:\n` +
+                      `Name: ${data.user_name}\n` +
+                      `Phone: ${data.user_phone}\n` +
+                      `Email: ${data.user_email || 'Not provided'}\n` +
+                      `Service: ${data.service}\n` +
+                      `Date: ${data.appointment_date}\n` +
+                      `Additional Info: ${data.message || 'None'}`;
+      const encodedMessage = encodeURIComponent(message);
+      const phoneNumbers = ['256766526236', '256772488592'];
+      phoneNumbers.forEach(number => {
+        const whatsappUrl = `https://wa.me/${number}?text=${encodedMessage}`;
+        window.open(whatsappUrl, '_blank');
+      });
+      alert('Appointment request sent to WhatsApp!');
+      this.reset();
+    });
+
+    // Testimonial Form Script
+  document.getElementById('testimonial-form').addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById('name').value.trim();
+  const testimonial = document.getElementById('testimonial').value.trim();
+
+  if (!name || !testimonial) {
+    alert('Please fill in both fields.');
+    return;
+  }
+
+  try {
+    const response = await fetch('submit_testimonial.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, testimonial }),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || result.error) {
+      throw new Error(result.error || 'Failed to submit testimonial');
+    }
+
+    this.reset();
+
+    loadTestimonials();
+  } catch (error) {
+    alert(error.message);
+  }
+});
+
+async function loadTestimonials() {
+  try {
+    const response = await fetch('get_testimonials.php');
+    if (!response.ok) {
+      throw new Error('Failed to load testimonials');
+    }
+    const testimonials = await response.json();
+
+    const container = document.getElementById('testimonialsContainer');
+    container.innerHTML = '';
+
+    testimonials.forEach(({ name, testimonial }) => {
+      const div = document.createElement('div');
+      div.classList.add('testimonial');
+      div.innerHTML = `<strong>${name}</strong><p>${testimonial}</p>`;
+      container.appendChild(div);
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+loadTestimonials();
+loadTestimonials();
+    document.addEventListener('DOMContentLoaded', () => {
+  const stars = document.querySelectorAll('#star-rating .star');
+  const ratingInput = document.getElementById('rating');
+  let selectedRating = 0;
+
+  stars.forEach(star => {
+    star.addEventListener('click', () => {
+      selectedRating = parseInt(star.getAttribute('data-value'));
+      ratingInput.value = selectedRating;
+      updateStars(selectedRating);
+    });
+    star.addEventListener('mouseover', () => {
+      const hoverValue = parseInt(star.getAttribute('data-value'));
+      updateStars(hoverValue);
+    });
+    star.addEventListener('mouseout', () => {
+      updateStars(selectedRating);
+    });
+  });
+
+  function updateStars(rating) {
+    stars.forEach(star => {
+      const starValue = parseInt(star.getAttribute('data-value'));
+      star.style.color = starValue <= rating ? '#ffc107' : '#bbb';
+    });
+  }
+
+  const form = document.getElementById('testimonialForm');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    if (!ratingInput.value) {
+      alert('Please select a rating.');
+      return;
+    }
+
+    const testimonial = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      rating: parseInt(ratingInput.value),
+      message: form.message.value.trim(),
+      date: new Date().toISOString()
+    };
+
+    // Get existing testimonials or empty array
+    const testimonials = JSON.parse(localStorage.getItem('testimonials') || '[]');
+    testimonials.push(testimonial);
+    localStorage.setItem('testimonials', JSON.stringify(testimonials));
+
+    alert('Thank you for your testimonial!');
+
+    form.reset();
+    updateStars(0);
+  });
+});
+
+    // AI Chat Script
+    const chatButton = document.getElementById('ai-chat-button');
+    const chatPopup = document.getElementById('ai-chat-popup');
+    const chatMessages = document.getElementById('ai-chat-messages');
+    const chatInput = document.getElementById('ai-chat-input');
+    const chatSend = document.getElementById('ai-chat-send');
+
+    chatButton.addEventListener('click', () => {
+      chatPopup.style.display = chatPopup.style.display === 'flex' ? 'none' : 'flex';
+      if (chatPopup.style.display === 'flex') chatInput.focus();
+    });
+
+    function appendMessage(text, sender) {
+      const msg = document.createElement('div');
+      msg.classList.add('ai-message', sender === 'user' ? 'user-message' : 'bot-message');
+      msg.textContent = text;
+      chatMessages.appendChild(msg);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function getAIResponse(question) {
+      const q = question.toLowerCase();
+      if (q.includes('working hours') || q.includes('open') || q.includes('hours')) {
+        return 'Our clinic is open Monday to Friday from 9:00 AM to 6:00 PM, and Saturday from 9:00 AM to 3:00 PM.';
+      }
+      if (q.includes('location') || q.includes('address')) {
+        return 'We are located at Garden City Mall, ground floor, Kampala, Uganda.';
+      }
+      if (q.includes('appointment') || q.includes('book')) {
+        return 'You can book an appointment online through our website or call us at +256 772 488592.';
+      }
+      if (q.includes('toothache')) {
+        return 'For toothache, we recommend scheduling an emergency appointment as soon as possible for proper diagnosis and treatment.';
+      }
+      if (q.includes('teeth whitening')) {
+        return 'We offer professional teeth whitening services that are safe and effective. Contact us to learn more.';
+      }
+      if (q.includes('root canal')) {
+        return 'Root canal therapy is a treatment to save an infected tooth. Our specialists provide pain-free root canal treatments.';
+      }
+      return "I'm here to help! Could you please provide more details or ask a specific question about our clinic or dental care?";
+    }
+
+    function handleUserInput() {
+      const question = chatInput.value.trim();
+      if (!question) return;
+      appendMessage(question, 'user');
+      chatInput.value = '';
+      chatInput.disabled = true;
+      chatSend.disabled = true;
+      setTimeout(() => {
+        const response = getAIResponse(question);
+        appendMessage(response, 'bot');
+        chatInput.disabled = false;
+        chatSend.disabled = false;
+        chatInput.focus();
+      }, 1000);
+    }
+
+    chatSend.addEventListener('click', handleUserInput);
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleUserInput();
+      }
+    });
+  </script>
+</body>
+</html>
