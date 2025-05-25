@@ -862,9 +862,7 @@
     });
 
     // Testimonial Form Script
-  
-    // Testimonial Form Script
-  document.getElementById('testimonial-form').addEventListener('submit', async function (e) {
+ document.getElementById('testimonial-form').addEventListener('submit', async function (e) {
   e.preventDefault();
 
   const name = document.getElementById('name').value.trim();
@@ -964,17 +962,6 @@ loadTestimonials();
       date: new Date().toISOString()
     };
 
-    // Get existing testimonials or empty array
-    const testimonials = JSON.parse(localStorage.getItem('testimonials') || '[]');
-    testimonials.push(testimonial);
-    localStorage.setItem('testimonials', JSON.stringify(testimonials));
-
-    alert('Thank you for your testimonial!');
-
-    form.reset();
-    updateStars(0);
-  });
-});
     // Get existing testimonials or empty array
     const testimonials = JSON.parse(localStorage.getItem('testimonials') || '[]');
     testimonials.push(testimonial);
