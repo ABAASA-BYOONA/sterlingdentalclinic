@@ -827,44 +827,82 @@
       </div>
     </div>
   </footer>
-<script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-  <script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+  // Initialize Supabase client with your credentials
+  if (typeof Supabase === 'undefined') {
+    console.error('Supabase library failed to load. Check the CDN URL or network connection.');
+    alert('Failed to load Supabase library. Please try again later.');
+  } else {
     const supabase = Supabase.createClient(
-  'https://emldrnonwflkbbnbughi.supabase.co', // Replace with your Supabase Project URL
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtbGRybm9ud2Zsa2JibmJ1Z2hpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxOTEwMzQsImV4cCI6MjA2Mzc2NzAzNH0.R2PETzSHm0uGa-A62RjN9FJiQ2VSM_J5KcB7NeJ3AEU' // Replace with your Supabase Anon Key
-);
- async function submitTestimonial() {
-  const name = document.getElementById('name').value.trim();
-  const message = document.getElementById('message').value.trim();
-  const rating = parseInt(document.getElementById('rating').value);
+      'https://emldrnonwflkbbnbughi.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtbGRybm9ud2Zsa2JibmJ1Z2hpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxOTEwMzQsImV4cCI6MjA2Mzc2NzAzNH0.R2PETzSHm0uGa-A62RjN9FJiQ2VSM_J5KcB7NeJ3AEU'
+    );
 
-  if (!name || !message || !rating) {
-    alert('Please fill in all fields.');
-    return;
-  }
+    document.addEventListener('DOMContentLoaded', () => {
+      // Test Supabase connectivity on page load
+      async function testSupabase() {
+        try {
+          const { data, error } = await supabase.from('testimonials').select('*').limit(1);
+          if (error) {
+            console.error('Supabase test error:', error);
+            alert('Supabase connection failed: ' + error.message);
+          } else {
+            console.log('Supabase connection successful:', data);
+          }
+        } catch (err) {
+          console.error('Unexpected error during Supabase test:', err);
+          alert('Unexpected error during Supabase test.');
+        }
+      }
 
-  try {
-    console.log('Submitting testimonial with Supabase client:', supabase);
-    const { error } = await supabase
-      .from('testimonials')
-      .insert([{ name, message, rating }]);
-    if (error) {
-      console.error('Supabase insert error:', error);
-      alert('Failed to submit testimonial: ' + error.message);
-      return;
-    }
-    console.log('Testimonial submitted successfully');
-    alert('Thank you for your testimonial!');
-    document.getElementById('name').value = '';
-    document.getElementById('message').value = '';
-    document.getElementById('rating').value = '';
-    loadTestimonials();
-  } catch (err) {
-    console.error('Unexpected error during submission:', err);
-    alert('Error submitting testimonial. Please try again later.');
+      testSupabase();
+
+      // Handle form submission
+      async function submitTestimonial(event) {
+        event.preventDefault(); // Prevent form from refreshing the page
+
+        const form = document.getElementById('testimonial-form');
+        const name = form.querySelector('#name').value.trim();
+        const message = form.querySelector('#message').value.trim();
+        const rating = parseInt(form.querySelector('#rating').value);
+
+        if (!name || !message || !rating) {
+          alert('Please fill in all fields.');
+          return;
+        }
+
+        try {
+          console.log('Submitting testimonial:', { name, message, rating });
+          const { error } = await supabase
+            .from('testimonials')
+            .insert([{ name, message, rating }]);
+
+          if (error) {
+            console.error('Supabase insert error:', error);
+            alert('Failed to submit testimonial: ' + error.message);
+            return;
+          }
+
+          console.log('Testimonial submitted successfully');
+          alert('Thank you for your testimonial!');
+          form.reset(); // Clear the form
+        } catch (err) {
+          console.error('Unexpected error during submission:', err);
+          alert('Error submitting testimonial. Please try again later.');
+        }
+      }
+
+      // Attach the submit event listener to the form
+      const form = document.getElementById('testimonial-form');
+      if (form) {
+        form.addEventListener('submit', submitTestimonial);
+      } else {
+        console.error('Form with id "testimonial-form" not found.');
+      }
+    });
   }
-}
-  </script>
+</script>
   <script>
     // Navigation Script
     const burger = document.getElementById('burger');
@@ -898,60 +936,6 @@
       this.reset();
     });
 
-    // Testimonial Form Script
- document.getElementById('testimonial-form').addEventListener('submit', async function (e) {
-  e.preventDefault();
-
-  const name = document.getElementById('name').value.trim();
-  const testimonial = document.getElementById('testimonial').value.trim();
-
-  if (!name || !testimonial) {
-    alert('Please fill in both fields.');
-    return;
-  }
-
-  try {
-    const response = await fetch('submit_testimonial.php', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, testimonial }),
-    });
-
-    const result = await response.json();
-
-    if (!response.ok || result.error) {
-      throw new Error(result.error || 'Failed to submit testimonial');
-    }
-
-    this.reset();
-
-    loadTestimonials();
-  } catch (error) {
-    alert(error.message);
-  }
-});
-
-loadTestimonials();
-loadTestimonials();
-    document.addEventListener('DOMContentLoaded', () => {
-  const stars = document.querySelectorAll('#star-rating .star');
-  const ratingInput = document.getElementById('rating');
-  let selectedRating = 0;
-
-  stars.forEach(star => {
-    star.addEventListener('click', () => {
-      selectedRating = parseInt(star.getAttribute('data-value'));
-      ratingInput.value = selectedRating;
-      updateStars(selectedRating);
-    });
-    star.addEventListener('mouseover', () => {
-      const hoverValue = parseInt(star.getAttribute('data-value'));
-      updateStars(hoverValue);
-    });
-    star.addEventListener('mouseout', () => {
-      updateStars(selectedRating);
-    });
-  });
     // AI Chat Script
     const chatButton = document.getElementById('ai-chat-button');
     const chatPopup = document.getElementById('ai-chat-popup');
