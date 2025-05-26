@@ -138,11 +138,9 @@
      <div class="form-container">
        <h2>Share Your Experience</h2>
        </div>
-     </div>
-     <div id="testimonials-container">
-       <!-- Testimonials will be inserted here -->
-     </div>
-
+    <div id="testimonials-container">
+  <!-- Testimonials will be inserted here -->
+</div>
       <footer>
     <div style="max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; text-align: left;">
       <div style="flex: 1; min-width: 200px; margin: 10px;">
@@ -181,133 +179,99 @@
     </div>
   </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-       <script>
+   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+  // Initialize Supabase client with your credentials
+  if (typeof Supabase === 'undefined') {
+    console.error('Supabase library failed to load. Check the CDN URL or network connection.');
+    alert('Failed to load Supabase library. Please try again later.');
+  } else {
     const supabase = Supabase.createClient(
-  'https://emldrnonwflkbbnbughi.supabase.co', // Replace with your Supabase Project URL
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtbGRybm9ud2Zsa2JibmJ1Z2hpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxOTEwMzQsImV4cCI6MjA2Mzc2NzAzNH0.R2PETzSHm0uGa-A62RjN9FJiQ2VSM_J5KcB7NeJ3AEU' // Replace with your Supabase Anon Key
-);
-async function submitTestimonial() {
-  const name = document.getElementById('name').value.trim();
-  const message = document.getElementById('message').value.trim();
-  const rating = parseInt(document.getElementById('rating').value);
+      'https://emldrnonwflkbbnbughi.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtbGRybm9ud2Zsa2JibmJ1Z2hpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxOTEwMzQsImV4cCI6MjA2Mzc2NzAzNH0.R2PETzSHm0uGa-A62RjN9FJiQ2VSM_J5KcB7NeJ3AEU'
+    );
 
-  if (!name || !message || !rating) {
-    alert('Please fill in all fields.');
-    return;
-  }
-    try {
-  console.log('Submitting testimonial:', { name, message, rating });
-  const { error } = await supabase
-    .from('testimonials')
-    .insert([{ name, message, rating }]);
-  if (error) {
-    console.error('Supabase insert error:', error);
-    alert('Failed to submit testimonial: ' + error.message);
-    return;
-  }
-  console.log('Testimonial submitted successfully');
-  alert('Thank you for your testimonial!');
-  document.getElementById('name').value = '';
-  document.getElementById('message').value = '';
-  document.getElementById('rating').value = '';
-  loadTestimonials();
-} catch (err) {
-  console.error('Unexpected error during submission:', err);
-  alert('Error submitting testimonial. Please try again later.');
-}
-  </script>
-    <script>
-    const burger = document.getElementById('burger');
-    const nav = document.getElementById('nav-menu');
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('testimonials-container');
 
-    burger.addEventListener('click', () => {
-      const expanded = burger.getAttribute('aria-expanded') === 'true';
-      burger.setAttribute('aria-expanded', String(!expanded));
-      burger.classList.toggle('active');
-      nav.classList.toggle('open');
-    });
-  </script>
-     <script>
-
-document.addEventListener('DOMContentLoaded', () => {
-  const container = document.getElementById('testimonials-container');
-  const testimonials = JSON.parse(localStorage.getItem('testimonials') || '[]');
-
-  if (testimonials.length === 0) {
-    container.innerHTML = '<p>No testimonials yet.</p>';
-    return;
-  }
-
-  container.innerHTML = testimonials.map(t => `
-    <div class="testimonial-card" style="border: 1px solid #0056b3; border-radius: 8px; padding: 15px; margin-bottom: 15px; background: #f0f8ff;">
-      <h3 style="color: #003366; margin: 0 0 5px;">${escapeHtml(t.name)}</h3>
-      <div style="color: #ffc107; font-size: 1.2em; margin-bottom: 10px;">
-        ${renderStars(t.rating)}
-      </div>
-      <p style="color: #000; margin: 0 0 10px;">${escapeHtml(t.message)}</p>
-      <small style="color: #666;">${new Date(t.date).toLocaleDateString()}</small>
-    </div>
-  `).join('');
-
-  function renderStars(rating) {
-    let starsHtml = '';
-    for (let i = 1; i <= 5; i++) {
-      starsHtml += i <= rating ? '★' : '☆';
-    }
-    return starsHtml;
-  }
-
-  // Simple escape to prevent HTML injection
-  function escapeHtml(text) {
-    return text.replace(/[&<>"']/g, (m) => ({
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#39;'
-    })[m]);
-  }
-});
-  async function submitTestimonial() {
-    const name = document.getElementById('name').value.trim();
-    const message = document.getElementById('message').value.trim();
-
-    if (!name || !message) {
-      alert('Please fill in all fields.');
-      return;
-    }
-
-    // For simplicity, set rating to 5 here or add rating input if you want
-    const rating = 5;
-
-    try {
-      const res = await fetch('http://localhost:3000/testimonials', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, message, rating, email: 'anonymous@example.com' }) // email required by backend
-      });
-
-      const result = await res.json();
-
-      if (res.ok) {
-        alert('Thank you for your testimonial!');
-        document.getElementById('name').value = '';
-        document.getElementById('message').value = '';
-        loadTestimonials();
-      } else {
-        alert(result.error || 'Failed to submit testimonial.');
+      // Test Supabase connectivity on page load
+      async function testSupabase() {
+        try {
+          const { data, error } = await supabase.from('testimonials').select('*').limit(1);
+          if (error) {
+            console.error('Supabase test error:', error);
+            container.innerHTML = '<p>Error connecting to Supabase: ' + error.message + '</p>';
+          } else {
+            console.log('Supabase connection successful:', data);
+          }
+        } catch (err) {
+          console.error('Unexpected error during Supabase test:', err);
+          container.innerHTML = '<p>Unexpected error connecting to Supabase.</p>';
+        }
       }
-    } catch (err) {
-      alert('Error submitting testimonial. Please try again later.');
-      console.error(err);
-    }
+
+      testSupabase();
+
+      // Fetch and display testimonials
+      async function loadTestimonials() {
+        try {
+          const { data: testimonials, error } = await supabase
+            .from('testimonials')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+          if (error) {
+            console.error('Error fetching testimonials:', error);
+            container.innerHTML = '<p>Error loading testimonials: ' + error.message + '</p>';
+            return;
+          }
+
+          if (!testimonials || testimonials.length === 0) {
+            container.innerHTML = '<p>No testimonials yet.</p>';
+            return;
+          }
+
+          container.innerHTML = testimonials.map(t => `
+            <div class="testimonial-card" style="border: 1px solid #0056b3; border-radius: 8px; padding: 15px; margin-bottom: 15px; background: #f0f8ff;">
+              <h3 style="color: #003366; margin: 0 0 5px;">${escapeHtml(t.name)}</h3>
+              <div style="color: #ffc107; font-size: 1.2em; margin-bottom: 10px;">
+                ${renderStars(t.rating)}
+              </div>
+              <p style="color: #000; margin: 0 0 10px;">${escapeHtml(t.message)}</p>
+              <small style="color: #666;">${new Date(t.created_at).toLocaleDateString()}</small>
+            </div>
+          `).join('');
+        } catch (err) {
+          console.error('Unexpected error:', err);
+          container.innerHTML = '<p>Error loading testimonials.</p>';
+        }
+      }
+
+      // Render star ratings
+      function renderStars(rating) {
+        let starsHtml = '';
+        for (let i = 1; i <= 5; i++) {
+          starsHtml += i <= rating ? '★' : '☆';
+        }
+        return starsHtml;
+      }
+
+      // Escape HTML to prevent XSS
+      function escapeHtml(text) {
+        return text.replace(/[&<>"']/g, (m) => ({
+          '&': '&',
+          '<': '<',
+          '>': '>',
+          '"': '"',
+          "'": '''
+        })[m]);
+      }
+
+      // Load testimonials on page load
+      loadTestimonials();
+    });
   }
-
-  // Load testimonials on page load
-  loadTestimonials();
-
-  </script>
+</script>
    </body>
    </html>
     
