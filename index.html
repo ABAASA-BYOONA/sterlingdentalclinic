@@ -495,14 +495,15 @@
       font-family: Arial, sans-serif;
     }
 
-    #star-rating {
-      font-size: 2em;
-      color: #bbb;
-      user-select: none;
-      display: inline-block;
-      margin-bottom: 15px;
-      cursor: pointer;
-    }
+  .star {
+  font-size: 2rem;
+  color: gray;
+  cursor: pointer;
+}
+
+.star.selected {
+  color: gold;
+}
   </style>
 </head>
 <body>
@@ -749,14 +750,14 @@
       <label for="email" style="color: #003366; font-weight: 600;">Email:</label><br />
       <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #0056b3; border-radius: 5px; color: #000;" /><br />
       <label for="rating" style="color: #003366; font-weight: 600; display: block; margin-bottom: 8px;">Rating:</label>
-      <div id="star-rating" style="font-size: 2em; color: #bbb; user-select: none; display: inline-block; margin-bottom: 15px; cursor: pointer;">
-        <span class="star" data-value="1">★</span>
-        <span class="star" data-value="2">★</span>
-        <span class="star" data-value="3">★</span>
-        <span class="star" data-value="4">★</span>
-        <span class="star" data-value="5">★</span>
-      </div>
-      <input type="hidden" name="rating" id="rating" required>
+      <div id="star-rating">
+  <span class="star" data-value="1">&#9733;</span>
+  <span class="star" data-value="2">&#9733;</span>
+  <span class="star" data-value="3">&#9733;</span>
+  <span class="star" data-value="4">&#9733;</span>
+  <span class="star" data-value="5">&#9733;</span>
+</div>
+<input type="hidden" id="rating" name="rating" value="0" />
       <label for="message" style="color: #003366; font-weight: 600;">Testimonial:</label><br />
       <textarea id="message" name="message" rows="4" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #0056b3; border-radius: 5px; color: #000;"></textarea><br />
       <button type="submit" style="background-color: #004085; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 1em; transition: background-color 0.3s ease;">
@@ -902,8 +903,26 @@
       }
     });
   }
+  const stars = document.querySelectorAll('#star-rating .star');
+const ratingInput = document.getElementById('rating');
+
+stars.forEach(star => {
+  star.addEventListener('click', () => {
+    const ratingValue = parseInt(star.getAttribute('data-value'));
+    ratingInput.value = ratingValue;
+
+    stars.forEach(s => {
+      if (parseInt(s.getAttribute('data-value')) <= ratingValue) {
+        s.classList.add('selected'); // Add gold color class
+      } else {
+        s.classList.remove('selected');
+      }
+    });
+  });
+});
 </script>
   <script>
+    
     // Navigation Script
     const burger = document.getElementById('burger');
     const navLinks = document.querySelectorAll('nav a');
