@@ -154,6 +154,63 @@
   </footer>
 
      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+       <script>
+    const supabase = Supabase.createClient(
+  'https://emldrnonwflkbbnbughi.supabase.co', // Replace with your Supabase Project URL
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtbGRybm9ud2Zsa2JibmJ1Z2hpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxOTEwMzQsImV4cCI6MjA2Mzc2NzAzNH0.R2PETzSHm0uGa-A62RjN9FJiQ2VSM_J5KcB7NeJ3AEU' // Replace with your Supabase Anon Key
+);
+    async function submitTestimonial() {
+  const name = document.getElementById('name').value.trim();
+  const message = document.getElementById('message').value.trim();
+  const rating = parseInt(document.getElementById('rating').value);
+
+  if (!name || !message || !rating) {
+    alert('Please fill in all fields.');
+    return;
+  }
+
+  try {
+    const { error } = await supabase
+      .from('testimonials')
+      .insert([{ name, message, rating }]);
+
+    if (error) {
+      alert('Failed to submit testimonial: ' + error.message);
+      return;
+    }
+
+    alert('Thank you for your testimonial!');
+    document.getElementById('name').value = '';
+    document.getElementById('message').value = '';
+    document.getElementById('rating').value = '';
+    loadTestimonials();
+  } catch (err) {
+    alert('Error submitting testimonial. Please try again later.');
+    console.error(err);
+  }
+}
+
+    try {
+  console.log('Submitting testimonial:', { name, message, rating });
+  const { error } = await supabase
+    .from('testimonials')
+    .insert([{ name, message, rating }]);
+  if (error) {
+    console.error('Supabase insert error:', error);
+    alert('Failed to submit testimonial: ' + error.message);
+    return;
+  }
+  console.log('Testimonial submitted successfully');
+  alert('Thank you for your testimonial!');
+  document.getElementById('name').value = '';
+  document.getElementById('message').value = '';
+  document.getElementById('rating').value = '';
+  loadTestimonials();
+} catch (err) {
+  console.error('Unexpected error during submission:', err);
+  alert('Error submitting testimonial. Please try again later.');
+}
+  </script>
      <script>
 
 document.addEventListener('DOMContentLoaded', () => {
