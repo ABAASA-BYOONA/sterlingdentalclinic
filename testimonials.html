@@ -289,6 +289,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Load testimonials on page load
   loadTestimonials();
+
+         // Navigation Script
+    const burger = document.getElementById('burger');
+    const navLinks = document.querySelectorAll('nav a');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      navLinks.forEach(link => {
+        link.classList.toggle('active');
+      });
+    });
+
   </script>
    </body>
    </html>
