@@ -156,82 +156,81 @@
          text-align: center;
          margin-bottom: 30px;
        }
-/* Hide burger by default */
-.burger {
-  display: none;
-  cursor: pointer;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  padding: 0;
-  z-index: 1100; /* above nav */
-  position: relative;
-}
 
-/* Burger lines */
-.burger div {
-  width: 25px;
-  height: 3px;
-  background: white;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-  transform-origin: 4px 2px;
-}
-
-/* Burger active state (cross) */
-.burger.active div:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-
-.burger.active div:nth-child(2) {
-  opacity: 0;
-}
-
-.burger.active div:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
-
-/* Desktop nav */
-nav {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
-  .burger {
-    display: flex;
-  }
   nav {
-    position: fixed;
-    top: 60px; /* adjust if header height changes */
-    left: 0;
-    width: 100%;
-    background: #007BFF;
-    flex-direction: column;
-    align-items: flex-start;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    z-index: 1000;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
-  nav.open {
-    max-height: 500px; /* enough to show all links */
-  }
+
   nav a {
-    display: block;
-    width: 100%;
-    padding: 15px 20px;
     color: white;
     text-decoration: none;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
+    margin: 0 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 1rem;
   }
+
   nav a:hover {
-    background: rgba(255,255,255,0.1);
+    text-decoration: underline;
   }
-}
+
+  /* Hide burger by default */
+  .burger {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .burger div {
+    width: 25px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    nav a {
+      display: none;
+      width: 100%;
+      padding: 12px 0;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      justify-content: center;
+    }
+
+    nav a.active {
+      display: flex;
+    }
+
+    .burger {
+      display: flex;
+    }
+
+    nav {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  /* Burger animation when active */
+  .burger.active div:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .burger.active div:nth-child(2) {
+    opacity: 0;
+  }
+  .burger.active div:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
        .testimonial {
          background: white;
          border-radius: 8px;
@@ -369,7 +368,17 @@ nav {
       </div>
     </div>
   </footer>
+<script>
+  const burger = document.getElementById('burger');
+  const navLinks = document.querySelectorAll('nav a');
 
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('active');
+    navLinks.forEach(link => {
+      link.classList.toggle('active');
+    });
+  });
+</script>
      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
        <script>
     const supabase = Supabase.createClient(
@@ -506,18 +515,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Load testimonials on page load
   loadTestimonials();
-
-         // Navigation Script
-const burger = document.getElementById('burger');
-const nav = document.getElementById('nav-menu');
-
-burger.addEventListener('click', () => {
-  const expanded = burger.getAttribute('aria-expanded') === 'true';
-  burger.setAttribute('aria-expanded', !expanded);
-  burger.classList.toggle('active');
-  nav.classList.toggle('open');
-});
-
   </script>
    </body>
    </html>
