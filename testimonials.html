@@ -182,17 +182,6 @@
   </footer>
 
     <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-     <script>
-    const burger = document.getElementById('burger');
-    const nav = document.getElementById('nav-menu');
-
-    burger.addEventListener('click', () => {
-      const expanded = burger.getAttribute('aria-expanded') === 'true';
-      burger.setAttribute('aria-expanded', String(!expanded));
-      burger.classList.toggle('active');
-      nav.classList.toggle('open');
-    });
-  </script>
        <script>
     const supabase = Supabase.createClient(
   'https://emldrnonwflkbbnbughi.supabase.co', // Replace with your Supabase Project URL
@@ -249,6 +238,17 @@
   console.error('Unexpected error during submission:', err);
   alert('Error submitting testimonial. Please try again later.');
 }
+  </script>
+    <script>
+    const burger = document.getElementById('burger');
+    const nav = document.getElementById('nav-menu');
+
+    burger.addEventListener('click', () => {
+      const expanded = burger.getAttribute('aria-expanded') === 'true';
+      burger.setAttribute('aria-expanded', String(!expanded));
+      burger.classList.toggle('active');
+      nav.classList.toggle('open');
+    });
   </script>
      <script>
 
