@@ -142,6 +142,158 @@
      </style>
    </head>
    <body>
+ <!DOCTYPE html>
+   <html lang="en">
+   <head>
+     <meta charset="UTF-8" />
+     <meta name="viewport" content="width=device-width, initial-scale=1" />
+     <title>Testimonials - Sterling Dental Clinic</title>
+     <link rel="stylesheet" href="styles.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <style>
+       h1 {
+         color: #007BFF;
+         text-align: center;
+         margin-bottom: 30px;
+       }
+/* Hide burger by default */
+.burger {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 0;
+  z-index: 1100; /* above nav */
+  position: relative;
+}
+
+/* Burger lines */
+.burger div {
+  width: 25px;
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: 4px 2px;
+}
+
+/* Burger active state (cross) */
+.burger.active div:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.burger.active div:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.active div:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Desktop nav */
+nav {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .burger {
+    display: flex;
+  }
+  nav {
+    position: fixed;
+    top: 60px; /* adjust if header height changes */
+    left: 0;
+    width: 100%;
+    background: #007BFF;
+    flex-direction: column;
+    align-items: flex-start;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    z-index: 1000;
+  }
+  nav.open {
+    max-height: 500px; /* enough to show all links */
+  }
+  nav a {
+    display: block;
+    width: 100%;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+  nav a:hover {
+    background: rgba(255,255,255,0.1);
+  }
+}
+       .testimonial {
+         background: white;
+         border-radius: 8px;
+         padding: 20px;
+         margin-bottom: 20px;
+         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+       }
+       .testimonial h3 {
+         margin: 0 0 10px 0;
+         color: #333;
+       }
+       .testimonial p {
+         font-style: italic;
+         color: #555;
+       }
+       .testimonial .date {
+         font-size: 0.85rem;
+         color: #999;
+         margin-top: 10px;
+         text-align: right;
+       }
+       .form-container {
+         background: white;
+         padding: 20px;
+         border-radius: 8px;
+         margin-bottom: 30px;
+         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+       }
+       .form-container input, .form-container textarea {
+         width: 100%;
+         padding: 10px;
+         margin: 10px 0;
+         border: 1px solid #ddd;
+         border-radius: 4px;
+       }
+       .form-container button {
+         background: #007BFF;
+         color: white;
+         padding: 10px 20px;
+         border: none;
+         border-radius: 4px;
+         cursor: pointer;
+       }
+       .form-container button:hover {
+         background-color:#0056b3;
+       }
+       
+    /* Footer Styles */
+    footer {
+      background: #005f99;
+      color: white;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+     </style>
+   </head>
+   <body>
    <header>
   <div class="header-content">
     <a href="#home" class="logo-link">
@@ -167,6 +319,208 @@
     <a href="#appointment"><i class="fas fa-calendar-check"></i> Book Appointment</a>
   </nav>
 </header>
+     <h1>What Our Clients Say</h1>
+     <div class="form-container">
+       <h2>Share Your Experience</h2>
+       <div>
+         <input type="text" id="name" placeholder="Your Name" required>
+         <textarea id="message" placeholder="Your Testimonial" rows="4" required></textarea>
+         <button onclick="submitTestimonial()">Submit Testimonial</button>
+       </div>
+     </div>
+     <div id="testimonials-container">
+       <!-- Testimonials will be inserted here -->
+     </div>
+
+      <footer>
+    <div style="max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; text-align: left;">
+      <div style="flex: 1; min-width: 200px; margin: 10px;">
+        <h3>Sterling Dental Clinic</h3>
+        <p>Providing exceptional dental care to Kampala since 2010.</p>
+      </div>
+      <div style="flex: 1; min-width: 200px; margin: 10px;">
+        <h3>Quick Links</h3>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="index.html" style="color: #fff; text-decoration: none;">Home</a></li>
+          <li><a href="services.html" style="color: #fff; text-decoration: none;">Services</a></li>
+          <li><a href="about.html" style="color: #fff; text-decoration: none;">About Us</a></li>
+          <li><a href="index.html" style="color: #fff; text-decoration: none;">Contact</a></li>
+        </ul>
+      </div>
+      <div style="flex: 1; min-width: 200px; margin: 10px;">
+        <h3>Contact Us</h3>
+        <p>
+          <i class="fas fa-map-marker-alt"></i> Garden City Mall, Kampala<br>
+          <i class="fas fa-phone-alt"></i> +256 772 488592<br>
+          <i class="fas fa-envelope"></i> info@kampalasterlingdentalclinic.com
+        </p>
+      </div>
+    </div>
+    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+      <p>© 2025 Sterling Dental Clinic. All rights reserved.</p>
+      <div style="margin-top: 10px;">
+        <a href="https://www.facebook.com/SterlingDentalPractice" style="color: #fff; margin: 0 10px; font-size: 20px;" title="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.twitter.com/yourprofile" style="color: #fff; margin: 0 10px; font-size: 20px;" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.linkedin.com/accessibility?openinweb=true" style="color: #fff; margin: 0 10px; font-size: 20px;" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.instagram.com/sterlingdentalclinic?igsh=MjZpdXk1cWsxeHQ1" style="color: #fff; margin: 0 10px; font-size: 20px;" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.snapchat.com/add/sterlingdental?share_id=PbJexKFCMqA&locale=en-US" style="color: #fff; margin: 0 10px; font-size: 20px;" title="Snapchat"><i class="fab fa-snapchat"></i></a>
+        <a href="https://www.tiktok.com/@sterlingdentalclinic?_t=ZM-8wcxw0G6gEf&_r=1" style="color: #fff; margin: 0 10px; font-size: 20px;" title="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="https://wa.me/message/MGRPNC4UBTNFD1" style="color: #fff; margin: 0 10px; font-size: 20px;" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </footer>
+
+     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+       <script>
+    const supabase = Supabase.createClient(
+  'https://emldrnonwflkbbnbughi.supabase.co', // Replace with your Supabase Project URL
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtbGRybm9ud2Zsa2JibmJ1Z2hpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxOTEwMzQsImV4cCI6MjA2Mzc2NzAzNH0.R2PETzSHm0uGa-A62RjN9FJiQ2VSM_J5KcB7NeJ3AEU' // Replace with your Supabase Anon Key
+);
+    async function submitTestimonial() {
+  const name = document.getElementById('name').value.trim();
+  const message = document.getElementById('message').value.trim();
+  const rating = parseInt(document.getElementById('rating').value);
+
+  if (!name || !message || !rating) {
+    alert('Please fill in all fields.');
+    return;
+  }
+
+  try {
+    const { error } = await supabase
+      .from('testimonials')
+      .insert([{ name, message, rating }]);
+
+    if (error) {
+      alert('Failed to submit testimonial: ' + error.message);
+      return;
+    }
+
+    alert('Thank you for your testimonial!');
+    document.getElementById('name').value = '';
+    document.getElementById('message').value = '';
+    document.getElementById('rating').value = '';
+    loadTestimonials();
+  } catch (err) {
+    alert('Error submitting testimonial. Please try again later.');
+    console.error(err);
+  }
+}
+
+    try {
+  console.log('Submitting testimonial:', { name, message, rating });
+  const { error } = await supabase
+    .from('testimonials')
+    .insert([{ name, message, rating }]);
+  if (error) {
+    console.error('Supabase insert error:', error);
+    alert('Failed to submit testimonial: ' + error.message);
+    return;
+  }
+  console.log('Testimonial submitted successfully');
+  alert('Thank you for your testimonial!');
+  document.getElementById('name').value = '';
+  document.getElementById('message').value = '';
+  document.getElementById('rating').value = '';
+  loadTestimonials();
+} catch (err) {
+  console.error('Unexpected error during submission:', err);
+  alert('Error submitting testimonial. Please try again later.');
+}
+  </script>
+     <script>
+
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('testimonials-container');
+  const testimonials = JSON.parse(localStorage.getItem('testimonials') || '[]');
+
+  if (testimonials.length === 0) {
+    container.innerHTML = '<p>No testimonials yet.</p>';
+    return;
+  }
+
+  container.innerHTML = testimonials.map(t => `
+    <div class="testimonial-card" style="border: 1px solid #0056b3; border-radius: 8px; padding: 15px; margin-bottom: 15px; background: #f0f8ff;">
+      <h3 style="color: #003366; margin: 0 0 5px;">${escapeHtml(t.name)}</h3>
+      <div style="color: #ffc107; font-size: 1.2em; margin-bottom: 10px;">
+        ${renderStars(t.rating)}
+      </div>
+      <p style="color: #000; margin: 0 0 10px;">${escapeHtml(t.message)}</p>
+      <small style="color: #666;">${new Date(t.date).toLocaleDateString()}</small>
+    </div>
+  `).join('');
+
+  function renderStars(rating) {
+    let starsHtml = '';
+    for (let i = 1; i <= 5; i++) {
+      starsHtml += i <= rating ? '★' : '☆';
+    }
+    return starsHtml;
+  }
+
+  // Simple escape to prevent HTML injection
+  function escapeHtml(text) {
+    return text.replace(/[&<>"']/g, (m) => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    })[m]);
+  }
+});
+  async function submitTestimonial() {
+    const name = document.getElementById('name').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !message) {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    // For simplicity, set rating to 5 here or add rating input if you want
+    const rating = 5;
+
+    try {
+      const res = await fetch('http://localhost:3000/testimonials', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, message, rating, email: 'anonymous@example.com' }) // email required by backend
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+        alert('Thank you for your testimonial!');
+        document.getElementById('name').value = '';
+        document.getElementById('message').value = '';
+        loadTestimonials();
+      } else {
+        alert(result.error || 'Failed to submit testimonial.');
+      }
+    } catch (err) {
+      alert('Error submitting testimonial. Please try again later.');
+      console.error(err);
+    }
+  }
+
+  // Load testimonials on page load
+  loadTestimonials();
+
+         // Navigation Script
+const burger = document.getElementById('burger');
+const nav = document.getElementById('nav-menu');
+
+burger.addEventListener('click', () => {
+  const expanded = burger.getAttribute('aria-expanded') === 'true';
+  burger.setAttribute('aria-expanded', !expanded);
+  burger.classList.toggle('active');
+  nav.classList.toggle('open');
+});
+
+  </script>
+   </body>
+   </html>
      <h1>What Our Clients Say</h1>
      <div class="form-container">
        <h2>Share Your Experience</h2>
