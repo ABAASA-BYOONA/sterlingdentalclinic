@@ -829,6 +829,59 @@
   </footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script>
+    async function submitTestimonial() {
+  const name = document.getElementById('name').value.trim();
+  const message = document.getElementById('message').value.trim();
+  const rating = parseInt(document.getElementById('rating').value);
+
+  if (!name || !message || !rating) {
+    alert('Please fill in all fields.');
+    return;
+  }
+
+  try {
+    const { error } = await supabase
+      .from('testimonials')
+      .insert([{ name, message, rating }]);
+
+    if (error) {
+      alert('Failed to submit testimonial: ' + error.message);
+      return;
+    }
+
+    alert('Thank you for your testimonial!');
+    document.getElementById('name').value = '';
+    document.getElementById('message').value = '';
+    document.getElementById('rating').value = '';
+    loadTestimonials();
+  } catch (err) {
+    alert('Error submitting testimonial. Please try again later.');
+    console.error(err);
+  }
+}
+
+    try {
+  console.log('Submitting testimonial:', { name, message, rating });
+  const { error } = await supabase
+    .from('testimonials')
+    .insert([{ name, message, rating }]);
+  if (error) {
+    console.error('Supabase insert error:', error);
+    alert('Failed to submit testimonial: ' + error.message);
+    return;
+  }
+  console.log('Testimonial submitted successfully');
+  alert('Thank you for your testimonial!');
+  document.getElementById('name').value = '';
+  document.getElementById('message').value = '';
+  document.getElementById('rating').value = '';
+  loadTestimonials();
+} catch (err) {
+  console.error('Unexpected error during submission:', err);
+  alert('Error submitting testimonial. Please try again later.');
+}
+  </script>
+  <script>
     // Navigation Script
     const burger = document.getElementById('burger');
     const navLinks = document.querySelectorAll('nav a');
