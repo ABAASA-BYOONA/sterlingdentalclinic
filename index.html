@@ -931,28 +931,6 @@
   }
 });
 
-async function loadTestimonials() {
-  try {
-    const response = await fetch('get_testimonials.php');
-    if (!response.ok) {
-      throw new Error('Failed to load testimonials');
-    }
-    const testimonials = await response.json();
-
-    const container = document.getElementById('testimonialsContainer');
-    container.innerHTML = '';
-
-    testimonials.forEach(({ name, testimonial }) => {
-      const div = document.createElement('div');
-      div.classList.add('testimonial');
-      div.innerHTML = `<strong>${name}</strong><p>${testimonial}</p>`;
-      container.appendChild(div);
-    });
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 loadTestimonials();
 loadTestimonials();
     document.addEventListener('DOMContentLoaded', () => {
@@ -974,43 +952,6 @@ loadTestimonials();
       updateStars(selectedRating);
     });
   });
-
-  function updateStars(rating) {
-    stars.forEach(star => {
-      const starValue = parseInt(star.getAttribute('data-value'));
-      star.style.color = starValue <= rating ? '#ffc107' : '#bbb';
-    });
-  }
-
-  const form = document.getElementById('testimonialForm');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    if (!ratingInput.value) {
-      alert('Please select a rating.');
-      return;
-    }
-
-    const testimonial = {
-      name: form.name.value.trim(),
-      email: form.email.value.trim(),
-      rating: parseInt(ratingInput.value),
-      message: form.message.value.trim(),
-      date: new Date().toISOString()
-    };
-
-    // Get existing testimonials or empty array
-    const testimonials = JSON.parse(localStorage.getItem('testimonials') || '[]');
-    testimonials.push(testimonial);
-    localStorage.setItem('testimonials', JSON.stringify(testimonials));
-
-    alert('Thank you for your testimonial!');
-
-    form.reset();
-    updateStars(0);
-  });
-});
-
     // AI Chat Script
     const chatButton = document.getElementById('ai-chat-button');
     const chatPopup = document.getElementById('ai-chat-popup');
