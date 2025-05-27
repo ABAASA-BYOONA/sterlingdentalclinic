@@ -113,128 +113,130 @@
       overflow: hidden;
     }
     
-  /* Container for the scrolling wrapper */
     .testimonials-scroll-wrapper {
-      width: 100%;
-      overflow: hidden;
+      display: flex;
       position: relative;
-      padding: 20px 0;
+      width: fit-content;
+      animation: scroll 30s linear infinite;
+      will-change: transform;
+      padding: 0 2rem;
     }
-
-    /* Grid container for testimonials */
+    
     .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
-      gap: 20px;
-      width: max-content; /* Allow container to expand to fit content */
-      animation: scroll 20s linear infinite; /* Animation for endless loop */
-      will-change: transform; /* Optimize animation performance */
+      display: flex;
+      padding: 1.5rem 0;
+      margin: 0 2rem 0 0;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      flex-shrink: 0;
+      justify-content: flex-start;
+      align-items: stretch;
+      gap: 2rem;
     }
-
-    /* Duplicate container for seamless looping */
-    .testimonials-grid.duplicate {
-      position: absolute;
-      top: 0;
-      right: 100%; /* Position duplicate to the left of the original */
+    
+    /* Pause animation on hover */
+    .testimonials-container:hover .testimonials-scroll-wrapper {
+      animation-play-state: paused;
     }
-
-    /* Skeleton card styling */
-    .skeleton-card {
-      width: 250px; /* Fixed width for each card */
-      padding: 20px;
-      background: #f0f0f0;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    .skeleton-avatar {
-      width: 50px;
-      height: 50px;
-      background: #e0e0e0;
-      border-radius: 50%;
-      margin-bottom: 10px;
-    }
-
-    .skeleton-line {
-      height: 10px;
-      background: #e0e0e0;
-      margin-bottom: 8px;
-      border-radius: 4px;
-    }
-
-    .skeleton-line:nth-child(2) { width: 70%; }
-    .skeleton-line:nth-child(3) { width: 100%; }
-    .skeleton-line:nth-child(4) { width: 60%; }
-
-    /* Animation keyframes for endless left-to-right scroll */
+    
+    /* Seamless scroll animation */
     @keyframes scroll {
       0% {
         transform: translateX(0);
       }
       100% {
-        transform: translateX(100%); /* Move to the right by the full width */
+        transform: translateX(-50%);
       }
     }
-
-    /* Ensure responsiveness */
-    @media (max-width: 768px) {
+    
+    /* Ensure smooth scrolling on all devices */
+    @media (prefers-reduced-motion: reduce) {
       .testimonials-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 cards per row on smaller screens */
-      }
-      .skeleton-card {
-        width: 200px; /* Adjust card width for smaller screens */
+        animation: none;
+        overflow-x: auto;
       }
     }
+    
+    /* Hide scrollbar for WebKit browsers */
+    .testimonials-grid::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .testimonial-card {
+      flex: 0 0 300px;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      margin: 0 0.5rem;
+      transition: transform 0.5s ease, box-shadow 0.3s ease, z-index 0.3s ease;
+      position: relative;
+      z-index: 1;
+      will-change: transform;
+    }
+    
+    .testimonial-card:hover {
+      transform: scale(1.05) translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      z-index: 2;
+    }
 
-    @media (max-width: 480px) {
-      .testimonials-grid {
-        grid-template-columns: 1fr; /* 1 card per row on very small screens */
+    /* Animation for testimonials */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
       }
-      .skeleton-card {
-        width: 100%; /* Full width for cards */
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
 
-    /* Review banner styling (unchanged) */
-    .review-banner {
-      background: linear-gradient(135deg, #007BFF, #00BFFF);
-      color: white;
-      padding: 30px;
-      border-radius: 10px;
-      text-align: center;
-      margin: 40px 0;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    .testimonial-card {
+      animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      opacity: 0;
     }
 
-    .review-banner h2 {
-      font-size: 2rem;
-      margin-bottom: 15px;
-    }
+    /* Stagger animations */
+    .testimonial-card:nth-child(1) { animation-delay: 0.1s; }
+    .testimonial-card:nth-child(2) { animation-delay: 0.2s; }
+    .testimonial-card:nth-child(3) { animation-delay: 0.3s; }
+    .testimonial-card:nth-child(4) { animation-delay: 0.4s; }
 
-    .review-banner p {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .review-banner .btn {
+    /* Testimonial Card */
+    .testimonial-card {
       background: white;
-      color: #007BFF;
-      padding: 12px 30px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-block;
-      transition: all 0.3s ease;
-      border: 2px solid white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 300px;
+      min-width: 300px;
+      max-width: 300px;
+      flex-shrink: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      box-sizing: border-box;
+      position: relative;
     }
 
-    .review-banner .btn:hover {
-      background: #007BFF;
-      color: white;
+    .testimonial-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #4f46e5, #7c3aed);
+      border-radius: 12px 12px 0 0;
     }
+
+    .testimonial-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+
     .testimonial-header {
       display: flex;
       align-items: center;
@@ -358,6 +360,35 @@
       background: var(--primary-dark);
       transform: translateY(-2px);
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Skeleton Loading */
+    .skeleton-card {
+      background: white;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .skeleton-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #eee;
+      margin-bottom: 1rem;
+    }
+
+    .skeleton-line {
+      height: 12px;
+      background: #eee;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
 
     /* Testimonial Form Styles */
@@ -650,64 +681,41 @@
         <p class="subtitle">Real experiences from our amazing patients</p>
       </div>
     </section>
-    
-  <div class="testimonials-scroll-wrapper">
-    <div id="testimonials-container" class="testimonials-grid">
-      <!-- Skeleton cards - First Set -->
-      <div class="skeleton-card">
-        <div class="skeleton-avatar"></div>
-        <div class="skeleton-line"></div>
-        <div class="skeleton-line"></div>
-        <div class="skeleton-line"></div>
+
+    <section class="testimonials-container container">
+      <div class="testimonials-scroll-wrapper">
+        <div id="testimonials-container" class="testimonials-grid">
+          <!-- Loading skeleton - First Set -->
+          <div class="skeleton-card">
+            <div class="skeleton-avatar"></div>
+            <div class="skeleton-line" style="width: 70%;"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line" style="width: 60%;"></div>
+          </div>
+          <div class="skeleton-card">
+            <div class="skeleton-avatar"></div>
+            <div class="skeleton-line" style="width: 80%;"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line" style="width: 70%;"></div>
+          </div>
+        </div>
+        <!-- Duplicate for seamless loop -->
+        <div id="testimonials-container-duplicate" class="testimonials-grid duplicate">
+          <!-- Loading skeleton - Second Set (Duplicate) -->
+          <div class="skeleton-card">
+            <div class="skeleton-avatar"></div>
+            <div class="skeleton-line" style="width: 70%;"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line" style="width: 60%;"></div>
+          </div>
+          <div class="skeleton-card">
+            <div class="skeleton-avatar"></div>
+            <div class="skeleton-line" style="width: 80%;"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line" style="width: 70%;"></div>
+          </div>
+        </div>
       </div>
-      <div class="skeleton-card">
-        <div class="skeleton-avatar"></div>
-        <div class="skeleton-line"></div>
-        <div class="skeleton-line"></div>
-        <div class="skeleton-line"></div>
-      </div>
-      <div class="skeleton-card">
-        <div class="skeleton-avatar"></div>
-        <div class="skeleton-line"></div>
-        <div class="skeleton-line"></div>
-        <div class="skeleton-line"></div>
-      </div>
-      <div class="skeleton-card">
-        <div class="skeleton-avatar"></div>
-        <div class="skeleton-line"></div>
-        <div class="skeleton-line"></div>
-        <div class="skeleton-line"></div>
-      </div>
-    </div>
-    <!-- Duplicate for seamless loop -->
-    <div id="testimonials-container-duplicate" class="testimonials-grid duplicate">
-      <!-- Skeleton cards - Second Set (Duplicate) -->
-      <div class="skeleton-card">
-        <div class="skeleton-avatar"></div>
-        <div class="skeleton-line"></div>
-        <div class="skeleton-line"></div>
-        <div class="skeleton-line"></div>
-      </div>
-      <div class="skeleton-card">
-        <div class="skeleton-avatar"></div>
-        <div class="skeleton-line"></div>
-        <div class="skeleton-line"></div>
-        <div class="skeleton-line"></div>
-      </div>
-      <div class="skeleton-card">
-        <div class="skeleton-avatar"></div>
-        <div class="skeleton-line"></div>
-        <div class="skeleton-line"></div>
-        <div class="skeleton-line"></div>
-      </div>
-      <div class="skeleton-card">
-        <div class="skeleton-avatar"></div>
-        <div class="skeleton-line"></div>
-        <div class="skeleton-line"></div>
-        <div class="skeleton-line"></div>
-      </div>
-    </div>
-  </div>
 
       <!-- Review Banner -->
       <div class="review-banner" style="background: linear-gradient(135deg, #007BFF, #00BFFF); color: white; padding: 30px; border-radius: 10px; text-align: center; margin: 40px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
@@ -720,6 +728,24 @@
         </a>
       </div>
       
+      <div class="testimonial-form-container" style="max-width: 600px; margin: 40px auto 0; padding: 30px; background: #d9e6ff; border-radius: 10px; box-shadow: 0 3px 8px rgba(0,0,0,0.15); font-family: Arial, sans-serif; position: relative;">
+        <div id="formMessage" class="form-message"></div>
+        <h2 style="text-align: center; color: #003366; margin-bottom: 20px;">Share Your Testimonial</h2>
+        <form id="testimonialForm" style="color: #000;">
+          <div style="margin-bottom: 15px;">
+            <label for="name" style="color: #003366; font-weight: 600; display: block; margin-bottom: 5px;">Name:</label>
+            <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; border: 1px solid #0056b3; border-radius: 5px; color: #000; box-sizing: border-box;" />
+          </div>
+          
+          <div style="margin-bottom: 15px;">
+            <label style="color: #003366; font-weight: 600; display: block; margin-bottom: 8px;">Rating:</label>
+            <div id="star-rating" style="font-size: 24px; line-height: 1; margin-bottom: 10px;">
+              <span class="star" data-value="1" style="cursor: pointer; margin-right: 5px;">☆</span>
+              <span class="star" data-value="2" style="cursor: pointer; margin-right: 5px;">☆</span>
+              <span class="star" data-value="3" style="cursor: pointer; margin-right: 5px;">☆</span>
+              <span class="star" data-value="4" style="cursor: pointer; margin-right: 5px;">☆</span>
+              <span class="star" data-value="5" style="cursor: pointer;">☆</span>
+=======
       <div class="testimonial-form-container">
         <h2>Share Your Experience</h2>
         <form id="testimonialForm" class="testimonial-form">
@@ -789,7 +815,7 @@
       </div>
     </div>
   </footer>
-  <script>
+<script>
     // Navigation Script
     const burger = document.getElementById('burger');
     const navLinks = document.querySelectorAll('nav a');
@@ -799,8 +825,8 @@
         link.classList.toggle('active');
       });
     });
-  </script>
-  
+
+</script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -1367,7 +1393,6 @@
     testSupabase();
   });
   </script>
-
   <style>
     /* Add styles for form messages */
     .form-message {
