@@ -105,13 +105,78 @@
       opacity: 0.9;
     }
 
-    /* Testimonials Grid */
+    /* Testimonials Grid - Seamless Infinite Scroll */
+    .testimonials-container {
+      width: 100%;
+      position: relative;
+      padding: 2rem 0;
+      overflow: hidden;
+    }
+    
+    .testimonials-scroll-wrapper {
+      display: flex;
+      position: relative;
+      width: fit-content;
+      animation: scroll 30s linear infinite;
+      will-change: transform;
+      padding: 0 2rem;
+    }
+    
     .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 2.5rem;
-      margin: 4rem 0;
-      perspective: 1000px;
+      display: flex;
+      padding: 1.5rem 0;
+      margin: 0 2rem 0 0;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      flex-shrink: 0;
+      justify-content: flex-start;
+      align-items: stretch;
+      gap: 2rem;
+    }
+    
+    /* Pause animation on hover */
+    .testimonials-container:hover .testimonials-scroll-wrapper {
+      animation-play-state: paused;
+    }
+    
+    /* Seamless scroll animation */
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    
+    /* Ensure smooth scrolling on all devices */
+    @media (prefers-reduced-motion: reduce) {
+      .testimonials-grid {
+        animation: none;
+        overflow-x: auto;
+      }
+    }
+    
+    /* Hide scrollbar for WebKit browsers */
+    .testimonials-grid::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .testimonial-card {
+      flex: 0 0 300px;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      margin: 0 0.5rem;
+      transition: transform 0.5s ease, box-shadow 0.3s ease, z-index 0.3s ease;
+      position: relative;
+      z-index: 1;
+      will-change: transform;
+    }
+    
+    .testimonial-card:hover {
+      transform: scale(1.05) translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      z-index: 2;
     }
 
     /* Animation for testimonials */
@@ -140,13 +205,20 @@
     /* Testimonial Card */
     .testimonial-card {
       background: white;
-      border-radius: 16px;
-      padding: 2.5rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 300px;
+      min-width: 300px;
+      max-width: 300px;
+      flex-shrink: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      box-sizing: border-box;
       position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(0, 0, 0, 0.03);
     }
 
     .testimonial-card::before {
@@ -154,9 +226,10 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 5px;
-      height: 100%;
-      background: linear-gradient(to bottom, var(--primary), var(--accent));
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #4f46e5, #7c3aed);
+      border-radius: 12px 12px 0 0;
     }
 
     .testimonial-card:hover {
@@ -393,38 +466,59 @@
     }
 
     .form-message {
-      padding: 15px;
-      margin: 0 0 20px 0;
+      padding: 15px 20px;
+      margin: 0 0 25px 0;
       border-radius: 8px;
       font-weight: 500;
       opacity: 0;
-      transform: translateY(-10px);
-      transition: all 0.3s ease;
+      transform: translateY(-20px);
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      max-width: 100%;
+      width: 100%;
+      box-sizing: border-box;
     }
     .form-message.visible {
       opacity: 1;
       transform: translateY(0);
     }
     .form-message.success {
-      background-color: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
+      background-color: #e8f5e9;
+      color: #1b5e20;
+      border-left: 4px solid #4caf50;
     }
     .form-message.error {
-      background-color: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
+      background-color: #ffebee;
+      color: #c62828;
+      border-left: 4px solid #f44336;
+    }
+    .form-message.info {
+      background-color: #e3f2fd;
+      color: #0d47a1;
+      border-left: 4px solid #2196f3;
     }
     .form-message p {
       margin: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
+      font-size: 1.05em;
+      line-height: 1.5;
     }
     .form-message i {
-      font-size: 1.2em;
+      font-size: 1.4em;
+      flex-shrink: 0;
+    }
+    @keyframes slideIn {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .form-message.visible {
+      animation: slideIn 0.4s ease-out forwards;
     }
 
     /* Responsive Design */
@@ -589,28 +683,69 @@
     </section>
 
     <section class="testimonials-container container">
-      <div id="testimonials-container" class="testimonials-grid">
-        <!-- Loading skeleton -->
-        <div class="skeleton-card">
-          <div class="skeleton-avatar"></div>
-          <div class="skeleton-line" style="width: 70%;"></div>
-          <div class="skeleton-line"></div>
-          <div class="skeleton-line" style="width: 60%;"></div>
+      <div class="testimonials-scroll-wrapper">
+        <div id="testimonials-container" class="testimonials-grid">
+          <!-- Loading skeleton - First Set -->
+          <div class="skeleton-card">
+            <div class="skeleton-avatar"></div>
+            <div class="skeleton-line" style="width: 70%;"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line" style="width: 60%;"></div>
+          </div>
+          <div class="skeleton-card">
+            <div class="skeleton-avatar"></div>
+            <div class="skeleton-line" style="width: 80%;"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line" style="width: 70%;"></div>
+          </div>
         </div>
-        <div class="skeleton-card">
-          <div class="skeleton-avatar"></div>
-          <div class="skeleton-line" style="width: 80%;"></div>
-          <div class="skeleton-line"></div>
-          <div class="skeleton-line" style="width: 70%;"></div>
+        <!-- Duplicate for seamless loop -->
+        <div id="testimonials-container-duplicate" class="testimonials-grid duplicate">
+          <!-- Loading skeleton - Second Set (Duplicate) -->
+          <div class="skeleton-card">
+            <div class="skeleton-avatar"></div>
+            <div class="skeleton-line" style="width: 70%;"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line" style="width: 60%;"></div>
+          </div>
+          <div class="skeleton-card">
+            <div class="skeleton-avatar"></div>
+            <div class="skeleton-line" style="width: 80%;"></div>
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line" style="width: 70%;"></div>
+          </div>
         </div>
       </div>
 
-      <div class="share-experience">
-        <h2>Share Your Experience</h2>
-        <p>We'd love to hear about your experience at Sterling Dental Clinic</p>
-        <a href="index.html#contact" class="btn btn-primary">Write a Review</a>
+      <!-- Review Banner -->
+      <div class="review-banner" style="background: linear-gradient(135deg, #007BFF, #00BFFF); color: white; padding: 30px; border-radius: 10px; text-align: center; margin: 40px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+        <h2 style="font-size: 2rem; margin-bottom: 15px;">Share Your Experience With Us</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 20px; max-width: 800px; margin-left: auto; margin-right: auto;">
+          Your feedback helps us improve our services. We'd love to hear about your experience at Sterling Dental Clinic.
+        </p>
+        <a href="#testimonial-form" class="btn btn-light" style="background: white; color: #007BFF; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; display: inline-block; transition: all 0.3s ease; border: 2px solid white;">
+          Write a Review
+        </a>
       </div>
       
+      <div class="testimonial-form-container" style="max-width: 600px; margin: 40px auto 0; padding: 30px; background: #d9e6ff; border-radius: 10px; box-shadow: 0 3px 8px rgba(0,0,0,0.15); font-family: Arial, sans-serif; position: relative;">
+        <div id="formMessage" class="form-message"></div>
+        <h2 style="text-align: center; color: #003366; margin-bottom: 20px;">Share Your Testimonial</h2>
+        <form id="testimonialForm" style="color: #000;">
+          <div style="margin-bottom: 15px;">
+            <label for="name" style="color: #003366; font-weight: 600; display: block; margin-bottom: 5px;">Name:</label>
+            <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; border: 1px solid #0056b3; border-radius: 5px; color: #000; box-sizing: border-box;" />
+          </div>
+          
+          <div style="margin-bottom: 15px;">
+            <label style="color: #003366; font-weight: 600; display: block; margin-bottom: 8px;">Rating:</label>
+            <div id="star-rating" style="font-size: 24px; line-height: 1; margin-bottom: 10px;">
+              <span class="star" data-value="1" style="cursor: pointer; margin-right: 5px;">☆</span>
+              <span class="star" data-value="2" style="cursor: pointer; margin-right: 5px;">☆</span>
+              <span class="star" data-value="3" style="cursor: pointer; margin-right: 5px;">☆</span>
+              <span class="star" data-value="4" style="cursor: pointer; margin-right: 5px;">☆</span>
+              <span class="star" data-value="5" style="cursor: pointer;">☆</span>
+=======
       <div class="testimonial-form-container">
         <h2>Share Your Experience</h2>
         <form id="testimonialForm" class="testimonial-form">
@@ -626,18 +761,20 @@
               <span class="star" data-value="3" style="cursor: pointer; margin-right: 5px; color: gray;">★</span>
               <span class="star" data-value="4" style="cursor: pointer; margin-right: 5px; color: gray;">★</span>
               <span class="star" data-value="5" style="cursor: pointer; color: gray;">★</span>
+
             </div>
-            <input type="hidden" id="rating" name="rating" value="0" />
+            <input type="hidden" id="rating" name="rating" value="0" required />
           </div>
-          <div class="form-group">
-            <label for="message" style="color: #003366; font-weight: 600;">Testimonial:</label><br />
-            <textarea id="message" name="message" rows="4" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #0056b3; border-radius: 5px; color: #000;"></textarea><br />
+          
+          <div style="margin-bottom: 20px;">
+            <label for="message" style="color: #003366; font-weight: 600; display: block; margin-bottom: 5px;">Testimonial:</label>
+            <textarea id="message" name="message" rows="4" required style="width: 100%; padding: 10px; border: 1px solid #0056b3; border-radius: 5px; color: #000; box-sizing: border-box; resize: vertical; min-height: 100px;"></textarea>
           </div>
-          <button type="submit" style="background-color: #004085; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 1em; transition: background-color 0.3s ease;">
-            Submit
+          
+          <button type="submit" style="background-color: #004085; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 1em; transition: background-color 0.3s ease; width: 100%;">
+            Submit Testimonial
           </button>
         </form>
-        <div id="formMessage" class="form-message"></div>
       </div>
     </section>
   </main>
@@ -715,19 +852,44 @@
     const formMessage = document.getElementById('formMessage');
     if (!formMessage) return;
     
+    // Clear any existing timeouts
+    if (window.formMessageTimeout) {
+      clearTimeout(window.formMessageTimeout);
+    }
+    
     // Set message and type
-    formMessage.innerHTML = `<p><i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i> ${message}</p>`;
+    const icon = type === 'success' ? 'fa-check-circle' : 
+                type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
+    
+    formMessage.innerHTML = `
+      <p>
+        <i class="fas ${icon}"></i>
+        <span>${message}</span>
+      </p>
+    `;
     
     // Update classes
     formMessage.className = 'form-message';
     formMessage.classList.add(type, 'visible');
     
-    // Auto-hide after 5 seconds if it's a success message
-    if (type === 'success') {
+    // Auto-hide after a delay
+    const hideDelay = type === 'success' ? 8000 : 
+                     type === 'error' ? 10000 : 5000;
+    
+    window.formMessageTimeout = setTimeout(() => {
+      formMessage.classList.remove('visible');
+      // Wait for animation to complete before removing content
       setTimeout(() => {
-        formMessage.classList.remove('visible');
-      }, 5000);
-    }
+        if (!formMessage.classList.contains('visible')) {
+          formMessage.innerHTML = '';
+        }
+      }, 400);
+    }, hideDelay);
+    
+    // Scroll to show the message if it's not in view
+    setTimeout(() => {
+      formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -735,45 +897,32 @@
     const form = document.getElementById('testimonialForm');
     const stars = document.querySelectorAll('#star-rating .star');
     const ratingInput = document.getElementById('rating');
-    
-    // Initialize star rating UI
-    if (stars.length > 0 && ratingInput) {
-      stars.forEach(star => {
-        star.addEventListener('click', () => {
-          const value = parseInt(star.getAttribute('data-value'));
-          ratingInput.value = value;
-          
-          // Update star colors
-          stars.forEach((s, index) => {
-            if (index < value) {
-              s.style.color = '#ffc107'; // Gold color for selected stars
-              s.classList.add('selected');
-            } else {
-              s.style.color = '#ddd';
-              s.classList.remove('selected');
-            }
-          });
-        });
-      });
-    }
 
-    // Initialize star rating
+    // Initialize star rating UI
     stars.forEach(star => {
       star.addEventListener('click', () => {
         const ratingValue = parseInt(star.getAttribute('data-value'));
         ratingInput.value = ratingValue;
 
+        // Update star appearance
         stars.forEach(s => {
           if (parseInt(s.getAttribute('data-value')) <= ratingValue) {
+            s.style.color = '#ffc107'; // Gold color for selected stars
             s.classList.add('selected');
-            s.style.color = 'gold';
           } else {
+            s.style.color = '#000';
             s.classList.remove('selected');
-            s.style.color = 'gray';
           }
         });
       });
     });
+    
+    // Attach the submit event listener to the form
+    if (form) {
+      form.addEventListener('submit', submitTestimonial);
+    } else {
+      console.error('Form with id "testimonialForm" not found.');
+    }
 
     // Test Supabase connectivity on page load
     async function testSupabase() {
@@ -894,30 +1043,23 @@
 
     // Load testimonials from Supabase
     async function loadTestimonials() {
-      if (!container) {
+      const scrollWrapper = document.querySelector('.testimonials-scroll-wrapper');
+      const container = document.querySelector('.testimonials-container');
+      if (!scrollWrapper || !container) {
         console.error('Testimonials container not found');
         return;
       }
       
       try {
-        // Show loading state with skeleton animation
-        container.innerHTML = `
-          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2.5rem; width: 100%;">
+        // Show loading state with skeleton animation only in the scroll wrapper
+        scrollWrapper.innerHTML = `
+          <div class="testimonials-grid">
             ${Array(3).fill(`
-              <div class="skeleton-card" style="background: white; border-radius: 16px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
-                <div style="display: flex; margin-bottom: 1.5rem;">
-                  <div class="skeleton-avatar" style="width: 60px; height: 60px; border-radius: 50%; background: #f5f7fa; margin-right: 1.2rem;"></div>
-                  <div style="flex: 1; padding-top: 0.5rem;">
-                    <div class="skeleton-line" style="height: 14px; background: #f0f4ff; width: 60%; margin-bottom: 8px; border-radius: 4px;"></div>
-                    <div class="skeleton-line" style="height: 12px; background: #f8f9fa; width: 40%; border-radius: 4px;"></div>
-                  </div>
-                </div>
-                <div class="skeleton-line" style="height: 16px; background: #f0f4ff; width: 80px; margin-bottom: 1.5rem; border-radius: 4px;"></div>
-                <div style="padding-left: 1.5rem; border-left: 2px solid #f0f4ff;">
-                  <div class="skeleton-line" style="height: 14px; background: #f8f9fa; margin-bottom: 10px; border-radius: 4px;"></div>
-                  <div class="skeleton-line" style="height: 14px; background: #f8f9fa; margin-bottom: 10px; width: 90%; border-radius: 4px;"></div>
-                  <div class="skeleton-line" style="height: 14px; background: #f8f9fa; width: 80%; border-radius: 4px;"></div>
-                </div>
+              <div class="skeleton-card">
+                <div class="skeleton-avatar"></div>
+                <div class="skeleton-line" style="width: 70%;"></div>
+                <div class="skeleton-line"></div>
+                <div class="skeleton-line" style="width: 60%;"></div>
               </div>
             `).join('')}
           </div>`;
@@ -963,28 +1105,37 @@
           return;
         }
 
-        container.innerHTML = `
-          <div class="testimonials-grid">
-            ${testimonials.map((testimonial, index) => `
-              <div class="testimonial-card" style="animation-delay: ${index * 0.1}s">
-                <div class="testimonial-header">
-                  <div class="testimonial-avatar" style="background: linear-gradient(135deg, ${getRandomGradient()})">
-                    ${testimonial.name.charAt(0).toUpperCase()}
-                  </div>
-                  <div class="testimonial-info">
-                    <h4 class="testimonial-name">${escapeHtml(testimonial.name)}</h4>
-                    <p class="testimonial-date">${formatDate(testimonial.created_at)}</p>
-                  </div>
-                </div>
-                <div class="testimonial-rating">
-                  ${renderStars(testimonial.rating)}
-                </div>
-                <div class="testimonial-message">
-                  <p>${escapeHtml(testimonial.message)}</p>
-                </div>
+        // Create the testimonials HTML for both original and duplicate
+        const createTestimonialHTML = (testimonial) => `
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <div class="testimonial-avatar" style="background: linear-gradient(135deg, ${getRandomGradient()})">
+                ${testimonial.name.charAt(0).toUpperCase()}
               </div>
-            `).join('')}
+              <div class="testimonial-info">
+                <h4 class="testimonial-name">${escapeHtml(testimonial.name)}</h4>
+                <p class="testimonial-date">${formatDate(testimonial.created_at)}</p>
+              </div>
+            </div>
+            <div class="testimonial-rating">
+              ${renderStars(testimonial.rating)}
+            </div>
+            <div class="testimonial-message">
+              <p>${escapeHtml(testimonial.message)}</p>
+            </div>
           </div>`;
+          
+        // Create both original and duplicate sets of testimonials
+        const testimonialsHTML = `
+          <div class="testimonials-grid">
+            ${testimonials.map(testimonial => createTestimonialHTML(testimonial)).join('')}
+          </div>
+          <div class="testimonials-grid">
+            ${testimonials.map(testimonial => createTestimonialHTML(testimonial)).join('')}
+          </div>`;
+          
+        // Update only the scroll wrapper content, preserving the banner
+        scrollWrapper.innerHTML = testimonialsHTML;
 
         // Add intersection observer for scroll animations
         const observer = new IntersectionObserver((entries) => {
@@ -1100,12 +1251,11 @@
       
       try {
         const name = form.querySelector('#name').value.trim();
-        const email = form.querySelector('#email').value.trim();
         const message = form.querySelector('#message').value.trim();
         const rating = parseInt(form.querySelector('#rating').value);
 
         // Validation
-        if (!name || !email || !message || isNaN(rating) || rating < 1 || rating > 5) {
+        if (!name || !message || isNaN(rating) || rating < 1 || rating > 5) {
           showFormMessage('Please fill in all required fields and provide a valid rating (1-5).', 'error');
           return;
         }
@@ -1125,12 +1275,11 @@
         submitBtn.textContent = 'Submitting...';
         showFormMessage('Submitting your testimonial...', 'info');
 
-        console.log('Submitting testimonial:', { name, email, message, rating });
+        console.log('Submitting testimonial:', { name, message, rating });
         const { data, error } = await supabaseClient
           .from('testimonials')
           .insert([{
             name,
-            email,
             message,
             rating,
             status: 'pending',
