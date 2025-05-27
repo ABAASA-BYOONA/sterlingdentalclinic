@@ -981,16 +981,14 @@
         })[m] || m);
       }
 
-      // Navigation Script
       const burger = document.getElementById('burger');
-      if (burger) {
-        const navLinks = document.querySelectorAll('nav a');
-        burger.addEventListener('click', () => {
-          burger.classList.toggle('active');
-          navLinks.forEach(link => {
-            link.classList.toggle('active');
-          });
-        });
+    const navLinks = document.querySelectorAll('nav a');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      navLinks.forEach(link => {
+        link.classList.toggle('active');
+      });
+    });
       }
 
       // Form submission handler
@@ -1110,13 +1108,6 @@
       }
     });
 
-    // Navigation Burger Menu
-        const burger = document.getElementById('burger');
-        const navLinks = document.querySelectorAll('nav a');
-        burger.addEventListener('click', () => {
-            burger.classList.toggle('active');
-            navLinks.forEach(link => link.classList.toggle('active'));
-        });
   </script>
   </script>
   <style>
