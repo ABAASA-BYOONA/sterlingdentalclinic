@@ -426,6 +426,33 @@
       margin-bottom: 30px;
     }
 
+     header {
+      text-align: center;
+      padding: 20px;
+      background: #007BFF;
+      color: white;
+    }
+
+    .logo {
+      max-width: 100px;
+      height: auto;
+      vertical-align: middle;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 10px;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      margin-top: 10px;
+    }
+
+    /* Navigation Styles */
     nav {
       padding: 10px 20px;
       display: flex;
@@ -449,18 +476,7 @@
       text-decoration: underline;
     }
 
-    /* Burger button */
     .burger {
-      display: none;
-      cursor: pointer;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      padding: 0;
-    }
-
-        .burger {
       display: none;
       cursor: pointer;
       flex-direction: column;
@@ -477,6 +493,7 @@
 
     @media (max-width: 768px) {
       nav a {
+        color: #333;
         display: none;
         width: 100%;
         padding: 12px 0;
@@ -509,23 +526,6 @@
         transform: rotate(-45deg) translate(5px, -5px);
       }
     }
-
-      nav {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      nav a {
-        display: none;
-        width: 100%;
-        padding: 12px 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
-        justify-content: center;
-      }
-
-      nav.open a {
-        display: flex;
-      }
   </style>
 </head>
 <body>
@@ -1094,6 +1094,14 @@
         });
       }
     });
+
+    // Navigation Burger Menu
+        const burger = document.getElementById('burger');
+        const navLinks = document.querySelectorAll('nav a');
+        burger.addEventListener('click', () => {
+            burger.classList.toggle('active');
+            navLinks.forEach(link => link.classList.toggle('active'));
+        });
   </script>
   </script>
   <style>
