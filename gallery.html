@@ -788,17 +788,6 @@
     </div>
   </section>
 
-  <!-- AI Chat Button -->
-  <button id="ai-chat-button" title="Ask AI">🤖</button>
-  <div id="ai-chat-popup" role="dialog" aria-modal="true" aria-labelledby="ai-chat-header">
-    <div id="ai-chat-header">Ask Sterling AI</div>
-    <div id="ai-chat-messages" aria-live="polite" aria-relevant="additions"></div>
-    <div id="ai-chat-input-container">
-      <input type="text" id="ai-chat-input" placeholder="Type your question..." aria-label="Type your question" />
-      <button id="ai-chat-send" aria-label="Send question">➤</button>
-    </div>
-  </div>
-
   <!-- WhatsApp Floating Buttons -->
   <a href="https://wa.me/256772488592" class="whatsapp" target="_blank">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -869,72 +858,6 @@
       });
     });
 
-    // AI Chat Functionality
-    const chatButton = document.getElementById('ai-chat-button');
-    const chatPopup = document.getElementById('ai-chat-popup');
-    const chatMessages = document.getElementById('ai-chat-messages');
-    const chatInput = document.getElementById('ai-chat-input');
-    const chatSend = document.getElementById('ai-chat-send');
-
-    chatButton.addEventListener('click', () => {
-      chatPopup.style.display = chatPopup.style.display === 'flex' ? 'none' : 'flex';
-      if (chatPopup.style.display === 'flex') chatInput.focus();
-    });
-
-    function appendMessage(text, sender) {
-      const msg = document.createElement('div');
-      msg.classList.add('ai-message', sender === 'user' ? 'user-message' : 'bot-message');
-      msg.textContent = text;
-      chatMessages.appendChild(msg);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-
-    function getAIResponse(question) {
-      const q = question.toLowerCase();
-      if (q.includes('working hours') || q.includes('open') || q.includes('hours')) {
-        return 'Our clinic is open Monday to Friday from 9:00 AM to 6:00 PM, and Saturday from 9:00 AM to 3:00 PM.';
-      }
-      if (q.includes('location') || q.includes('address')) {
-        return 'We are located at Garden City Mall, ground floor, Kampala, Uganda.';
-      }
-      if (q.includes('appointment') || q.includes('book')) {
-        return 'You can book an appointment online through our website or call us at +256 772 488592.';
-      }
-      if (q.includes('toothache')) {
-        return 'For toothache, we recommend scheduling an emergency appointment as soon as possible for proper diagnosis and treatment.';
-      }
-      if (q.includes('teeth whitening')) {
-        return 'We offer professional teeth whitening services that are safe and effective. Contact us to learn more.';
-      }
-      if (q.includes('root canal')) {
-        return 'Root canal therapy is a treatment to save an infected tooth. Our specialists provide pain-free root canal treatments.';
-      }
-      return "I'm here to help! Could you please provide more details or ask a specific question about our clinic or dental care?";
-    }
-
-    function handleUserInput() {
-      const question = chatInput.value.trim();
-      if (!question) return;
-      appendMessage(question, 'user');
-      chatInput.value = '';
-      chatInput.disabled = true;
-      chatSend.disabled = true;
-      setTimeout(() => {
-        const response = getAIResponse(question);
-        appendMessage(response, 'bot');
-        chatInput.disabled = false;
-        chatSend.disabled = false;
-        chatInput.focus();
-      }, 1000);
-    }
-
-    chatSend.addEventListener('click', handleUserInput);
-    chatInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        handleUserInput();
-      }
-    });
   </script>
 </body>
 </html>
