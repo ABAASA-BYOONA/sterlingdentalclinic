@@ -724,6 +724,46 @@
 .star.selected {
   color: gold;
 }
+        .service-card {
+  position: relative;
+  background: #fff; /* fallback color */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  overflow: hidden;
+  color: #fff; /* text color for contrast */
+}
+
+/* Blurred background image layer */
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: inherit; /* inherit the background image */
+  background-size: cover;
+  background-position: center;
+  filter: blur(6px);
+  z-index: 0;
+  border-radius: 8px;
+}
+
+/* Dark overlay to dim the background */
+.service-card::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* stronger dim */
+  z-index: 1;
+  border-radius: 8px;
+}
+
+/* Make sure the content is above the overlay and blur */
+.service-card > * {
+  position: relative;
+  z-index: 2;
+}
+
   </style>
 </head>
 <body>
