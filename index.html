@@ -724,110 +724,6 @@
 .star.selected {
   color: gold;
 }
-        .service-card {
-  position: relative;
-  background: #fff; /* fallback color */
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  text-align: center;
-  overflow: hidden;
-  color: #fff; /* text color for contrast */
-}
-
-/* Blurred background image layer */
-.service-card::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-image: inherit; /* inherit the background image */
-  background-size: cover;
-  background-position: center;
-  filter: blur(6px);
-  z-index: 0;
-  border-radius: 8px;
-}
-
-/* Dark overlay to dim the background */
-.service-card::after {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.5); /* stronger dim */
-  z-index: 1;
-  border-radius: 8px;
-}
-
-/* Make sure the content is above the overlay and blur */
-.service-card > * {
-  position: relative;
-  z-index: 2;
-}
-  .smile-button {
-            display: inline-block;
-            padding: 15px 30px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #fff;
-            background-color: #ff6f61;
-            border: none;
-            border-radius: 25px;
-            text-decoration: none;
-            transition: background-color 0.3s, transform 0.2s;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-        }
-
-        .smile-button:hover {
-            background-color: #e55a4e;
-            transform: translateY(-2px);
-        }
-
-        .smile-button:active {
-            transform: translateY(0);
-        }
-
-        .smile-design {
-            margin-top: 20px;
-            width: 100px;
-            height: 100px;
-            background-color: #ffd700;
-            border-radius: 50%;
-            position: relative;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .smile-design::before,
-        .smile-design::after {
-            content: '';
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background-color: #333;
-            border-radius: 50%;
-            top: 30px;
-        }
-
-        .smile-design::before {
-            left: 25px;
-        }
-
-        .smile-design::after {
-            right: 25px;
-        }
-
-        .smile-mouth {
-            position: absolute;
-            width: 40px;
-            height: 20px;
-            background-color: transparent;
-            border: 4px solid #333;
-            border-top: none;
-            border-radius: 0 0 20px 20px;
-            top: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
   </style>
 </head>
 <body>
@@ -891,77 +787,69 @@
       <a href="tel:+256772488592" style="background-color: #007BFF; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin: 10px;">
         <i class="fas fa-phone"></i> Call Now
       </a>
-   
     </div>
-    <center>
-        <a href="https://isimulation.ismile.app/" class="smile-button">Smile Stimulator</a>
-    <div class="smile-design">
-        <div class="smile-mouth"></div>
-    </div>
-      </center>
   </section>
 
+  <section id="services">
+    <h2 style="color: white;">Our Dental Services</h2>
+    <p>We offer a complete range of dental treatments to meet all your oral health needs.</p>
     <div class="services-grid">
-       <div class="service-card" style="background-image: url('services/1.jpg'); background-size: cover; background-position: center;">
-                <h3><i class="fas fa-tooth" style="color: #007BFF;"></i> General Dentistry</h3>
-                <ul>
-                    <li>Dental exams & cleanings</li>
-                    <li>Fillings & restorations</li>
-                    <li>Root canal therapy</li>
-                    <li>Gum disease treatment</li>
-                </ul>
-            </div>
-
-            <div class="service-card" style="background-image: url('services/2.jpg'); background-size: cover; background-position: center;">
-                <h3><i class="fas fa-star" style="color: #ffc107;"></i> Cosmetic Dentistry</h3>
-                <ul>
-                    <li>Teeth whitening</li>
-                    <li>Dental veneers</li>
-                    <li>Composite bonding</li>
-                    <li>Smile makeovers</li>
-                </ul>
-            </div>
-<br>
-            <div class="service-card" style="background-image: url('services/3.jpg'); background-size: cover; background-position: center;">
-                <h3><i class="fas fa-teeth-open" style="color: #17a2b8;"></i> Orthodontics</h3>
-                <ul>
-                    <li>Traditional braces</li>
-                    <li>Invisalign clear aligners</li>
-                    <li>Retainers</li>
-                    <li>Space maintainers</li>
-                </ul>
-            </div>
-
-            <div class="service-card" style="background-image: url('services/4.jpg'); background-size: cover; background-position: center;">
-                <h3><i class="fas fa-baby" style="color: #fd7e14;"></i> Pediatric Dentistry</h3>
-                <ul>
-                    <li>Child dental exams</li>
-                    <li>Fluoride treatments</li>
-                    <li>Dental sealants</li>
-                    <li>Early orthodontic care</li>
-                </ul>
-            </div>
-      <br>
-            <div class="service-card" style="background-image: url('services/5.jpg'); background-size: cover; background-position: center;">
-                <h3><i class="fas fa-ambulance" style="color: #dc3545;"></i> Emergency Care</h3>
-                <ul>
-                    <li>Toothache relief</li>
-                    <li>Broken tooth repair</li>
-                    <li>Knocked-out tooth</li>
-                    <li>Dental trauma</li>
-                </ul>
-            </div>
-
-            <div class="service-card" style="background-image: url('services/6.jpg'); background-size: cover; background-position: center;">
-                <h3><i class="fas fa-implant" style="color: #6f42c1;"></i> Dental Implants</h3>
-                <ul>
-                    <li>Single tooth implants</li>
-                    <li>Implant-supported bridges</li>
-                    <li>Full arch restoration</li>
-                    <li>Bone grafting</li>
-                </ul>
-            </div>
+      <div class="service-card">
+        <h3><i class="fas fa-tooth" style="color: #007BFF;"></i> General Dentistry</h3>
+        <ul>
+          <li>Dental exams & cleanings</li>
+          <li>Fillings & restorations</li>
+          <li>Root canal therapy</li>
+          <li>Gum disease treatment</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <h3><i class="fas fa-star" style="color: #ffc107;"></i> Cosmetic Dentistry</h3>
+        <ul>
+          <li>Teeth whitening</li>
+          <li>Dental veneers</li>
+          <li>Composite bonding</li>
+          <li>Smile makeovers</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <h3><i class="fas fa-teeth-open" style="color: #17a2b8;"></i> Orthodontics</h3>
+        <ul>
+          <li>Traditional braces</li>
+          <li>Invisalign clear aligners</li>
+          <li>Retainers</li>
+          <li>Space maintainers</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <h3><i class="fas fa-baby" style="color: #fd7e14;"></i> Pediatric Dentistry</h3>
+        <ul>
+          <li>Child dental exams</li>
+          <li>Fluoride treatments</li>
+          <li>Dental sealants</li>
+          <li>Early orthodontic care</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <h3><i class="fas fa-ambulance" style="color: #dc3545;"></i> Emergency Care</h3>
+        <ul>
+          <li>Toothache relief</li>
+          <li>Broken tooth repair</li>
+          <li>Knocked-out tooth</li>
+          <li>Dental trauma</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <h3><i class="fas fa-implant" style="color: #6f42c1;"></i> Dental Implants</h3>
+        <ul>
+          <li>Single tooth implants</li>
+          <li>Implant-supported bridges</li>
+          <li>Full arch restoration</li>
+          <li>Bone grafting</li>
+        </ul>
+      </div>
     </div>
+  </section>
 
   <section id="about">
     <h2 style="color: white;">About Our Clinic</h2>
@@ -981,48 +869,29 @@
     animation: scroll-left 30s linear infinite;
   }
 
-  /* Pause scroll on hover */
+  /* Pause scrolling on hover */
   .floating-container:hover .floating-track {
     animation-play-state: paused;
   }
 
-.image-card {
-  position: relative;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  width: 300px;
-  margin: 0 1rem;
-  text-align: center;
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
-  z-index: 1;
-}
+  .image-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    margin: 0 1rem;
+    text-align: center;
+    flex-shrink: 0;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    z-index: 1;
+  }
 
-/* Light glow behind card */
-.image-card::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 110%;
-  height: 110%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 80%);
-  transform: translate(-50%, -50%);
-  border-radius: 20px;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: -1;
-}
-
-.image-card:hover::before {
-  opacity: 1;
-}
-
-
-  .image-card:hover::before {
-    opacity: 1;
+  .image-card:hover {
+    background-color: #f0f0f0; /* Lighten or darken as preferred */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    z-index: 2;
   }
 
   .image-card img {
@@ -1051,46 +920,43 @@
 
 <div class="floating-container">
   <div class="floating-track">
-    <div class="image-card" style="background-image: url('drive/_OK_9183.jpg'); background-size: cover; background-position: center;">
-      <img src="drive/_OK_9183.jpg" alt="Clinic interior" />
-      <p><strong style="color:white">Our state-of-the-art clinic</strong></p>
+    <!-- First Set -->
+    <div class="image-card">
+      <img src="drive/_OK_9183.jpg" alt="Sterling Dental Clinic interior" loading="lazy" />
+      <p><strong>Our state-of-the-art clinic</strong></p>
     </div>
-    <div class="image-card" >
-      <img src="drive/_OK_9406.jpg" alt="Dr. Biren N. Yajnik" />
+    <div class="image-card">
+      <img src="drive/_OK_9406.jpg" alt="Dr. Biren N. Yajnik" loading="lazy" />
       <p><strong>Dr. Biren N. Yajnik</strong></p>
       <p>Vice President of UDA (2020–2022)</p>
       <p>President of UDA (2020–2024)</p>
       <p>B.D.S., F.A.G.E., F.R.S.H (Lon), F.P.F.A (USA)</p>
       <p>Cosmetic Dentist</p>
     </div>
-    <div class="image-card" style="background-image: url('drive/_OK_9101.jpg'); background-size: cover; background-position: center;">
-      <img src="drive/_OK_9101.jpg" alt="Dental team" />
+    <div class="image-card">
+      <img src="drive/_OK_9101.jpg" alt="Dental team" loading="lazy" />
       <p><strong>Our dedicated dental team</strong></p>
     </div>
-  <div class="image-card" style="background-image: url('drive/_OK_9406.jpg'); background-size: cover; background-position: center;">
-      <img src="drive/_OK_9406.jpg" alt="Dr. Biren N. Yajnik" />
-      <p><strong>Dr. Biren N. Yajnik</strong></p>
+
+    <!-- Duplicate Set -->
+    <div class="image-card">
+      <img src="drive/_OK_9183.jpg" alt="Sterling Dental Clinic interior" loading="lazy" />
+      <p><strong>Our state-of-the-art clinic</strong></p>
     </div>
-    <!-- Duplicate cards for infinite scroll -->
-    <div class="image-card" style="background-image: url('drive/_OK_9183.jpg'); background-size: cover; background-position: center;">
-      <img src="drive/_OK_9183.jpg" alt="Clinic interior" />
-      <p style="color:white"><strong>Our state-of-the-art clinic</strong></p>
-    </div>
-    <div class="image-card" >
-      <img src="drive/_OK_9406.jpg" alt="Dr. Biren N. Yajnik" />
+    <div class="image-card">
+      <img src="drive/_OK_9406.jpg" alt="Dr. Biren N. Yajnik" loading="lazy" />
       <p><strong>Dr. Biren N. Yajnik</strong></p>
       <p>Vice President of UDA (2020–2022)</p>
       <p>President of UDA (2020–2024)</p>
       <p>B.D.S., F.A.G.E., F.R.S.H (Lon), F.P.F.A (USA)</p>
       <p>Cosmetic Dentist</p>
     </div>
-    <div class="image-card" style="background-image: url('drive/_OK_9101.jpg'); background-size: cover; background-position: center;">
-      <img src="drive/_OK_9101.jpg" alt="Dental team" />
+    <div class="image-card">
+      <img src="drive/_OK_9101.jpg" alt="Dental team" loading="lazy" />
       <p><strong>Our dedicated dental team</strong></p>
     </div>
   </div>
 </div>
-
 
   </section>
   <style>
@@ -1232,6 +1098,20 @@
       
       <button type="submit" style="background-color: #004085; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 1em; transition: background-color 0.3s ease; width: 100%;">
         Submit Testimonial
+=======
+      <label for="rating" style="color: #003366; font-weight: 600; display: block; margin-bottom: 8px;">Rating:</label>
+      <div id="star-rating">
+  <span class="star" data-value="1">&#9733;</span>
+  <span class="star" data-value="2">&#9733;</span>
+  <span class="star" data-value="3">&#9733;</span>
+  <span class="star" data-value="4">&#9733;</span>
+  <span class="star" data-value="5">&#9733;</span>
+</div>
+<input type="hidden" id="rating" name="rating" value="0" />
+      <label for="message" style="color: #003366; font-weight: 600;">Testimonial:</label><br />
+      <textarea id="message" name="message" rows="4" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #0056b3; border-radius: 5px; color: #000;"></textarea><br />
+      <button type="submit" style="background-color: #004085; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 1em; transition: background-color 0.3s ease;">
+        
       </button>
     </form>
   </section>
@@ -1518,4 +1398,3 @@
   <script src="chatbot.js"></script>
 </body>
 </html>
-
