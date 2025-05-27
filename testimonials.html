@@ -1375,6 +1375,58 @@
     testSupabase();
   });
   </script>
+  <script>
+    const scrollWrapper = document.querySelector('.testimonials-scroll-wrapper');
+
+let isDown = false;
+let startX;
+let scrollLeft;
+
+scrollWrapper.addEventListener('mousedown', (e) => {
+  isDown = true;
+  scrollWrapper.style.cursor = 'grabbing';
+  startX = e.pageX - scrollWrapper.offsetLeft;
+  scrollLeft = scrollWrapper.scrollLeft;
+  scrollWrapper.style.animationPlayState = 'paused'; // pause animation on drag
+});
+
+scrollWrapper.addEventListener('mouseleave', () => {
+  isDown = false;
+  scrollWrapper.style.cursor = 'grab';
+  scrollWrapper.style.animationPlayState = 'running'; // resume animation
+});
+
+scrollWrapper.addEventListener('mouseup', () => {
+  isDown = false;
+  scrollWrapper.style.cursor = 'grab';
+  scrollWrapper.style.animationPlayState = 'running'; // resume animation
+});
+
+scrollWrapper.addEventListener('mousemove', (e) => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - scrollWrapper.offsetLeft;
+  const walk = (x - startX) * 2; // scroll-fast
+  scrollWrapper.scrollLeft = scrollLeft - walk;
+});
+
+// Touch events for mobile swiping
+scrollWrapper.addEventListener('touchstart', (e) => {
+  startX = e.touches[0].pageX - scrollWrapper.offsetLeft;
+  scrollLeft = scrollWrapper.scrollLeft;
+  scrollWrapper.style.animationPlayState = 'paused'; // pause animation on drag
+});
+
+scrollWrapper.addEventListener('touchend', () => {
+  scrollWrapper.style.animationPlayState = 'running'; // resume animation
+});
+
+scrollWrapper.addEventListener('touchmove', (e) => {
+  const x = e.touches[0].pageX - scrollWrapper.offsetLeft;
+  const walk = (x - startX) * 2; // scroll-fast
+  scrollWrapper.scrollLeft = scrollLeft - walk;
+});
+  </script>
   <style>
     /* Add styles for form messages */
     .form-message {
