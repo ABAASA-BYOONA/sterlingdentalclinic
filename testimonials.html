@@ -113,12 +113,16 @@
       overflow: hidden;
     }
     
-  .testimonials-scroll-wrapper {
+ .testimonials-scroll-wrapper {
   display: flex;
   position: relative;
   width: fit-content;
   will-change: transform;
   padding: 0 2rem;
+  cursor: grab;
+  overflow-x: scroll; /* allow scroll for drag */
+  scroll-behavior: smooth; /* smooth scroll on user drag */
+  -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
 }
 
     .testimonials-grid {
@@ -173,28 +177,6 @@
       z-index: 2;
     }
 
-    /* Animation for testimonials */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .testimonial-card {
-      animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-      opacity: 0;
-    }
-
-    /* Stagger animations */
-    .testimonial-card:nth-child(1) { animation-delay: 0.1s; }
-    .testimonial-card:nth-child(2) { animation-delay: 0.2s; }
-    .testimonial-card:nth-child(3) { animation-delay: 0.3s; }
-    .testimonial-card:nth-child(4) { animation-delay: 0.4s; }
 
     /* Testimonial Card */
     .testimonial-card {
@@ -814,25 +796,26 @@ let scrollStart = 0;
 let autoScrollSpeed = 0.5; // pixels per frame
 let animationFrameId;
 
-function autoScroll() {
+function loopScroll() {
   if (!isDragging) {
     scrollWrapper.scrollLeft += autoScrollSpeed;
     if (scrollWrapper.scrollLeft >= scrollWidthHalf) {
       scrollWrapper.scrollLeft -= scrollWidthHalf;
+    } else if (scrollWrapper.scrollLeft <= 0) {
+      scrollWrapper.scrollLeft += scrollWidthHalf;
     }
   }
-  animationFrameId = requestAnimationFrame(autoScroll);
+  animationFrameId = requestAnimationFrame(loopScroll);
 }
 
-autoScroll();
-
-scrollWrapper.style.cursor = 'grab';
+loopScroll();
 
 scrollWrapper.addEventListener('mousedown', (e) => {
   isDragging = true;
   startX = e.pageX - scrollWrapper.offsetLeft;
   scrollStart = scrollWrapper.scrollLeft;
   scrollWrapper.style.cursor = 'grabbing';
+  e.preventDefault();
 });
 
 scrollWrapper.addEventListener('mouseup', () => {
@@ -854,6 +837,7 @@ scrollWrapper.addEventListener('mousemove', (e) => {
   const walk = (x - startX) * 2; // scroll speed multiplier
   scrollWrapper.scrollLeft = scrollStart - walk;
 
+  // Loop scroll position for seamless effect
   if (scrollWrapper.scrollLeft >= scrollWidthHalf) {
     scrollWrapper.scrollLeft -= scrollWidthHalf;
   } else if (scrollWrapper.scrollLeft <= 0) {
