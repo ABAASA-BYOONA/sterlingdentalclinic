@@ -724,6 +724,71 @@
 .star.selected {
   color: gold;
 }
+    .smile-button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #ff6f61;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .smile-button:hover {
+            background-color: #e55a4e;
+            transform: translateY(-2px);
+        }
+
+        .smile-button:active {
+            transform: translateY(0);
+        }
+
+        .smile-design {
+            margin-top: 20px;
+            width: 100px;
+            height: 100px;
+            background-color: #ffd700;
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .smile-design::before,
+        .smile-design::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #333;
+            border-radius: 50%;
+            top: 30px;
+        }
+
+        .smile-design::before {
+            left: 25px;
+        }
+
+        .smile-design::after {
+            right: 25px;
+        }
+
+        .smile-mouth {
+            position: absolute;
+            width: 40px;
+            height: 20px;
+            background-color: transparent;
+            border: 4px solid #333;
+            border-top: none;
+            border-radius: 0 0 20px 20px;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
   </style>
 </head>
 <body>
