@@ -812,76 +812,71 @@
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-    const scrollWrapper = document.querySelector('.testimonials-scroll-wrapper');
-const scrollSpeed = 0.5; // pixels per frame, adjust for speed
-let scrollPos = 0;
-let direction = 1; // 1 for right to left, -1 for left to right
+const scrollWrapper = document.querySelector('.testimonials-scroll-wrapper');
 let isDragging = false;
-let dragStartX = 0;
-let dragScrollStart = 0;
+let startX;
+let scrollStart;
 
-function animateScroll() {
-  if (!isDragging) {
-    scrollPos += scrollSpeed * direction;
-    // Loop scroll position to create seamless effect
-    if (scrollPos >= scrollWrapper.scrollWidth / 2) {
-      scrollPos = 0;
-    } else if (scrollPos < 0) {
-      scrollPos = scrollWrapper.scrollWidth / 2;
-    }
-    scrollWrapper.scrollLeft = scrollPos;
-  }
-  requestAnimationFrame(animateScroll);
-}
+scrollWrapper.style.cursor = 'grab';
 
-// Drag/swipe handlers
 scrollWrapper.addEventListener('mousedown', (e) => {
   isDragging = true;
-  dragStartX = e.pageX;
-  dragScrollStart = scrollWrapper.scrollLeft;
+  startX = e.pageX - scrollWrapper.offsetLeft;
+  scrollStart = scrollWrapper.scrollLeft;
   scrollWrapper.style.cursor = 'grabbing';
+  scrollWrapper.style.animationPlayState = 'paused'; // pause auto scroll while dragging
+});
+
+scrollWrapper.addEventListener('mouseleave', () => {
+  if (isDragging) {
+    isDragging = false;
+    scrollWrapper.style.cursor = 'grab';
+    scrollWrapper.style.animationPlayState = 'running'; // resume auto scroll
+  }
 });
 
 scrollWrapper.addEventListener('mouseup', () => {
   isDragging = false;
   scrollWrapper.style.cursor = 'grab';
-});
-
-scrollWrapper.addEventListener('mouseleave', () => {
-  isDragging = false;
-  scrollWrapper.style.cursor = 'grab';
+  scrollWrapper.style.animationPlayState = 'running'; // resume auto scroll
 });
 
 scrollWrapper.addEventListener('mousemove', (e) => {
   if (!isDragging) return;
-  const dx = e.pageX - dragStartX;
-  scrollWrapper.scrollLeft = dragScrollStart - dx;
-  scrollPos = scrollWrapper.scrollLeft;
+  e.preventDefault();
+  const x = e.pageX - scrollWrapper.offsetLeft;
+  const walk = (x - startX) * 2; // scroll speed multiplier
+  scrollWrapper.scrollLeft = scrollStart - walk;
+  // Loop scroll position for seamless effect
+  if (scrollWrapper.scrollLeft >= scrollWrapper.scrollWidth / 2) {
+    scrollWrapper.scrollLeft -= scrollWrapper.scrollWidth / 2;
+  } else if (scrollWrapper.scrollLeft <= 0) {
+    scrollWrapper.scrollLeft += scrollWrapper.scrollWidth / 2;
+  }
 });
 
+// Touch events for mobile swiping
 scrollWrapper.addEventListener('touchstart', (e) => {
-  isDragging = true;
-  dragStartX = e.touches[0].pageX;
-  dragScrollStart = scrollWrapper.scrollLeft;
+  startX = e.touches[0].pageX - scrollWrapper.offsetLeft;
+  scrollStart = scrollWrapper.scrollLeft;
+  scrollWrapper.style.animationPlayState = 'paused';
 });
 
 scrollWrapper.addEventListener('touchend', () => {
-  isDragging = false;
+  scrollWrapper.style.animationPlayState = 'running';
 });
 
 scrollWrapper.addEventListener('touchmove', (e) => {
-  if (!isDragging) return;
-  const dx = e.touches[0].pageX - dragStartX;
-  scrollWrapper.scrollLeft = dragScrollStart - dx;
-  scrollPos = scrollWrapper.scrollLeft;
+  const x = e.touches[0].pageX - scrollWrapper.offsetLeft;
+  const walk = (x - startX) * 2;
+  scrollWrapper.scrollLeft = scrollStart - walk;
+  // Loop scroll position for seamless effect
+  if (scrollWrapper.scrollLeft >= scrollWrapper.scrollWidth / 2) {
+    scrollWrapper.scrollLeft -= scrollWrapper.scrollWidth / 2;
+  } else if (scrollWrapper.scrollLeft <= 0) {
+    scrollWrapper.scrollLeft += scrollWrapper.scrollWidth / 2;
+  }
 });
-
-// Optional: toggle direction on click or button (example)
-scrollWrapper.addEventListener('dblclick', () => {
-  direction = -direction; // reverse scroll direction on double click
-});
-
-animateScroll();
   </script>
 <script>
   // Initialize Supabase client
