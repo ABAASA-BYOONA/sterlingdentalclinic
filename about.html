@@ -10,13 +10,26 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <style>
     /* General Reset and Base */
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f9faff;
-      color: #222;
-      line-height: 1.6;
-    }
+   body {
+            background-image: url('drive/IMG-20250523-WA0263.jpg');
+            background-repeat: repeat;
+            background-size: auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+        }
+        /* Transparent Background Overlay */
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: inherit;
+            opacity: 0.2;
+            z-index: -1;
+        }
 
     a {
       color: #007BFF;
@@ -148,10 +161,13 @@
 
     /* Main Section */
     section#about {
+      background-image: url('drive/IMG-20250523-WA0263.jpg');
+            background-repeat: repeat;
+            background-size: auto;
       max-width: 900px;
       margin: 40px auto;
       padding: 0 20px;
-      background-color: #fff;
+      
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
@@ -501,7 +517,7 @@
     </div>
   </footer>
 
-
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
   <script>
     // Responsive burger menu toggle
     const burger = document.getElementById('burger');

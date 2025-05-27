@@ -854,43 +854,110 @@
   <section id="about">
     <h2 style="color: white;">About Our Clinic</h2>
     <p>Sterling Dental Clinic has been serving the Kampala community since 1997. Our team of experienced dental professionals is committed to providing the highest quality care in a comfortable, modern environment.</p>
-    <div class="about-images">
-      <div class="image-card">
-        <img src="drive/_OK_9183.jpg" alt="Sterling Dental Clinic interior" loading="lazy" />
-        <p>Our state-of-the-art clinic</p>
-      </div>
-      <div class="image-card">
-        <img src="drive/_OK_9406.jpg" alt="Sterling Dental Clinic team" loading="lazy" />
-        <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">DR. BIREN N.YAJNIK</p> <br>
-        <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Vice President of UDA 2020-2022</p><br>
-        <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">President of UDA 2020-2024</p><br>
-        <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">B.D.S. F.A.G.E. F.R.S.H(Lon). F.P.F.A(USA)</p>
-         <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Cosmetic Dentist</p><br>
-      </div>
-      <div class="image-card">
-        <img src="drive/_OK_9101.jpg" alt="Sterling Dental Clinic team" loading="lazy" />
-        <p>Our dedicated dental team</p>
-      </div>
+  <style>
+  .floating-container {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    background-color: transparent;
+    padding: 2rem 0;
+    position: relative;
+  }
+
+  .floating-track {
+    display: inline-flex;
+    animation: scroll-left 30s linear infinite;
+  }
+
+  /* Pause scrolling on hover */
+  .floating-container:hover .floating-track {
+    animation-play-state: paused;
+  }
+
+  .image-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    margin: 0 1rem;
+    text-align: center;
+    flex-shrink: 0;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    z-index: 1;
+  }
+
+  .image-card:hover {
+    background-color: #f0f0f0; /* Lighten or darken as preferred */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+  }
+
+  .image-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-bottom: 1px solid #eee;
+  }
+
+  .image-card p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0.5rem 1rem;
+    font-size: 1rem;
+    color: #333;
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+</style>
+
+<div class="floating-container">
+  <div class="floating-track">
+    <!-- First Set -->
+    <div class="image-card">
+      <img src="drive/_OK_9183.jpg" alt="Sterling Dental Clinic interior" loading="lazy" />
+      <p><strong>Our state-of-the-art clinic</strong></p>
     </div>
-    <div class="mission-vision">
-      <div class="card">
-        <h3 style="color: white;"><i class="fas fa-certificate"></i> Our Mission</h3>
-        <p>To deliver exceptional dental care through personalized treatment plans, advanced technology, and compassionate service.</p>
-      </div>
-      <div class="card">
-        <h3 style="color: white;"><i class="fas fa-eye"></i> Our Vision</h3>
-        <p>To be Kampala’s most trusted dental clinic, transforming smiles and improving oral health for generations to come.</p>
-      </div>
+    <div class="image-card">
+      <img src="drive/_OK_9406.jpg" alt="Dr. Biren N. Yajnik" loading="lazy" />
+      <p><strong>Dr. Biren N. Yajnik</strong></p>
+      <p>Vice President of UDA (2020–2022)</p>
+      <p>President of UDA (2020–2024)</p>
+      <p>B.D.S., F.A.G.E., F.R.S.H (Lon), F.P.F.A (USA)</p>
+      <p>Cosmetic Dentist</p>
     </div>
-    <div class="hours card" >
-      <h3 style="color: white;"><i class="fas fa-clock"></i> Opening Hours</h3>
-      <ul>
-        <li style="color: white;"><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM</li>
-        <li style="color: white;"><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM</li>
-        <li style="color: white;"><strong>Saturday:</strong> 9:00 AM - 3:00 PM</li>
-        <li style="color: white;"><strong>Sunday:</strong> Emergency only</li>
-      </ul>
+    <div class="image-card">
+      <img src="drive/_OK_9101.jpg" alt="Dental team" loading="lazy" />
+      <p><strong>Our dedicated dental team</strong></p>
     </div>
+
+    <!-- Duplicate Set -->
+    <div class="image-card">
+      <img src="drive/_OK_9183.jpg" alt="Sterling Dental Clinic interior" loading="lazy" />
+      <p><strong>Our state-of-the-art clinic</strong></p>
+    </div>
+    <div class="image-card">
+      <img src="drive/_OK_9406.jpg" alt="Dr. Biren N. Yajnik" loading="lazy" />
+      <p><strong>Dr. Biren N. Yajnik</strong></p>
+      <p>Vice President of UDA (2020–2022)</p>
+      <p>President of UDA (2020–2024)</p>
+      <p>B.D.S., F.A.G.E., F.R.S.H (Lon), F.P.F.A (USA)</p>
+      <p>Cosmetic Dentist</p>
+    </div>
+    <div class="image-card">
+      <img src="drive/_OK_9101.jpg" alt="Dental team" loading="lazy" />
+      <p><strong>Our dedicated dental team</strong></p>
+    </div>
+  </div>
+</div>
+
   </section>
   <style>
     .image-card img {
@@ -1011,6 +1078,7 @@
         <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; border: 1px solid #0056b3; border-radius: 5px; color: #000; box-sizing: border-box;" />
       </div>
       
+
       <div style="margin-bottom: 15px;">
         <label style="color: #003366; font-weight: 600; display: block; margin-bottom: 8px;">Rating:</label>
         <div id="star-rating" style="font-size: 24px; line-height: 1; margin-bottom: 10px;">
@@ -1030,6 +1098,20 @@
       
       <button type="submit" style="background-color: #004085; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 1em; transition: background-color 0.3s ease; width: 100%;">
         Submit Testimonial
+=======
+      <label for="rating" style="color: #003366; font-weight: 600; display: block; margin-bottom: 8px;">Rating:</label>
+      <div id="star-rating">
+  <span class="star" data-value="1">&#9733;</span>
+  <span class="star" data-value="2">&#9733;</span>
+  <span class="star" data-value="3">&#9733;</span>
+  <span class="star" data-value="4">&#9733;</span>
+  <span class="star" data-value="5">&#9733;</span>
+</div>
+<input type="hidden" id="rating" name="rating" value="0" />
+      <label for="message" style="color: #003366; font-weight: 600;">Testimonial:</label><br />
+      <textarea id="message" name="message" rows="4" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #0056b3; border-radius: 5px; color: #000;"></textarea><br />
+      <button type="submit" style="background-color: #004085; color: white; padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 1em; transition: background-color 0.3s ease;">
+        
       </button>
     </form>
   </section>
@@ -1111,7 +1193,7 @@
       </div>
     </div>
   </footer>
-
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
   <!-- Add environment variables -->
   <script>
     // Set environment variables

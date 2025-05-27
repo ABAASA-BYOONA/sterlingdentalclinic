@@ -745,6 +745,23 @@
               <span class="star" data-value="3" style="cursor: pointer; margin-right: 5px;">☆</span>
               <span class="star" data-value="4" style="cursor: pointer; margin-right: 5px;">☆</span>
               <span class="star" data-value="5" style="cursor: pointer;">☆</span>
+=======
+      <div class="testimonial-form-container">
+        <h2>Share Your Experience</h2>
+        <form id="testimonialForm" class="testimonial-form">
+          <div class="form-group">
+            <label for="name" style="color: #003366; font-weight: 600;">Name:</label><br />
+            <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #0056b3; border-radius: 5px; color: #000;">
+          </div>
+          <div class="form-group">
+            <label style="color: #003366; font-weight: 600;">Rating:</label><br />
+            <div id="star-rating" style="font-size: 2rem; margin: 10px 0 20px 0;">
+              <span class="star" data-value="1" style="cursor: pointer; margin-right: 5px; color: gray;">★</span>
+              <span class="star" data-value="2" style="cursor: pointer; margin-right: 5px; color: gray;">★</span>
+              <span class="star" data-value="3" style="cursor: pointer; margin-right: 5px; color: gray;">★</span>
+              <span class="star" data-value="4" style="cursor: pointer; margin-right: 5px; color: gray;">★</span>
+              <span class="star" data-value="5" style="cursor: pointer; color: gray;">★</span>
+
             </div>
             <input type="hidden" id="rating" name="rating" value="0" required />
           </div>
@@ -810,6 +827,7 @@
     });
 
 </script>
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   // Initialize Supabase client
