@@ -113,15 +113,14 @@
       overflow: hidden;
     }
     
-    .testimonials-scroll-wrapper {
-      display: flex;
-      position: relative;
-      width: fit-content;
-      animation: scroll 30s linear infinite;
-      will-change: transform;
-      padding: 0 2rem;
-    }
-    
+  .testimonials-scroll-wrapper {
+  display: flex;
+  position: relative;
+  width: fit-content;
+  will-change: transform;
+  padding: 0 2rem;
+}
+
     .testimonials-grid {
       display: flex;
       padding: 1.5rem 0;
@@ -132,11 +131,6 @@
       justify-content: flex-start;
       align-items: stretch;
       gap: 2rem;
-    }
-    
-    /* Pause animation on hover */
-    .testimonials-container:hover .testimonials-scroll-wrapper {
-      animation-play-state: paused;
     }
     
     /* Seamless scroll animation */
@@ -813,9 +807,24 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
 const scrollWrapper = document.querySelector('.testimonials-scroll-wrapper');
+const scrollWidthHalf = scrollWrapper.scrollWidth / 2;
 let isDragging = false;
-let startX;
-let scrollStart;
+let startX = 0;
+let scrollStart = 0;
+let autoScrollSpeed = 0.5; // pixels per frame
+let animationFrameId;
+
+function autoScroll() {
+  if (!isDragging) {
+    scrollWrapper.scrollLeft += autoScrollSpeed;
+    if (scrollWrapper.scrollLeft >= scrollWidthHalf) {
+      scrollWrapper.scrollLeft -= scrollWidthHalf;
+    }
+  }
+  animationFrameId = requestAnimationFrame(autoScroll);
+}
+
+autoScroll();
 
 scrollWrapper.style.cursor = 'grab';
 
@@ -824,21 +833,18 @@ scrollWrapper.addEventListener('mousedown', (e) => {
   startX = e.pageX - scrollWrapper.offsetLeft;
   scrollStart = scrollWrapper.scrollLeft;
   scrollWrapper.style.cursor = 'grabbing';
-  scrollWrapper.style.animationPlayState = 'paused'; // pause auto scroll while dragging
+});
+
+scrollWrapper.addEventListener('mouseup', () => {
+  isDragging = false;
+  scrollWrapper.style.cursor = 'grab';
 });
 
 scrollWrapper.addEventListener('mouseleave', () => {
   if (isDragging) {
     isDragging = false;
     scrollWrapper.style.cursor = 'grab';
-    scrollWrapper.style.animationPlayState = 'running'; // resume auto scroll
   }
-});
-
-scrollWrapper.addEventListener('mouseup', () => {
-  isDragging = false;
-  scrollWrapper.style.cursor = 'grab';
-  scrollWrapper.style.animationPlayState = 'running'; // resume auto scroll
 });
 
 scrollWrapper.addEventListener('mousemove', (e) => {
@@ -847,34 +853,34 @@ scrollWrapper.addEventListener('mousemove', (e) => {
   const x = e.pageX - scrollWrapper.offsetLeft;
   const walk = (x - startX) * 2; // scroll speed multiplier
   scrollWrapper.scrollLeft = scrollStart - walk;
-  // Loop scroll position for seamless effect
-  if (scrollWrapper.scrollLeft >= scrollWrapper.scrollWidth / 2) {
-    scrollWrapper.scrollLeft -= scrollWrapper.scrollWidth / 2;
+
+  if (scrollWrapper.scrollLeft >= scrollWidthHalf) {
+    scrollWrapper.scrollLeft -= scrollWidthHalf;
   } else if (scrollWrapper.scrollLeft <= 0) {
-    scrollWrapper.scrollLeft += scrollWrapper.scrollWidth / 2;
+    scrollWrapper.scrollLeft += scrollWidthHalf;
   }
 });
 
-// Touch events for mobile swiping
 scrollWrapper.addEventListener('touchstart', (e) => {
+  isDragging = true;
   startX = e.touches[0].pageX - scrollWrapper.offsetLeft;
   scrollStart = scrollWrapper.scrollLeft;
-  scrollWrapper.style.animationPlayState = 'paused';
 });
 
 scrollWrapper.addEventListener('touchend', () => {
-  scrollWrapper.style.animationPlayState = 'running';
+  isDragging = false;
 });
 
 scrollWrapper.addEventListener('touchmove', (e) => {
+  if (!isDragging) return;
   const x = e.touches[0].pageX - scrollWrapper.offsetLeft;
   const walk = (x - startX) * 2;
   scrollWrapper.scrollLeft = scrollStart - walk;
-  // Loop scroll position for seamless effect
-  if (scrollWrapper.scrollLeft >= scrollWrapper.scrollWidth / 2) {
-    scrollWrapper.scrollLeft -= scrollWrapper.scrollWidth / 2;
+
+  if (scrollWrapper.scrollLeft >= scrollWidthHalf) {
+    scrollWrapper.scrollLeft -= scrollWidthHalf;
   } else if (scrollWrapper.scrollLeft <= 0) {
-    scrollWrapper.scrollLeft += scrollWrapper.scrollWidth / 2;
+    scrollWrapper.scrollLeft += scrollWidthHalf;
   }
 });
   </script>
