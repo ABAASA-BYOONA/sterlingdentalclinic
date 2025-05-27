@@ -47,17 +47,33 @@ function appendMessage(text, sender) {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
+// Custom responses for specific questions
+const customResponses = {
+    "what are your working hours?": "We are open Monday to Friday, 9:00am to 6:00pm, Saturday, 9:00am to 3:00pm.",
+    "where are you located?": "We are located in Kampala, Garden City Mall, Ground floor, check the home page for the directions on the map.",
+    // Add more Q&A here
+};
+
 // Handle user input
 async function handleUserInput() {
     const message = chatInput.value.trim();
     if (!message) return;
-    
-    // Add user message to chat
+
     appendMessage(message, 'user');
     chatInput.value = '';
     chatInput.disabled = true;
     chatSend.disabled = true;
-    
+
+    // Check for custom response (case insensitive)
+    const lowerMessage = message.toLowerCase();
+    if (customResponses[lowerMessage]) {
+        appendMessage(customResponses[lowerMessage], 'bot');
+        chatInput.disabled = false;
+        chatSend.disabled = false;
+        chatInput.focus();
+        return;
+    }
+
     try {
         // Show typing indicator
         const typingIndicator = document.createElement('div');
