@@ -859,7 +859,7 @@
     overflow: hidden;
     white-space: nowrap;
     width: 100%;
-    background-color: transparent;
+    background-color: #f9f9f9;
     padding: 2rem 0;
     position: relative;
   }
@@ -869,29 +869,41 @@
     animation: scroll-left 30s linear infinite;
   }
 
-  /* Pause scrolling on hover */
+  /* Pause scroll on hover */
   .floating-container:hover .floating-track {
     animation-play-state: paused;
   }
 
   .image-card {
+    position: relative;
     background: #fff;
     border-radius: 16px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     width: 300px;
     margin: 0 1rem;
     text-align: center;
     flex-shrink: 0;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
+    transition: transform 0.3s ease;
     z-index: 1;
   }
 
-  .image-card:hover {
-    background-color: #f0f0f0; /* Lighten or darken as preferred */
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    z-index: 2;
+  .image-card::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: rgba(255, 255, 255, 0.6); /* Light glow */
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+
+  .image-card:hover::before {
+    opacity: 1;
   }
 
   .image-card img {
@@ -920,13 +932,12 @@
 
 <div class="floating-container">
   <div class="floating-track">
-    <!-- First Set -->
     <div class="image-card">
-      <img src="drive/_OK_9183.jpg" alt="Sterling Dental Clinic interior" loading="lazy" />
+      <img src="drive/_OK_9183.jpg" alt="Clinic interior" />
       <p><strong>Our state-of-the-art clinic</strong></p>
     </div>
     <div class="image-card">
-      <img src="drive/_OK_9406.jpg" alt="Dr. Biren N. Yajnik" loading="lazy" />
+      <img src="drive/_OK_9406.jpg" alt="Dr. Biren N. Yajnik" />
       <p><strong>Dr. Biren N. Yajnik</strong></p>
       <p>Vice President of UDA (2020–2022)</p>
       <p>President of UDA (2020–2024)</p>
@@ -934,17 +945,17 @@
       <p>Cosmetic Dentist</p>
     </div>
     <div class="image-card">
-      <img src="drive/_OK_9101.jpg" alt="Dental team" loading="lazy" />
+      <img src="drive/_OK_9101.jpg" alt="Dental team" />
       <p><strong>Our dedicated dental team</strong></p>
     </div>
 
-    <!-- Duplicate Set -->
+    <!-- Duplicate cards for infinite scroll -->
     <div class="image-card">
-      <img src="drive/_OK_9183.jpg" alt="Sterling Dental Clinic interior" loading="lazy" />
+      <img src="drive/_OK_9183.jpg" alt="Clinic interior" />
       <p><strong>Our state-of-the-art clinic</strong></p>
     </div>
     <div class="image-card">
-      <img src="drive/_OK_9406.jpg" alt="Dr. Biren N. Yajnik" loading="lazy" />
+      <img src="drive/_OK_9406.jpg" alt="Dr. Biren N. Yajnik" />
       <p><strong>Dr. Biren N. Yajnik</strong></p>
       <p>Vice President of UDA (2020–2022)</p>
       <p>President of UDA (2020–2024)</p>
@@ -952,11 +963,12 @@
       <p>Cosmetic Dentist</p>
     </div>
     <div class="image-card">
-      <img src="drive/_OK_9101.jpg" alt="Dental team" loading="lazy" />
+      <img src="drive/_OK_9101.jpg" alt="Dental team" />
       <p><strong>Our dedicated dental team</strong></p>
     </div>
   </div>
 </div>
+
 
   </section>
   <style>
