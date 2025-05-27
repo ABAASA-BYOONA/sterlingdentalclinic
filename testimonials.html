@@ -23,7 +23,7 @@
       box-sizing: border-box;
     }
     
-    body {
+     body {
       background-image: url('xray/backtile.jpg');
       background-repeat: repeat;
       background-size: auto;
@@ -31,6 +31,7 @@
       color: #333;
     }
 
+    /* Transparent Background Overlay */
     body::before {
       content: '';
       position: fixed;
@@ -43,12 +44,14 @@
       z-index: -1;
     }
 
+    /* Container Styles */
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 1rem;
     }
 
+    /* Hero Section */
     .testimonials-hero {
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: white;
@@ -91,6 +94,18 @@
       line-height: 1.6;
     }
 
+    .testimonials-hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .testimonials-hero .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    /* Testimonials Grid - Seamless Infinite Scroll */
     .testimonials-container {
       width: 100%;
       position: relative;
@@ -98,32 +113,128 @@
       overflow: hidden;
     }
     
+ /* Container for the scrolling wrapper */
     .testimonials-scroll-wrapper {
-      display: flex;
+      width: 100%;
+      overflow: hidden;
       position: relative;
-      width: fit-content;
-      padding: 0 2rem;
-      cursor: grab;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      user-select: none;
-      -webkit-user-select: none;
-      -ms-user-select: none;
+      padding: 20px 0;
     }
 
+    /* Grid container for testimonials */
     .testimonials-grid {
-      display: flex;
-      padding: 1.5rem 0;
-      margin: 0 2rem 0 0;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-      flex-shrink: 0;
-      justify-content: flex-start;
-      align-items: stretch;
-      gap: 2rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
+      gap: 20px;
+      width: max-content; /* Allow container to expand to fit content */
+      animation: scroll 20s linear infinite; /* Animation for endless loop */
     }
-    
+
+    /* Duplicate container for seamless looping */
+    .testimonials-grid.duplicate {
+      position: absolute;
+      top: 0;
+      left: 100%; /* Position duplicate immediately after the original */
+    }
+
+    /* Skeleton card styling */
+    .skeleton-card {
+      width: 250px; /* Fixed width for each card */
+      padding: 20px;
+      background: #f0f0f0;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .skeleton-avatar {
+      width: 50px;
+      height: 50px;
+      background: #e0e0e0;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    .skeleton-line {
+      height: 10px;
+      background: #e0e0e0;
+      margin-bottom: 8px;
+      border-radius: 4px;
+    }
+
+    .skeleton-line:nth-child(2) { width: 70%; }
+    .skeleton-line:nth-child(3) { width: 100%; }
+    .skeleton-line:nth-child(4) { width: 60%; }
+
+    /* Animation keyframes for endless scroll */
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%); /* Move to the left by the full width */
+      }
+    }
+
+    /* Ensure responsiveness */
+    @media (max-width: 768px) {
+      .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 cards per row on smaller screens */
+      }
+      .skeleton-card {
+        width: 200px; /* Adjust card width for smaller screens */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .testimonials-grid {
+        grid-template-columns: 1fr; /* 1 card per row on very small screens */
+      }
+      .skeleton-card {
+        width: 100%; /* Full width for cards */
+      }
+    }
+
+    /* Review banner styling (unchanged) */
+    .review-banner {
+      background: linear-gradient(135deg, #007BFF, #00BFFF);
+      color: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      margin: 40px 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .review-banner h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .review-banner p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .review-banner .btn {
+      background: white;
+      color: #007BFF;
+      padding: 12px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      transition: all 0.3s ease;
+      border: 2px solid white;
+    }
+
+    .review-banner .btn:hover {
+      background: #007BFF;
+      color: white;
+    }
+    /* Hide scrollbar for WebKit browsers */
     .testimonials-grid::-webkit-scrollbar {
       display: none;
     }
@@ -145,6 +256,8 @@
       z-index: 2;
     }
 
+
+    /* Testimonial Card */
     .testimonial-card {
       background: white;
       border-radius: 12px;
@@ -248,6 +361,8 @@
       z-index: 0;
     }
 
+
+    /* Share Experience Section */
     .share-experience {
       text-align: center;
       background: white;
@@ -283,6 +398,7 @@
       margin-right: auto;
     }
 
+    /* Buttons */
     .btn {
       display: inline-block;
       padding: 0.8rem 2rem;
@@ -301,6 +417,7 @@
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
 
+    /* Skeleton Loading */
     .skeleton-card {
       background: white;
       border-radius: 10px;
@@ -329,6 +446,7 @@
       50% { opacity: 0.5; }
     }
 
+    /* Testimonial Form Styles */
     .testimonial-form-container {
       background: white;
       padding: 2.5rem;
@@ -418,30 +536,25 @@
       width: 100%;
       box-sizing: border-box;
     }
-
     .form-message.visible {
       opacity: 1;
       transform: translateY(0);
     }
-
     .form-message.success {
       background-color: #e8f5e9;
       color: #1b5e20;
       border-left: 4px solid #4caf50;
     }
-
     .form-message.error {
       background-color: #ffebee;
       color: #c62828;
       border-left: 4px solid #f44336;
     }
-
     .form-message.info {
       background-color: #e3f2fd;
       color: #0d47a1;
       border-left: 4px solid #2196f3;
     }
-
     .form-message p {
       margin: 0;
       display: flex;
@@ -451,21 +564,19 @@
       font-size: 1.05em;
       line-height: 1.5;
     }
-
     .form-message i {
       font-size: 1.4em;
       flex-shrink: 0;
     }
-
     @keyframes slideIn {
       from { transform: translateY(-20px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
-
     .form-message.visible {
       animation: slideIn 0.4s ease-out forwards;
     }
 
+    /* Responsive Design */
     @media (max-width: 768px) {
       .testimonials-hero {
         padding: 3rem 1rem;
@@ -491,7 +602,7 @@
       margin-bottom: 30px;
     }
 
-    header {
+     header {
       text-align: center;
       padding: 20px;
       background: #007BFF;
@@ -517,6 +628,7 @@
       margin-top: 10px;
     }
 
+    /* Navigation Styles */
     nav {
       padding: 10px 20px;
       display: flex;
@@ -594,29 +706,29 @@
 </head>
 <body>
   <header>
-    <div class="header-content">
-      <a href="#home" class="logo-link">
-        <img src="sterlinglogo.jpg" alt="Sterling Dental Clinic Logo" class="logo">
-      </a>
-      <div class="header-text">
-        <h1 style="color: white;">Sterling Dental Clinic</h1>
-        <p class="tagline">Your trusted partner for exceptional dental care in Kampala</p>
-      </div>
+  <div class="header-content">
+    <a href="#home" class="logo-link">
+      <img src="sterlinglogo.jpg" alt="Sterling Dental Clinic Logo" class="logo">
+    </a>
+    <div class="header-text">
+      <h1 style="color: white";>Sterling Dental Clinic</h1>
+      <p class="tagline">Your trusted partner for exceptional dental care in Kampala</p>
     </div>
-    <nav>
-      <div class="burger" id="burger">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <a href="index.html#home"><i class="fas fa-home"></i> Home</a>
-      <a href="services.html"><i class="fas fa-teeth"></i> Services</a>
-      <a href="about.html"><i class="fas fa-info-circle"></i> About Us</a>
-      <a href="index.html#contact"><i class="fas fa-phone-alt"></i> Contact</a>
-      <a href="testimonials.html"><i class="fas fa-quote-right testimonial-icon"></i> Testimonials</a>
-      <a href="index.html#appointment"><i class="fas fa-calendar-check"></i> Book Appointment</a>
-    </nav>
-  </header>
+  </div>
+  <nav>
+    <div class="burger" id="burger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <a href="index.html#home"><i class="fas fa-home"></i> Home</a>
+    <a href="services.html"><i class="fas fa-teeth"></i> Services</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> About Us</a>
+    <a href="index.html#contact"><i class="fas fa-phone-alt"></i> Contact</a>
+    <a href="testimonials.html"><i class="fas fa-quote-right testimonial-icon"></i> Testimonials</a>
+    <a href="index.html#appointment"><i class="fas fa-calendar-check"></i> Book Appointment</a>
+  </nav>
+</header>
   <main class="testimonials-page">
     <section class="testimonials-hero">
       <div class="container">
@@ -626,37 +738,65 @@
     </section>
 
     <section class="testimonials-container container">
-      <div class="testimonials-scroll-wrapper">
-        <div id="testimonials-container" class="testimonials-grid">
-          <div class="skeleton-card">
-            <div class="skeleton-avatar"></div>
-            <div class="skeleton-line" style="width: 70%;"></div>
-            <div class="skeleton-line"></div>
-            <div class="skeleton-line" style="width: 60%;"></div>
-          </div>
-          <div class="skeleton-card">
-            <div class="skeleton-avatar"></div>
-            <div class="skeleton-line" style="width: 80%;"></div>
-            <div class="skeleton-line"></div>
-            <div class="skeleton-line" style="width: 70%;"></div>
-          </div>
-        </div>
-        <div id="testimonials-container-duplicate" class="testimonials-grid duplicate">
-          <div class="skeleton-card">
-            <div class="skeleton-avatar"></div>
-            <div class="skeleton-line" style="width: 70%;"></div>
-            <div class="skeleton-line"></div>
-            <div class="skeleton-line" style="width: 60%;"></div>
-          </div>
-          <div class="skeleton-card">
-            <div class="skeleton-avatar"></div>
-            <div class="skeleton-line" style="width: 80%;"></div>
-            <div class="skeleton-line"></div>
-            <div class="skeleton-line" style="width: 70%;"></div>
-          </div>
-        </div>
+     <div class="testimonials-scroll-wrapper">
+    <div id="testimonials-container" class="testimonials-grid">
+      <!-- Skeleton cards - First Set -->
+      <div class="skeleton-card">
+        <div class="skeleton-avatar"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
       </div>
+      <div class="skeleton-card">
+        <div class="skeleton-avatar"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+      </div>
+      <div class="skeleton-card">
+        <div class="skeleton-avatar"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+      </div>
+      <div class="skeleton-card">
+        <div class="skeleton-avatar"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+      </div>
+    </div>
+    <!-- Duplicate for seamless loop -->
+    <div id="testimonials-container-duplicate" class="testimonials-grid duplicate">
+      <!-- Skeleton cards - Second Set (Duplicate) -->
+      <div class="skeleton-card">
+        <div class="skeleton-avatar"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+      </div>
+      <div class="skeleton-card">
+        <div class="skeleton-avatar"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+      </div>
+      <div class="skeleton-card">
+        <div class="skeleton-avatar"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+      </div>
+      <div class="skeleton-card">
+        <div class="skeleton-avatar"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+      </div>
+    </div>
+  </div>
 
+      <!-- Review Banner -->
       <div class="review-banner" style="background: linear-gradient(135deg, #007BFF, #00BFFF); color: white; padding: 30px; border-radius: 10px; text-align: center; margin: 40px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
         <h2 style="font-size: 2rem; margin-bottom: 15px;">Share Your Experience With Us</h2>
         <p style="font-size: 1.2rem; margin-bottom: 20px; max-width: 800px; margin-left: auto; margin-right: auto;">
@@ -682,6 +822,7 @@
               <span class="star" data-value="3" style="cursor: pointer; margin-right: 5px; color: gray;">★</span>
               <span class="star" data-value="4" style="cursor: pointer; margin-right: 5px; color: gray;">★</span>
               <span class="star" data-value="5" style="cursor: pointer; color: gray;">★</span>
+
             </div>
             <input type="hidden" id="rating" name="rating" value="0" required />
           </div>
@@ -698,7 +839,7 @@
       </div>
     </section>
   </main>
-  <footer>
+      <footer>
     <div style="max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; text-align: left;">
       <div style="flex: 1; min-width: 200px; margin: 10px;">
         <h3>Sterling Dental Clinic</h3>
@@ -723,7 +864,7 @@
       </div>
     </div>
     <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
-      <p>2025 Sterling Dental Clinic. All rights reserved.</p>
+      <p> 2025 Sterling Dental Clinic. All rights reserved.</p>
       <div style="margin-top: 10px;">
         <a href="https://www.facebook.com/SterlingDentalPractice" style="color: #fff; margin: 0 10px; font-size: 20px;" title="Facebook"><i class="fab fa-facebook"></i></a>
         <a href="https://www.twitter.com/yourprofile" style="color: #fff; margin: 0 10px; font-size: 20px;" title="Twitter"><i class="fab fa-twitter"></i></a>
@@ -735,8 +876,6 @@
       </div>
     </div>
   </footer>
-  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     // Navigation Script
     const burger = document.getElementById('burger');
@@ -747,172 +886,353 @@
         link.classList.toggle('active');
       });
     });
-
-    // Scroll Script
-    const scrollWrapper = document.querySelector('.testimonials-scroll-wrapper');
-    let isDragging = false;
-    let startX = 0;
-    let scrollStart = 0;
-    let autoScrollSpeed = 0.5;
-    let animationFrameId;
-    let lastInteractionTime = 0;
-    const interactionCooldown = 1000; // 1 second cooldown before resuming auto-scroll
-
-    function getScrollWidth() {
-      const container = document.getElementById('testimonials-container');
-      return container ? container.scrollWidth : 0;
+  </script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // Initialize Supabase client
+  const supabaseUrl = 'https://emldrnonwflkbbnbughi.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtbGRybm9ud2Zsa2JibmJ1Z2hpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxOTEwMzQsImV4cCI6MjA2Mzc2NzAzNH0.R2PETzSHm0uGa-A62RjN9FJiQ2VSM_J5KcB7NeJ3AEU';
+  
+  // Create a single supabase client for interacting with your database
+  const { createClient } = supabase;
+  const supabaseClient = createClient(supabaseUrl, supabaseKey, {
+    db: {
+      schema: 'public',
+    },
+    auth: {
+      autoRefreshToken: true,
+      persistSession: false,
+      detectSessionInUrl: false
     }
+  });
 
-    function loopScroll() {
-      if (!isDragging && Date.now() - lastInteractionTime > interactionCooldown) {
-        scrollWrapper.scrollLeft += autoScrollSpeed;
-        const scrollWidth = getScrollWidth();
-        if (scrollWidth > 0) {
-          if (scrollWrapper.scrollLeft >= scrollWidth) {
-            scrollWrapper.scrollLeft -= scrollWidth;
-          } else if (scrollWrapper.scrollLeft <= 0) {
-            scrollWrapper.scrollLeft += scrollWidth;
-          }
+  // Show form message with nice UI
+  function showFormMessage(message, type = 'info') {
+    const formMessage = document.getElementById('formMessage');
+    if (!formMessage) return;
+    
+    // Clear any existing timeouts
+    if (window.formMessageTimeout) {
+      clearTimeout(window.formMessageTimeout);
+    }
+    
+    // Set message and type
+    const icon = type === 'success' ? 'fa-check-circle' : 
+                type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
+    
+    formMessage.innerHTML = `
+      <p>
+        <i class="fas ${icon}"></i>
+        <span>${message}</span>
+      </p>
+    `;
+    
+    // Update classes
+    formMessage.className = 'form-message';
+    formMessage.classList.add(type, 'visible');
+    
+    // Auto-hide after a delay
+    const hideDelay = type === 'success' ? 8000 : 
+                     type === 'error' ? 10000 : 5000;
+    
+    window.formMessageTimeout = setTimeout(() => {
+      formMessage.classList.remove('visible');
+      // Wait for animation to complete before removing content
+      setTimeout(() => {
+        if (!formMessage.classList.contains('visible')) {
+          formMessage.innerHTML = '';
         }
-      }
-      animationFrameId = requestAnimationFrame(loopScroll);
-    }
+      }, 400);
+    }, hideDelay);
+    
+    // Scroll to show the message if it's not in view
+    setTimeout(() => {
+      formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
+  }
 
-    function startAutoScroll() {
-      if (!animationFrameId) {
-        animationFrameId = requestAnimationFrame(loopScroll);
-      }
-    }
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('testimonials-container');
+    const form = document.getElementById('testimonialForm');
+    const stars = document.querySelectorAll('#star-rating .star');
+    const ratingInput = document.getElementById('rating');
 
-    function stopAutoScroll() {
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-        animationFrameId = null;
-      }
-    }
+    // Initialize star rating UI
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        const ratingValue = parseInt(star.getAttribute('data-value'));
+        ratingInput.value = ratingValue;
 
-    // Start auto-scrolling on page load
-    startAutoScroll();
-
-    // Mouse events
-    scrollWrapper.addEventListener('mousedown', (e) => {
-      isDragging = true;
-      startX = e.pageX - scrollWrapper.offsetLeft;
-      scrollStart = scrollWrapper.scrollLeft;
-      scrollWrapper.style.cursor = 'grabbing';
-      stopAutoScroll();
-      lastInteractionTime = Date.now();
-      e.preventDefault();
-    });
-
-    scrollWrapper.addEventListener('mouseup', () => {
-      isDragging = false;
-      scrollWrapper.style.cursor = 'grab';
-      lastInteractionTime = Date.now();
-      setTimeout(startAutoScroll, interactionCooldown);
-    });
-
-    scrollWrapper.addEventListener('mouseleave', () => {
-      if (isDragging) {
-        isDragging = false;
-        scrollWrapper.style.cursor = 'grab';
-        lastInteractionTime = Date.now();
-        setTimeout(startAutoScroll, interactionCooldown);
-      }
-    });
-
-    scrollWrapper.addEventListener('mousemove', (e) => {
-      if (!isDragging) return;
-      const x = e.pageX - scrollWrapper.offsetLeft;
-      const walk = (x - startX) * 2;
-      scrollWrapper.scrollLeft = scrollStart - walk;
-    });
-
-    // Touch events
-    scrollWrapper.addEventListener('touchstart', (e) => {
-      isDragging = true;
-      startX = e.touches[0].pageX - scrollWrapper.offsetLeft;
-      scrollStart = scrollWrapper.scrollLeft;
-      stopAutoScroll();
-      lastInteractionTime = Date.now();
-    });
-
-    scrollWrapper.addEventListener('touchend', () => {
-      isDragging = false;
-      lastInteractionTime = Date.now();
-      setTimeout(startAutoScroll, interactionCooldown);
-    });
-
-    scrollWrapper.addEventListener('touchmove', (e) => {
-      if (!isDragging) return;
-      const x = e.touches[0].pageX - scrollWrapper.offsetLeft;
-      const walk = (x - startX) * 2;
-      scrollWrapper.scrollLeft = scrollStart - walk;
-    });
-
-    // Supabase and Testimonial Handling
-    const supabaseUrl = 'https://emldrnonwflkbbnbughi.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtbGRybm9ud2Zsa2JibmJ1Z2hpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxOTEwMzQsImV4cCI6MjA2Mzc2NzAzNH0.R2PETzSHm0uGa-A62RjN9FJiQ2VSM_J5KcB7NeJ3AEU';
-    const { createClient } = supabase;
-    const supabaseClient = createClient(supabaseUrl, supabaseKey, {
-      db: { schema: 'public' },
-      auth: { autoRefreshToken: true, persistSession: false, detectSessionInUrl: false }
-    });
-
-    function showFormMessage(message, type = 'info') {
-      const formMessage = document.getElementById('formMessage');
-      if (!formMessage) return;
-      if (window.formMessageTimeout) clearTimeout(window.formMessageTimeout);
-      const icon = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
-      formMessage.innerHTML = `<p><i class="fas ${icon}"></i><span>${message}</span></p>`;
-      formMessage.className = 'form-message';
-      formMessage.classList.add(type, 'visible');
-      const hideDelay = type === 'success' ? 8000 : type === 'error' ? 10000 : 5000;
-      window.formMessageTimeout = setTimeout(() => {
-        formMessage.classList.remove('visible');
-        setTimeout(() => {
-          if (!formMessage.classList.contains('visible')) formMessage.innerHTML = '';
-        }, 400);
-      }, hideDelay);
-      setTimeout(() => formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const container = document.getElementById('testimonials-container');
-      const form = document.getElementById('testimonialForm');
-      const stars = document.querySelectorAll('#star-rating .star');
-      const ratingInput = document.getElementById('rating');
-
-      stars.forEach(star => {
-        star.addEventListener('click', () => {
-          const ratingValue = parseInt(star.getAttribute('data-value'));
-          ratingInput.value = ratingValue;
-          stars.forEach(s => {
-            s.style.color = parseInt(s.getAttribute('data-value')) <= ratingValue ? '#ffc107' : 'gray';
-            s.classList.toggle('selected', parseInt(s.getAttribute('data-value')) <= ratingValue);
-          });
+        // Update star appearance
+        stars.forEach(s => {
+          if (parseInt(s.getAttribute('data-value')) <= ratingValue) {
+            s.style.color = '#ffc107'; // Gold color for selected stars
+            s.classList.add('selected');
+          } else {
+            s.style.color = '#000';
+            s.classList.remove('selected');
+          }
         });
       });
+    });
+    
+    // Attach the submit event listener to the form
+    if (form) {
+      form.addEventListener('submit', submitTestimonial);
+    } else {
+      console.error('Form with id "testimonialForm" not found.');
+    }
 
-      if (form) form.addEventListener('submit', submitTestimonial);
-
-      function getRandomGradient() {
-        const gradients = [
-          '#007bff, #00b4ff', '#6c5ce7, #a29bfe', '#00b894, #55efc4',
-          '#fd79a8, #ff9ff3', '#e17055, #fab1a0', '#0984e3, #74b9ff',
-          '#6c5ce7, #a29bfe', '#00b894, #55efc4', '#fd79a8, #ff9ff3',
-          '#e17055, #fab1a0'
-        ];
-        return gradients[Math.floor(Math.random() * gradients.length)];
+    // Test Supabase connectivity on page load
+    async function testSupabase() {
+      try {
+        console.log('Testing Supabase connection...');
+        const { data, error } = await supabaseClient
+          .from('testimonials')
+          .select('*')
+          .limit(1);
+          
+        if (error) {
+          console.error('Supabase query error:', error);
+          throw error;
+        }
+        console.log('Supabase connection successful');
+        return true;
+      } catch (error) {
+        console.error('Supabase connection error:', error);
+        if (container) {
+          container.innerHTML = `
+            <div class="error">
+              <p>Error connecting to the database. Please check console for details.</p>
+              <p>${error.message || 'Unknown error occurred'}</p>
+            </div>`;
+        }
+        return false;
       }
+    }
 
+    // Generate random gradient for avatar backgrounds
+    function getRandomGradient() {
+      const gradients = [
+        '#007bff, #00b4ff',
+        '#6c5ce7, #a29bfe',
+        '#00b894, #55efc4',
+        '#fd79a8, #ff9ff3',
+        '#e17055, #fab1a0',
+        '#0984e3, #74b9ff',
+        '#6c5ce7, #a29bfe',
+        '#00b894, #55efc4',
+        '#fd79a8, #ff9ff3',
+        '#e17055, #fab1a0'
+      ];
+      return gradients[Math.floor(Math.random() * gradients.length)];
+    }
+
+    // Format date to relative time (e.g., '2 weeks ago')
+    function formatDate(dateString) {
+      // Parse the date string and account for timezone
+      const date = new Date(dateString);
+      const now = new Date();
+      
+      // Get the start of today in local time
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      // Get the start of yesterday
+      const yesterday = new Date(today);
+      yesterday.setDate(yesterday.getDate() - 1);
+      
+      // Get the start of the current week (Sunday)
+      const startOfWeek = new Date(today);
+      startOfWeek.setDate(today.getDate() - today.getDay());
+      
+      // Format time in 12-hour format with AM/PM
+      const formatTime = (date) => {
+        let hours = date.getHours();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; 
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        return `${hours}:${minutes} ${ampm}`;
+      };
+      
+      // If the date is today
+      if (date >= today) {
+        return `Today at ${formatTime(date)}`;
+      }
+      // If the date was yesterday
+      if (date >= yesterday) {
+        return `Yesterday at ${formatTime(date)}`;
+      }
+      // If the date is in the current week
+      if (date >= startOfWeek) {
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        return `${days[date.getDay()]} at ${formatTime(date)}`;
+      }
+      
+      // For older dates, show the full date
+      const options = { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+      };
+      return date.toLocaleDateString('en-US', options);
+    }
+
+    // Render star ratings with Font Awesome icons
+    function renderStars(rating) {
+      const fullStars = Math.floor(rating);
+      const hasHalfStar = rating % 1 >= 0.5;
+      let stars = '';
+      
+      for (let i = 1; i <= 5; i++) {
+        if (i <= fullStars) {
+          stars += '<i class="fas fa-star"></i>';
+        } else if (i === fullStars + 1 && hasHalfStar) {
+          stars += '<i class="fas fa-star-half-alt"></i>';
+        } else {
+          stars += '<i class="far fa-star"></i>';
+        }
+      }
+      return stars;
+    }
+
+    // Load testimonials from Supabase
+    async function loadTestimonials() {
+      const scrollWrapper = document.querySelector('.testimonials-scroll-wrapper');
+      const container = document.querySelector('.testimonials-container');
+      if (!scrollWrapper || !container) {
+        console.error('Testimonials container not found');
+        return;
+      }
+      
+      try {
+        // Show loading state with skeleton animation only in the scroll wrapper
+        scrollWrapper.innerHTML = `
+          <div class="testimonials-grid">
+            ${Array(3).fill(`
+              <div class="skeleton-card">
+                <div class="skeleton-avatar"></div>
+                <div class="skeleton-line" style="width: 70%;"></div>
+                <div class="skeleton-line"></div>
+                <div class="skeleton-line" style="width: 60%;"></div>
+              </div>
+            `).join('')}
+          </div>`;
+
+        // Add shimmer animation to skeleton loaders
+        const style = document.createElement('style');
+        style.textContent = `
+          @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+          }
+          .skeleton-line, .skeleton-avatar {
+            background: linear-gradient(90deg, #f5f7fa 0%, #e4e9f2 50%, #f5f7fa 100%);
+            background-size: 1000px 100%;
+            animation: shimmer 2s infinite linear;
+          }
+          .skeleton-avatar {
+            animation: shimmer 2s infinite linear, pulse 2s infinite ease-in-out;
+          }
+          @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+          }`;
+        document.head.appendChild(style);
+
+        console.log('Fetching testimonials...');
+        const { data: testimonials, error } = await supabaseClient
+          .from('testimonials')
+          .select('*')
+          .eq('status', 'approved')
+          .order('created_at', { ascending: false });
+
+        if (error) {
+          console.error('Error fetching testimonials:', error);
+          throw error;
+        }
+
+        console.log('Fetched testimonials:', testimonials);
+
+        if (!testimonials || testimonials.length === 0) {
+          console.log('No approved testimonials found');
+          container.innerHTML = '<p>No testimonials yet. Be the first to share your experience!</p>';
+          return;
+        }
+
+        // Create the testimonials HTML for both original and duplicate
+        const createTestimonialHTML = (testimonial) => `
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <div class="testimonial-avatar" style="background: linear-gradient(135deg, ${getRandomGradient()})">
+                ${testimonial.name.charAt(0).toUpperCase()}
+              </div>
+              <div class="testimonial-info">
+                <h4 class="testimonial-name">${escapeHtml(testimonial.name)}</h4>
+                <p class="testimonial-date">${formatDate(testimonial.created_at)}</p>
+              </div>
+            </div>
+            <div class="testimonial-rating">
+              ${renderStars(testimonial.rating)}
+            </div>
+            <div class="testimonial-message">
+              <p>${escapeHtml(testimonial.message)}</p>
+            </div>
+          </div>`;
+          
+        // Create both original and duplicate sets of testimonials
+        const testimonialsHTML = `
+          <div class="testimonials-grid">
+            ${testimonials.map(testimonial => createTestimonialHTML(testimonial)).join('')}
+          </div>
+          <div class="testimonials-grid">
+            ${testimonials.map(testimonial => createTestimonialHTML(testimonial)).join('')}
+          </div>`;
+          
+        // Update only the scroll wrapper content, preserving the banner
+        scrollWrapper.innerHTML = testimonialsHTML;
+
+        // Add intersection observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'translateY(0)';
+            }
+          });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.testimonial-card').forEach(card => {
+          observer.observe(card);
+        });
+      } catch (error) {
+        console.error('Error loading testimonials:', error);
+        if (container) {
+          container.innerHTML = '<p class="error">Error loading testimonials. Please refresh the page to try again.</p>';
+        }
+      }
+    }
+
+      // Format date to relative time (e.g., '2 weeks ago')
       function formatDate(dateString) {
+        // Create date objects in local timezone
         const now = new Date();
         const date = new Date(dateString);
+        
+        // Reset time to midnight for both dates to compare just the dates
         const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
         const thatDay = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        
+        // Calculate difference in days
         const diffTime = today - thatDay;
         const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        
         if (diffDays === 0) return 'Today';
         if (diffDays === 1) return 'Yesterday';
         if (diffDays < 7) return `${diffDays} days ago`;
@@ -920,9 +1240,14 @@
           const weeks = Math.floor(diffDays / 7);
           return `${weeks} week${weeks > 1 ? 's' : ''} ago`;
         }
-        return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        return date.toLocaleDateString('en-US', { 
+          year: 'numeric', 
+          month: 'short', 
+          day: 'numeric' 
+        });
       }
 
+      // Render star ratings with Font Awesome icons
       function renderStars(rating) {
         let starsHtml = '';
         for (let i = 1; i <= 5; i++) {
@@ -937,219 +1262,257 @@
         return starsHtml;
       }
 
+      // Add fade-in animation
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `;
+      document.head.appendChild(style);
+
+      // Escape HTML to prevent XSS
       function escapeHtml(text) {
         if (!text) return '';
         return text.toString().replace(/[&<>"']/g, (m) => ({
-          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;'
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
         })[m] || m);
       }
 
-      async function loadTestimonials() {
-        const scrollWrapper = document.querySelector('.testimonials-scroll-wrapper');
-        const container = document.querySelector('.testimonials-container');
-        if (!scrollWrapper || !container) return;
-        try {
-          scrollWrapper.innerHTML = `
-            <div class="testimonials-grid">
-              ${Array(3).fill(`
-                <div class="skeleton-card">
-                  <div class="skeleton-avatar"></div>
-                  <div class="skeleton-line" style="width: 70%;"></div>
-                  <div class="skeleton-line"></div>
-                  <div class="skeleton-line" style="width: 60%;"></div>
-                </div>
-              `).join('')}
-            </div>`;
-          const style = document.createElement('style');
-          style.textContent = `
-            @keyframes shimmer {
-              0% { background-position: -1000px 0; }
-              100% { background-position: 1000px 0; }
-            }
-            .skeleton-line, .skeleton-avatar {
-              background: linear-gradient(90deg, #f5f7fa 0%, #e4e9f2 50%, #f5f7fa 100%);
-              background-size: 1000px 100%;
-              animation: shimmer 2s infinite linear;
-            }
-            .skeleton-avatar {
-              animation: shimmer 2s infinite linear, pulse 2s infinite ease-in-out;
-            }
-            @keyframes pulse {
-              0%, 100% { opacity: 1; }
-              50% { opacity: 0.6; }
-            }`;
-          document.head.appendChild(style);
+    // Burger menu toggle
+    const burger = document.getElementById('burger');
+    const navLinks = document.querySelectorAll('nav a');
+    if (burger) {
+      burger.addEventListener('click', () => {
+        burger.classList.toggle('active');
+        navLinks.forEach(link => {
+          link.classList.toggle('active');
+        });
+      });
+    }
 
-          const { data: testimonials, error } = await supabaseClient
-            .from('testimonials')
-            .select('*')
-            .eq('status', 'approved')
-            .order('created_at', { ascending: false });
+    // Form submission handler
+    async function submitTestimonial(e) {
+      e.preventDefault();
+      
+      const form = e.target;
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn.textContent;
+      
+      try {
+        const name = form.querySelector('#name').value.trim();
+        const message = form.querySelector('#message').value.trim();
+        const rating = parseInt(form.querySelector('#rating').value);
 
-          if (error) throw error;
-          if (!testimonials || testimonials.length === 0) {
-            container.innerHTML = '<p>No testimonials yet. Be the first to share your experience!</p>';
-            return;
-          }
-
-          const createTestimonialHTML = (testimonial) => `
-            <div class="testimonial-card">
-              <div class="testimonial-header">
-                <div class="testimonial-avatar" style="background: linear-gradient(135deg, ${getRandomGradient()})">
-                  ${testimonial.name.charAt(0).toUpperCase()}
-                </div>
-                <div class="testimonial-info">
-                  <h4 class="testimonial-name">${escapeHtml(testimonial.name)}</h4>
-                  <p class="testimonial-date">${formatDate(testimonial.created_at)}</p>
-                </div>
-              </div>
-              <div class="testimonial-rating">${renderStars(testimonial.rating)}</div>
-              <div class="testimonial-message"><p>${escapeHtml(testimonial.message)}</p></div>
-            </div>`;
-
-          scrollWrapper.innerHTML = `
-            <div class="testimonials-grid" id="testimonials-container">
-              ${testimonials.map(createTestimonialHTML).join('')}
-            </div>
-            <div class="testimonials-grid duplicate" id="testimonials-container-duplicate">
-              ${testimonials.map(createTestimonialHTML).join('')}
-            </div>`;
-
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-              }
-            });
-          }, { threshold: 0.1 });
-
-          document.querySelectorAll('.testimonial-card').forEach(card => observer.observe(card));
-
-          // Reset scroll position to ensure seamless looping
-          scrollWrapper.scrollLeft = 0;
-          startAutoScroll();
-        } catch (error) {
-          console.error('Error loading testimonials:', error);
-          container.innerHTML = '<p class="error">Error loading testimonials. Please refresh the page to try again.</p>';
+        // Validation
+        if (!name || !message || isNaN(rating) || rating < 1 || rating > 5) {
+          showFormMessage('Please fill in all required fields and provide a valid rating (1-5).', 'error');
+          return;
         }
-      }
+        
+        // Check message length (assuming minimum 10 characters and maximum 1000 characters)
+        if (message.length < 10) {
+          showFormMessage('Your testimonial is too short. Please provide more details (minimum 10 characters).', 'error');
+          return;
+        }
+        
+        if (message.length > 1000) {
+          showFormMessage('Your testimonial is too long. Please keep it under 1000 characters.', 'error');
+          return;
+        }
 
-      async function submitTestimonial(e) {
-        e.preventDefault();
-        const form = e.target;
-        const submitBtn = form.querySelector('button[type="submit"]');
-        const originalBtnText = submitBtn.textContent;
-        try {
-          const name = form.querySelector('#name').value.trim();
-          const message = form.querySelector('#message').value.trim();
-          const rating = parseInt(form.querySelector('#rating').value);
-          if (!name || !message || isNaN(rating) || rating < 1 || rating > 5) {
-            showFormMessage('Please fill in all required fields and provide a valid rating (1-5).', 'error');
-            return;
-          }
-          if (message.length < 10) {
-            showFormMessage('Your testimonial is too short. Please provide more details (minimum 10 characters).', 'error');
-            return;
-          }
-          if (message.length > 1000) {
-            showFormMessage('Your testimonial is too long. Please keep it under 1000 characters.', 'error');
-            return;
-          }
-          submitBtn.disabled = true;
-          submitBtn.textContent = 'Submitting...';
-          showFormMessage('Submitting your testimonial...', 'info');
-          const { data, error } = await supabaseClient
-            .from('testimonials')
-            .insert([{ name, message, rating, status: 'pending', created_at: new Date().toISOString(), updated_at: new Date().toISOString() }])
-            .select();
-          if (error) {
-            if (error.code === '23505' && error.message.includes('uq_testimonials_email')) {
-              throw new Error('This email has already been used to submit a testimonial.');
-            }
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+        showFormMessage('Submitting your testimonial...', 'info');
+
+        console.log('Submitting testimonial:', { name, message, rating });
+        const { data, error } = await supabaseClient
+          .from('testimonials')
+          .insert([{
+            name,
+            message,
+            rating,
+            status: 'pending',
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+          }])
+          .select();
+
+        if (error) {
+          console.error('Supabase insert error:', error);
+          if (error.code === '23505' && error.message.includes('uq_testimonials_email')) {
+            throw new Error('This email has already been used to submit a testimonial. Each email can only submit one testimonial.');
+          } else {
             throw new Error('Failed to submit testimonial. Please try again later.');
           }
-          showFormMessage('Thank you for your testimonial! It will be reviewed before being published.', 'success');
-          form.reset();
-          stars.forEach(s => {
-            s.classList.remove('selected');
-            s.style.color = 'gray';
-          });
-          ratingInput.value = 0;
-          document.getElementById('formMessage').scrollIntoView({ behavior: 'smooth' });
-        } catch (error) {
-          showFormMessage(error.message || 'There was an error submitting your testimonial. Please try again later.', 'error');
-        } finally {
+        }
+
+        console.log('Testimonial submitted successfully:', data);
+        showFormMessage('Thank you for your testimonial! It will be reviewed before being published.', 'success');
+        form.reset();
+        // Reset star colors after form reset
+        stars.forEach(s => {
+          s.classList.remove('selected');
+          s.style.color = 'gray';
+        });
+        ratingInput.value = 0;
+        
+        // Scroll to show the success message
+        document.getElementById('formMessage').scrollIntoView({ behavior: 'smooth' });
+        
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+          document.getElementById('formMessage').style.display = 'none';
+        }, 5000);
+        
+      } catch (error) {
+        console.error('Error submitting testimonial:', error);
+        showFormMessage(error.message || 'There was an error submitting your testimonial. Please try again later.', 'error');
+      } finally {
+        if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.textContent = originalBtnText;
         }
       }
+    }
 
-      if (form) form.addEventListener('submit', submitTestimonial);
+    // Attach the submit event listener to the form
+    if (form) {
+      form.addEventListener('submit', submitTestimonial);
+      console.log('Form event listener attached');
+    } else {
+      console.error('Form with id "testimonialForm" not found.');
+    }
 
+    // Load testimonials on page load
+    loadTestimonials();
+    
+    // Make submitTestimonial globally available for testing
+    window.submitTestimonial = submitTestimonial;
+
+    // Add selected class to stars on hover
+    if (stars.length > 0) {
       stars.forEach(star => {
         star.addEventListener('mouseover', () => {
           const value = parseInt(star.getAttribute('data-value'));
-          stars.forEach(s => s.style.color = 'gray');
-          for (let i = 0; i < value; i++) stars[i].style.color = '#ffc107';
+          // Reset all stars
+          stars.forEach(s => {
+            s.style.color = 'gray';
+          });
+          // Color stars up to the hovered one
+          for (let i = 0; i < value; i++) {
+            stars[i].style.color = '#ffc107';
+          }
         });
+
+        // Reset stars on mouseout (unless a rating is selected)
         star.addEventListener('mouseout', () => {
           const rating = parseInt(ratingInput.value);
-          stars.forEach((s, i) => s.style.color = i < rating ? '#ffc107' : 'gray');
+          if (rating === 0) {
+            stars.forEach(s => {
+              s.style.color = 'gray';
+            });
+          } else {
+            stars.forEach((s, i) => {
+              s.style.color = i < rating ? '#ffc107' : 'gray';
+            });
+          }
         });
       });
+    }
 
-      async function testSupabase() {
-        try {
-          const { data, error } = await supabaseClient.from('testimonials').select('*').limit(1);
-          if (error) throw error;
-          console.log('Successfully connected to Supabase');
-          return true;
-        } catch (error) {
-          console.error('Error connecting to Supabase:', error);
-          showFormMessage('Error connecting to the database. Please try again later.', 'error');
-          return false;
-        }
+    // Test Supabase connection
+    async function testSupabase() {
+      try {
+        const { data, error } = await supabaseClient
+          .from('testimonials')
+          .select('*')
+          .limit(1);
+          
+        if (error) throw error;
+        console.log('Successfully connected to Supabase');
+        return true;
+      } catch (error) {
+        console.error('Error connecting to Supabase:', error);
+        showFormMessage('Error connecting to the database. Please try again later.', 'error');
+        return false;
       }
-
-      testSupabase();
-      loadTestimonials();
-    });
-
-    // Form message styles
-    const style = document.createElement('style');
-    style.textContent = `
-      .form-message {
-        padding: 10px;
-        margin: 10px 0;
-        border-radius: 4px;
-        display: none;
-      }
-      .form-message.success {
-        background-color: #dff0d8;
-        color: #3c763d;
-        border: 1px solid #d6e9c6;
-        display: block;
-      }
-      .form-message.error {
-        background-color: #f2dede;
-        color: #a94442;
-        border: 1px solid #ebccd1;
-        display: block;
-      }
-      .error {
-        color: #d32f2f;
-        padding: 10px;
-        background: #ffebee;
-        border-radius: 4px;
-        margin: 10px 0;
-      }
-      @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-    `;
-    document.head.appendChild(style);
+    }
+    
+    // Test the connection on page load
+    testSupabase();
+  });
   </script>
-</body>
-</html>
+
+  <style>
+    /* Add styles for form messages */
+    .form-message {
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+      display: none;
+    }
+    .form-message.success {
+      background-color: #dff0d8;
+      color: #3c763d;
+      border: 1px solid #d6e9c6;
+    }
+    .form-message.error {
+      background-color: #f2dede;
+      color: #a94442;
+      border: 1px solid #ebccd1;
+    }
+    /* Loading skeleton styles */
+    .skeleton-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .skeleton-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #f0f0f0;
+      margin-bottom: 10px;
+    }
+    .skeleton-line {
+      height: 12px;
+      background: #f0f0f0;
+      margin-bottom: 8px;
+      border-radius: 4px;
+    }
+    .error {
+      color: #d32f2f;
+      padding: 10px;
+      background: #ffebee;
+      border-radius: 4px;
+      margin: 10px 0;
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+
+  </script>
+   </body>
+   </html>
