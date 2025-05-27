@@ -842,70 +842,98 @@
       </div>
     </div>
   </footer>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.8/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  // Initialize Supabase client with your credentials
-  if (typeof Supabase === 'undefined') {
-    console.error('Supabase library failed to load. Check the CDN URL or network connection.');
-    alert('Failed to load Supabase library. Please try again later.');
-  } else {
-    const supabase = Supabase.createClient(
-      'https://emldrnonwflkbbnbughi.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtbGRybm9ud2Zsa2JibmJ1Z2hpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxOTEwMzQsImV4cCI6MjA2Mzc2NzAzNH0.R2PETzSHm0uGa-A62RjN9FJiQ2VSM_J5KcB7NeJ3AEU'
-    );
+  // Initialize Supabase client
+  const supabaseUrl = 'https://emldrnonwflkbbnbughi.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtbGRybm9ud2Zsa2JibmJ1Z2hpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxOTEwMzQsImV4cCI6MjA2Mzc2NzAzNH0.R2PETzSHm0uGa-A62RjN9FJiQ2VSM_J5KcB7NeJ3AEU';
+  
+  // Create a single supabase client for interacting with your database
+  const { createClient } = supabase;
+  const supabaseClient = createClient(supabaseUrl, supabaseKey);
 
-    document.addEventListener('DOMContentLoaded', () => {
-      // Test Supabase connectivity on page load
-      async function testSupabase() {
-        try {
-          const { data, error } = await supabase.from('testimonials').select('*').limit(1);
-          if (error) {
-            console.error('Supabase test error:', error);
-            alert('Supabase connection failed: ' + error.message);
-          } else {
-            console.log('Supabase connection successful:', data);
-          }
-        } catch (err) {
-          console.error('Unexpected error during Supabase test:', err);
-          alert('Unexpected error during Supabase test.');
+  document.addEventListener('DOMContentLoaded', () => {
+    // Test Supabase connectivity on page load
+    async function testSupabase() {
+      try {
+        console.log('Testing Supabase connection...');
+        const { data, error } = await supabaseClient
+          .from('testimonials')
+          .select('*')
+          .limit(1);
+          
+        if (error) {
+          console.error('Supabase query error:', error);
+          throw error;
         }
+        
+        console.log('Supabase connection successful, data:', data);
+        return true;
+      } catch (error) {
+        console.error('Supabase test error:', error);
+        alert('Failed to connect to the database. Please try again later.');
+        return false;
       }
+    }
 
-      testSupabase();
+      // Initialize the page
+      testSupabase().then(isConnected => {
+        if (isConnected) {
+          console.log('Supabase initialized successfully');
+        }
+      });
 
       // Handle form submission
       async function submitTestimonial(event) {
-        event.preventDefault(); // Prevent form from refreshing the page
+        event.preventDefault();
 
         const form = document.getElementById('testimonial-form');
-        const name = form.querySelector('#name').value.trim();
-        const message = form.querySelector('#message').value.trim();
-        const rating = parseInt(form.querySelector('#rating').value);
-
-        if (!name || !message || !rating) {
-          alert('Please fill in all fields.');
-          return;
-        }
-
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.textContent;
+        
         try {
-          console.log('Submitting testimonial:', { name, message, rating });
-          const { error } = await supabase
-            .from('testimonials')
-            .insert([{ name, message, rating }]);
+          const name = form.querySelector('#name').value.trim();
+          const message = form.querySelector('#message').value.trim();
+          const rating = parseInt(form.querySelector('#rating').value);
 
-          if (error) {
-            console.error('Supabase insert error:', error);
-            alert('Failed to submit testimonial: ' + error.message);
+          if (!name || !message || isNaN(rating) || rating < 1 || rating > 5) {
+            alert('Please fill in all fields and provide a valid rating (1-5).');
             return;
           }
 
-          console.log('Testimonial submitted successfully');
-          alert('Thank you for your testimonial!');
-          form.reset(); // Clear the form
-        } catch (err) {
-          console.error('Unexpected error during submission:', err);
-          alert('Error submitting testimonial. Please try again later.');
-        }
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Submitting...';
+          
+          console.log('Submitting testimonial:', { name, message, rating });
+          const { data, error } = await supabaseClient
+            .from('testimonials')
+            .insert([{ 
+              name, 
+              message, 
+              rating,
+              status: 'pending',
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString()
+            }])
+            .select();
+
+          if (error) {
+            console.error('Supabase insert error:', error);
+            throw error;
+          }
+
+          console.log('Testimonial submitted successfully:', data);
+          alert('Thank you for your testimonial! It will be reviewed before being published.');
+          form.reset();
+        } catch (error) {
+          console.error('Error submitting testimonial:', error);
+          alert('There was an error submitting your testimonial: ' + (error.message || 'Please try again later.'));
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalBtnText;
+          }
+        }  
       }
 
       // Attach the submit event listener to the form
