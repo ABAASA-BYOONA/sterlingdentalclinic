@@ -113,7 +113,7 @@
       overflow: hidden;
     }
     
- /* Container for the scrolling wrapper */
+  /* Container for the scrolling wrapper */
     .testimonials-scroll-wrapper {
       width: 100%;
       overflow: hidden;
@@ -128,13 +128,14 @@
       gap: 20px;
       width: max-content; /* Allow container to expand to fit content */
       animation: scroll 20s linear infinite; /* Animation for endless loop */
+      will-change: transform; /* Optimize animation performance */
     }
 
     /* Duplicate container for seamless looping */
     .testimonials-grid.duplicate {
       position: absolute;
       top: 0;
-      left: 100%; /* Position duplicate immediately after the original */
+      right: 100%; /* Position duplicate to the left of the original */
     }
 
     /* Skeleton card styling */
@@ -165,13 +166,13 @@
     .skeleton-line:nth-child(3) { width: 100%; }
     .skeleton-line:nth-child(4) { width: 60%; }
 
-    /* Animation keyframes for endless scroll */
+    /* Animation keyframes for endless left-to-right scroll */
     @keyframes scroll {
       0% {
         transform: translateX(0);
       }
       100% {
-        transform: translateX(-100%); /* Move to the left by the full width */
+        transform: translateX(100%); /* Move to the right by the full width */
       }
     }
 
@@ -234,64 +235,6 @@
       background: #007BFF;
       color: white;
     }
-    /* Hide scrollbar for WebKit browsers */
-    .testimonials-grid::-webkit-scrollbar {
-      display: none;
-    }
-    
-    .testimonial-card {
-      flex: 0 0 300px;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      margin: 0 0.5rem;
-      transition: transform 0.5s ease, box-shadow 0.3s ease, z-index 0.3s ease;
-      position: relative;
-      z-index: 1;
-      will-change: transform;
-    }
-    
-    .testimonial-card:hover {
-      transform: scale(1.05) translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-      z-index: 2;
-    }
-
-
-    /* Testimonial Card */
-    .testimonial-card {
-      background: white;
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      width: 300px;
-      min-width: 300px;
-      max-width: 300px;
-      flex-shrink: 0;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      margin: 0;
-      box-sizing: border-box;
-      position: relative;
-    }
-
-    .testimonial-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #4f46e5, #7c3aed);
-      border-radius: 12px 12px 0 0;
-    }
-
-    .testimonial-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    }
-
     .testimonial-header {
       display: flex;
       align-items: center;
@@ -415,35 +358,6 @@
       background: var(--primary-dark);
       transform: translateY(-2px);
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Skeleton Loading */
-    .skeleton-card {
-      background: white;
-      border-radius: 10px;
-      padding: 2rem;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    }
-
-    .skeleton-avatar {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: #eee;
-      margin-bottom: 1rem;
-    }
-
-    .skeleton-line {
-      height: 12px;
-      background: #eee;
-      border-radius: 4px;
-      margin-bottom: 10px;
-      animation: pulse 1.5s infinite ease-in-out;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
     }
 
     /* Testimonial Form Styles */
@@ -736,9 +650,8 @@
         <p class="subtitle">Real experiences from our amazing patients</p>
       </div>
     </section>
-
-    <section class="testimonials-container container">
-     <div class="testimonials-scroll-wrapper">
+    
+  <div class="testimonials-scroll-wrapper">
     <div id="testimonials-container" class="testimonials-grid">
       <!-- Skeleton cards - First Set -->
       <div class="skeleton-card">
