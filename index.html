@@ -9,6 +9,211 @@
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
+    /* Chatbot Styles */
+    #ai-chat-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #007BFF, #00BFFF);
+      color: white;
+      border: none;
+      font-size: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #ai-chat-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    #ai-chat-button:active {
+      transform: scale(0.95);
+    }
+
+    #ai-chat-popup {
+      position: fixed;
+      bottom: 110px;
+      right: 30px;
+      width: 380px;
+      height: 600px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 10000;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    #ai-chat-header {
+      background: linear-gradient(135deg, #007BFF, #00BFFF);
+      color: white;
+      padding: 15px 20px;
+      font-weight: 600;
+      font-size: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .chat-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    #ai-chat-messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background-color: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .chat-message {
+      display: flex;
+      max-width: 85%;
+      margin-bottom: 10px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .chat-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #e9ecef;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+      flex-shrink: 0;
+      font-size: 16px;
+    }
+
+    .chat-content {
+      padding: 12px 16px;
+      border-radius: 18px;
+      font-size: 14px;
+      line-height: 1.4;
+      word-wrap: break-word;
+    }
+
+    .user-message {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .user-message .chat-content {
+      background: #007BFF;
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .bot-message {
+      align-self: flex-start;
+    }
+
+    .bot-message .chat-content {
+      background: white;
+      color: #333;
+      border: 1px solid #e9ecef;
+      border-bottom-left-radius: 4px;
+    }
+
+    #ai-chat-input-container {
+      display: flex;
+      padding: 15px;
+      background: white;
+      border-top: 1px solid #e9ecef;
+    }
+
+    #ai-chat-input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 2px solid #e9ecef;
+      border-radius: 24px;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    #ai-chat-input:focus {
+      border-color: #007BFF;
+    }
+
+    #ai-chat-send {
+      background: #007BFF;
+      color: white;
+      border: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      margin-left: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #ai-chat-send:hover {
+      background: #0056b3;
+      transform: scale(1.05);
+    }
+
+    #ai-chat-send:active {
+      transform: scale(0.95);
+    }
+
+    .typing-indicator {
+      display: flex;
+      align-self: flex-start;
+      padding: 12px 16px;
+      background: white;
+      border-radius: 18px;
+      border: 1px solid #e9ecef;
+      margin-bottom: 10px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .typing-indicator span {
+      width: 8px;
+      height: 8px;
+      background: #6c757d;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 0 2px;
+      animation: bounce 1.4s infinite ease-in-out both;
+    }
+
+    .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+    .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1); }
+    }
+
     /* General Reset */
     * {
       margin: 0;
@@ -797,13 +1002,28 @@
   </a>
 
   <!-- AI Chat Button -->
-  <button id="ai-chat-button" title="Ask AI">🤖</button>
+  <button id="ai-chat-button" title="Chat with our AI Assistant" aria-label="Chat with AI Assistant">
+    <i class="fas fa-robot"></i>
+  </button>
   <div id="ai-chat-popup" role="dialog" aria-modal="true" aria-labelledby="ai-chat-header">
-    <div id="ai-chat-header">Ask Sterling AI</div>
-    <div id="ai-chat-messages" aria-live="polite" aria-relevant="additions"></div>
-    <div id="ai-chat-input-container">
-      <input type="text" id="ai-chat-input" placeholder="Type your question..." aria-label="Type your question" />
-      <button id="ai-chat-send" aria-label="Send question">➤</button>
+    <div id="ai-chat-header">
+      <span>Sterling Dental Assistant</span>
+      <i class="fas fa-robot"></i>
+    </div>
+    <div class="chat-body">
+      <div id="ai-chat-messages" aria-live="polite" aria-relevant="additions"></div>
+      <div id="ai-chat-input-container">
+        <input 
+          type="text" 
+          id="ai-chat-input" 
+          placeholder="Ask me about our dental services..." 
+          aria-label="Type your question"
+          autocomplete="off"
+        />
+        <button id="ai-chat-send" aria-label="Send message">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -844,6 +1064,19 @@
       </div>
     </div>
   </footer>
+
+  <!-- Add environment variables -->
+  <script>
+    // Set environment variables
+    window.ENV = {
+      OPENROUTER_API_KEY: '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'
+    };
+  </script>
+  
+  <!-- Load Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+=======
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   // Initialize Supabase client
@@ -970,7 +1203,6 @@
   });
 </script>
   <script>
-    
     // Navigation Script
     const burger = document.getElementById('burger');
     const navLinks = document.querySelectorAll('nav a');
@@ -980,7 +1212,9 @@
         link.classList.toggle('active');
       });
     });
-
+  </script>
+  
+  <script>
     // Appointment Form Script
     document.getElementById('appointment-form').addEventListener('submit', function(event) {
       event.preventDefault();
@@ -1002,74 +1236,10 @@
       alert('Appointment request sent to WhatsApp!');
       this.reset();
     });
-
-    // AI Chat Script
-    const chatButton = document.getElementById('ai-chat-button');
-    const chatPopup = document.getElementById('ai-chat-popup');
-    const chatMessages = document.getElementById('ai-chat-messages');
-    const chatInput = document.getElementById('ai-chat-input');
-    const chatSend = document.getElementById('ai-chat-send');
-
-    chatButton.addEventListener('click', () => {
-      chatPopup.style.display = chatPopup.style.display === 'flex' ? 'none' : 'flex';
-      if (chatPopup.style.display === 'flex') chatInput.focus();
-    });
-
-    function appendMessage(text, sender) {
-      const msg = document.createElement('div');
-      msg.classList.add('ai-message', sender === 'user' ? 'user-message' : 'bot-message');
-      msg.textContent = text;
-      chatMessages.appendChild(msg);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-
-    function getAIResponse(question) {
-      const q = question.toLowerCase();
-      if (q.includes('working hours') || q.includes('open') || q.includes('hours')) {
-        return 'Our clinic is open Monday to Friday from 9:00 AM to 6:00 PM, and Saturday from 9:00 AM to 3:00 PM.';
-      }
-      if (q.includes('location') || q.includes('address')) {
-        return 'We are located at Garden City Mall, ground floor, Kampala, Uganda.';
-      }
-      if (q.includes('appointment') || q.includes('book')) {
-        return 'You can book an appointment online through our website or call us at +256 772 488592.';
-      }
-      if (q.includes('toothache')) {
-        return 'For toothache, we recommend scheduling an emergency appointment as soon as possible for proper diagnosis and treatment.';
-      }
-      if (q.includes('teeth whitening')) {
-        return 'We offer professional teeth whitening services that are safe and effective. Contact us to learn more.';
-      }
-      if (q.includes('root canal')) {
-        return 'Root canal therapy is a treatment to save an infected tooth. Our specialists provide pain-free root canal treatments.';
-      }
-      return "I'm here to help! Could you please provide more details or ask a specific question about our clinic or dental care?";
-    }
-
-    function handleUserInput() {
-      const question = chatInput.value.trim();
-      if (!question) return;
-      appendMessage(question, 'user');
-      chatInput.value = '';
-      chatInput.disabled = true;
-      chatSend.disabled = true;
-      setTimeout(() => {
-        const response = getAIResponse(question);
-        appendMessage(response, 'bot');
-        chatInput.disabled = false;
-        chatSend.disabled = false;
-        chatInput.focus();
-      }, 1000);
-    }
-
-    chatSend.addEventListener('click', handleUserInput);
-    chatInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        handleUserInput();
-      }
-    });
   </script>
+  
+  <!-- Load the chatbot script -->
+  <script src="chatbot.js"></script>
 </body>
 </html>
 
