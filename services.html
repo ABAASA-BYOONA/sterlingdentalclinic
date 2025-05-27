@@ -26,26 +26,26 @@
     <p>Your trusted partner for exceptional dental care in Kampala</p>
      <style>
 
-      body {
-      background-image: url('drive/_OK_9101.jpg');
-      background-repeat: repeat;
-      background-size: auto;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #333;
-    }
-
-    /* Transparent Background Overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: inherit;
-      opacity: 0.8;
-      z-index: -1;
-    }
+    body {
+            background-image: url('drive/IMG-20250523-WA0263.jpg');
+            background-repeat: repeat;
+            background-size: auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+        }
+        /* Transparent Background Overlay */
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: inherit;
+            opacity: 0.2;
+            z-index: -1;
+        }
 
   nav {
     padding: 10px 20px;
@@ -294,6 +294,45 @@
       color: #333;
       float: left;
     }
+      .service-card {
+  position: relative;
+  background: #fff; /* fallback color */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  overflow: hidden;
+  color: #fff; /* text color for contrast */
+}
+
+/* Blurred background image layer */
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: inherit; /* inherit the background image */
+  background-size: cover;
+  background-position: center;
+  filter: blur(6px);
+  z-index: 0;
+  border-radius: 8px;
+}
+
+/* Dark overlay to dim the background */
+.service-card::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* stronger dim */
+  z-index: 1;
+  border-radius: 8px;
+}
+
+/* Make sure the content is above the overlay and blur */
+.service-card > * {
+  position: relative;
+  z-index: 2;
+}
 
 </style>
 
@@ -331,7 +370,7 @@
     <p>We offer a complete range of dental treatments to meet all your oral health needs.</p>
     
     <div class="services-grid">
-      <div class="service-card">
+      <div class="service-card" style="background-image: url('https://pin.it/12F8ccwic'); background-size: cover; background-position: center;">
         <h3><i class="fas fa-tooth" style="color: #007BFF;"></i> General Dentistry</h3>
         <ul>
 <li>Dental exams & cleanings</li>
@@ -341,7 +380,7 @@
         </ul>
       </div>
       
-      <div class="service-card">
+     <div class="service-card" style="background-image: url('https://pin.it/1JP69Qs41'); background-size: cover; background-position: center;">
         <h3><i class="fas fa-star" style="color: #ffc107;"></i> Cosmetic Dentistry</h3>
         <ul>
           <li>Teeth whitening</li>
@@ -351,7 +390,7 @@
         </ul>
  </div>
       
-      <div class="service-card">
+     <div class="service-card" style="background-image: url('https://pin.it/3w2KmMLj6'); background-size: cover; background-position: center;">
         <h3><i class="fas fa-teeth-open" style="color: #17a2b8;"></i> Orthodontics</h3>
         <ul>
           <li>Traditional braces</li>
@@ -361,7 +400,7 @@
         </ul>
       </div>
       
-      <div class="service-card">
+      <div class="service-card" style="background-image: url('https://pin.it/585Mf7oTh'); background-size: cover; background-position: center;">
         <h3><i class="fas fa-baby" style="color: #fd7e14;"></i> Pediatric Dentistry</h3>
         <ul>
           <li>Child dental exams</li>
@@ -370,7 +409,7 @@
           <li>Early orthodontic care</li>
         </ul>
       </div>
-<div class="service-card">
+<div class="service-card" style="background-image: url('https://pin.it/5NJdVQUNH'); background-size: cover; background-position: center;">
         <h3><i class="fas fa-ambulance" style="color: #dc3545;"></i> Emergency Care</h3>
         <ul>
           <li>Toothache relief</li>
@@ -380,7 +419,7 @@
         </ul>
       </div>
       
-      <div class="service-card">
+      <div class="service-card" style="background-image: url('https://pin.it/6zZolLllK'); background-size: cover; background-position: center;">
         <h3><i class="fas fa-implant" style="color: #6f42c1;"></i> Dental Implants</h3>
         <ul>
           <li>Single tooth implants</li>

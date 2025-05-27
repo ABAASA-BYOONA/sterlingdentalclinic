@@ -23,12 +23,27 @@
       box-sizing: border-box;
     }
     
-    body {
-      font-family: 'Poppins', sans-serif;
-      line-height: 1.6;
+     body {
+      background-image: url('xray/backtile.jpg');
+      background-repeat: repeat;
+      background-size: auto;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #333;
-      background-color: #f9f9f9;
     }
+
+    /* Transparent Background Overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: inherit;
+      opacity: 0.2;
+      z-index: -1;
+    }
+
     /* Container Styles */
     .container {
       max-width: 1200px;
@@ -426,6 +441,33 @@
       margin-bottom: 30px;
     }
 
+     header {
+      text-align: center;
+      padding: 20px;
+      background: #007BFF;
+      color: white;
+    }
+
+    .logo {
+      max-width: 100px;
+      height: auto;
+      vertical-align: middle;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 10px;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      margin-top: 10px;
+    }
+
+    /* Navigation Styles */
     nav {
       padding: 10px 20px;
       display: flex;
@@ -449,18 +491,7 @@
       text-decoration: underline;
     }
 
-    /* Burger button */
     .burger {
-      display: none;
-      cursor: pointer;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      padding: 0;
-    }
-
-        .burger {
       display: none;
       cursor: pointer;
       flex-direction: column;
@@ -477,6 +508,7 @@
 
     @media (max-width: 768px) {
       nav a {
+        color: #333;
         display: none;
         width: 100%;
         padding: 12px 0;
@@ -509,51 +541,33 @@
         transform: rotate(-45deg) translate(5px, -5px);
       }
     }
-
-      nav {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      nav a {
-        display: none;
-        width: 100%;
-        padding: 12px 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
-        justify-content: center;
-      }
-
-      nav.open a {
-        display: flex;
-      }
   </style>
 </head>
 <body>
   <header>
-    <div class="header-content" style="display:flex; align-items:center; padding:10px 20px; color:white;">
-      <a href="index.html#home" class="logo-link" style="margin-right: 15px;">
-        <img src="sterlinglogo.jpg" alt="Sterling Dental Clinic Logo" class="logo" style="height:40px;" />
-      </a>
-      <div class="header-text">
-        <h1 style="margin:0; font-size:1.5rem; color:white;">Sterling Dental Clinic</h1>
-        <p class="tagline" style="margin:0; font-size:0.9rem;">Your trusted partner for exceptional dental care in Kampala</p>
-      </div>
+  <div class="header-content">
+    <a href="#home" class="logo-link">
+      <img src="sterlinglogo.jpg" alt="Sterling Dental Clinic Logo" class="logo">
+    </a>
+    <div class="header-text">
+      <h1 style="color: white";>Sterling Dental Clinic</h1>
+      <p class="tagline">Your trusted partner for exceptional dental care in Kampala</p>
     </div>
-    <nav>
+  </div>
+  <nav>
     <div class="burger" id="burger">
       <div></div>
       <div></div>
       <div></div>
     </div>
-    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="index.html#home"><i class="fas fa-home"></i> Home</a>
     <a href="services.html"><i class="fas fa-teeth"></i> Services</a>
     <a href="about.html"><i class="fas fa-info-circle"></i> About Us</a>
     <a href="index.html#contact"><i class="fas fa-phone-alt"></i> Contact</a>
     <a href="testimonials.html"><i class="fas fa-quote-right testimonial-icon"></i> Testimonials</a>
-    <a href="gallery.html"><i class="fas fa-images"></i> Gallery</a>
     <a href="index.html#appointment"><i class="fas fa-calendar-check"></i> Book Appointment</a>
   </nav>
-  </header>
+</header>
   <main class="testimonials-page">
     <section class="testimonials-hero">
       <div class="container">
@@ -591,10 +605,6 @@
           <div class="form-group">
             <label for="name">Your Name *</label>
             <input type="text" id="name" name="name" required class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="email">Your Email *</label>
-            <input type="email" id="email" name="email" required class="form-control">
           </div>
           <div class="form-group">
             <label>Your Rating *</label>
@@ -653,7 +663,18 @@
       </div>
     </div>
   </footer>
+<script>
+    // Navigation Script
+    const burger = document.getElementById('burger');
+    const navLinks = document.querySelectorAll('nav a');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      navLinks.forEach(link => {
+        link.classList.toggle('active');
+      });
+    });
 
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   // Initialize Supabase client
@@ -981,16 +1002,14 @@
         })[m] || m);
       }
 
-      // Navigation Script
       const burger = document.getElementById('burger');
-      if (burger) {
-        const navLinks = document.querySelectorAll('nav a');
-        burger.addEventListener('click', () => {
-          burger.classList.toggle('active');
-          navLinks.forEach(link => {
-            link.classList.toggle('active');
-          });
-        });
+    const navLinks = document.querySelectorAll('nav a');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      navLinks.forEach(link => {
+        link.classList.toggle('active');
+      });
+    });
       }
 
       // Form submission handler
@@ -1109,6 +1128,7 @@
         });
       }
     });
+
   </script>
   </script>
   <style>
