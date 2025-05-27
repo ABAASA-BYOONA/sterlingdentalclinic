@@ -811,6 +811,78 @@
   
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+    const scrollWrapper = document.querySelector('.testimonials-scroll-wrapper');
+const scrollSpeed = 0.5; // pixels per frame, adjust for speed
+let scrollPos = 0;
+let direction = 1; // 1 for right to left, -1 for left to right
+let isDragging = false;
+let dragStartX = 0;
+let dragScrollStart = 0;
+
+function animateScroll() {
+  if (!isDragging) {
+    scrollPos += scrollSpeed * direction;
+    // Loop scroll position to create seamless effect
+    if (scrollPos >= scrollWrapper.scrollWidth / 2) {
+      scrollPos = 0;
+    } else if (scrollPos < 0) {
+      scrollPos = scrollWrapper.scrollWidth / 2;
+    }
+    scrollWrapper.scrollLeft = scrollPos;
+  }
+  requestAnimationFrame(animateScroll);
+}
+
+// Drag/swipe handlers
+scrollWrapper.addEventListener('mousedown', (e) => {
+  isDragging = true;
+  dragStartX = e.pageX;
+  dragScrollStart = scrollWrapper.scrollLeft;
+  scrollWrapper.style.cursor = 'grabbing';
+});
+
+scrollWrapper.addEventListener('mouseup', () => {
+  isDragging = false;
+  scrollWrapper.style.cursor = 'grab';
+});
+
+scrollWrapper.addEventListener('mouseleave', () => {
+  isDragging = false;
+  scrollWrapper.style.cursor = 'grab';
+});
+
+scrollWrapper.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+  const dx = e.pageX - dragStartX;
+  scrollWrapper.scrollLeft = dragScrollStart - dx;
+  scrollPos = scrollWrapper.scrollLeft;
+});
+
+scrollWrapper.addEventListener('touchstart', (e) => {
+  isDragging = true;
+  dragStartX = e.touches[0].pageX;
+  dragScrollStart = scrollWrapper.scrollLeft;
+});
+
+scrollWrapper.addEventListener('touchend', () => {
+  isDragging = false;
+});
+
+scrollWrapper.addEventListener('touchmove', (e) => {
+  if (!isDragging) return;
+  const dx = e.touches[0].pageX - dragStartX;
+  scrollWrapper.scrollLeft = dragScrollStart - dx;
+  scrollPos = scrollWrapper.scrollLeft;
+});
+
+// Optional: toggle direction on click or button (example)
+scrollWrapper.addEventListener('dblclick', () => {
+  direction = -direction; // reverse scroll direction on double click
+});
+
+animateScroll();
+  </script>
 <script>
   // Initialize Supabase client
   const supabaseUrl = 'https://emldrnonwflkbbnbughi.supabase.co';
@@ -1375,58 +1447,7 @@
     testSupabase();
   });
   </script>
-  <script>
-    const scrollWrapper = document.querySelector('.testimonials-scroll-wrapper');
 
-let isDown = false;
-let startX;
-let scrollLeft;
-
-scrollWrapper.addEventListener('mousedown', (e) => {
-  isDown = true;
-  scrollWrapper.style.cursor = 'grabbing';
-  startX = e.pageX - scrollWrapper.offsetLeft;
-  scrollLeft = scrollWrapper.scrollLeft;
-  scrollWrapper.style.animationPlayState = 'paused'; // pause animation on drag
-});
-
-scrollWrapper.addEventListener('mouseleave', () => {
-  isDown = false;
-  scrollWrapper.style.cursor = 'grab';
-  scrollWrapper.style.animationPlayState = 'running'; // resume animation
-});
-
-scrollWrapper.addEventListener('mouseup', () => {
-  isDown = false;
-  scrollWrapper.style.cursor = 'grab';
-  scrollWrapper.style.animationPlayState = 'running'; // resume animation
-});
-
-scrollWrapper.addEventListener('mousemove', (e) => {
-  if (!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - scrollWrapper.offsetLeft;
-  const walk = (x - startX) * 2; // scroll-fast
-  scrollWrapper.scrollLeft = scrollLeft - walk;
-});
-
-// Touch events for mobile swiping
-scrollWrapper.addEventListener('touchstart', (e) => {
-  startX = e.touches[0].pageX - scrollWrapper.offsetLeft;
-  scrollLeft = scrollWrapper.scrollLeft;
-  scrollWrapper.style.animationPlayState = 'paused'; // pause animation on drag
-});
-
-scrollWrapper.addEventListener('touchend', () => {
-  scrollWrapper.style.animationPlayState = 'running'; // resume animation
-});
-
-scrollWrapper.addEventListener('touchmove', (e) => {
-  const x = e.touches[0].pageX - scrollWrapper.offsetLeft;
-  const walk = (x - startX) * 2; // scroll-fast
-  scrollWrapper.scrollLeft = scrollLeft - walk;
-});
-  </script>
   <style>
     /* Add styles for form messages */
     .form-message {
