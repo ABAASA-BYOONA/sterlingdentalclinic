@@ -43,7 +43,120 @@
       opacity: 0.2;
       z-index: -1;
     }
+ /* Header */
+    header {
+      background-color: #005f99;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+    }
 
+    header table {
+      margin: 0 auto;
+      border-collapse: collapse;
+      align-items: center;
+    }
+
+    header .logo {
+      max-height: 80px;
+      width: auto;
+      vertical-align: middle;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0 0 5px 15px;
+      font-weight: 700;
+      vertical-align: middle;
+      display: inline-block;
+      color: #fff;
+    }
+
+    header p {
+      margin: 5px 0 0;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: #cce4ff;
+    }
+
+    /* Navigation */
+    nav {
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    nav a {
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      background-color: #0056b3;
+      outline: none;
+    }
+
+    /* Burger menu */
+    .burger {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .burger div {
+      width: 25px;
+      height: 3px;
+      background: white;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      nav a {
+        display: none;
+        width: 100%;
+        padding: 12px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        justify-content: center;
+      }
+
+      nav a.active {
+        display: flex;
+      }
+
+      .burger {
+        display: flex;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .burger.active div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .burger.active div:nth-child(2) {
+      opacity: 0;
+    }
+
+    .burger.active div:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
     /* Container Styles */
     .container {
       max-width: 1200px;
@@ -114,135 +227,68 @@
     }
     
     .testimonials-scroll-wrapper {
-      display: flex;
-      position: relative;
-      width: fit-content;
-      animation: scroll 10s linear infinite;
-      will-change: transform;
-      padding: 0 2rem;
-    }
-    
-    .testimonials-grid {
-      display: flex;
-      padding: 1.5rem 0;
-      margin: 0 2rem 0 0;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-      flex-shrink: 0;
-      justify-content: flex-start;
-      align-items: stretch;
-      gap: 2rem;
-    }
-    
-    /* Pause animation on hover */
-    .testimonials-container:hover .testimonials-scroll-wrapper {
-      animation-play-state: paused;
-    }
-    
-    /* Seamless scroll animation */
-    @keyframes scroll {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
-    }
-    
-    /* Ensure smooth scrolling on all devices */
-    @media (prefers-reduced-motion: reduce) {
-      .testimonials-grid {
-        animation: none;
-        overflow-x: auto;
-      }
-    }
-    
-    /* Hide scrollbar for WebKit browsers */
-    .testimonials-grid::-webkit-scrollbar {
-      display: none;
-    }
-    
-    .testimonial-card {
-      flex: 0 0 300px;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      margin: 0 0.5rem;
-      transition: transform 0.5s ease, box-shadow 0.3s ease, z-index 0.3s ease;
-      position: relative;
-      z-index: 1;
-      will-change: transform;
-    }
-    
-    .testimonial-card:hover {
-      transform: scale(1.05) translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-      z-index: 2;
-    }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 2rem;
+  animation: none; /* Disable scrolling animation */
+  width: 100%;
+  overflow: visible;
+}
 
-    /* Animation for testimonials */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+.testimonials-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
 
-    .testimonial-card {
-      animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-      opacity: 0;
-    }
+.testimonial-card {
+  flex: 1 1 300px; /* Responsive width with min 300px */
+  max-width: 350px;
+  margin: 1rem;
+  scroll-snap-align: none;
+  scroll-snap-stop: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 1;
+  will-change: transform;
+}
 
-    /* Stagger animations */
-    .testimonial-card:nth-child(1) { animation-delay: 0.1s; }
-    .testimonial-card:nth-child(2) { animation-delay: 0.2s; }
-    .testimonial-card:nth-child(3) { animation-delay: 0.3s; }
-    .testimonial-card:nth-child(4) { animation-delay: 0.4s; }
+.testimonial-card:hover {
+  transform: scale(1.05) translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
 
-    /* Testimonial Card */
-    .testimonial-card {
-      background: white;
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      width: 300px;
-      min-width: 300px;
-      max-width: 300px;
-      flex-shrink: 0;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      margin: 0;
-      box-sizing: border-box;
-      position: relative;
-    }
+/* Remove duplicate container styles */
+.testimonials-grid.duplicate {
+  display: none;
+}
 
-    .testimonial-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #4f46e5, #7c3aed);
-      border-radius: 12px 12px 0 0;
-    }
+/* Back to Top Button */
+#back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: background 0.3s ease;
+  z-index: 1000;
+}
 
-    .testimonial-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    }
-
-    .testimonial-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 1.5rem;
-      position: relative;
-    }
+#back-to-top:hover {
+  background: #0056b3;
+}
 
     .testimonial-avatar {
       width: 60px;
@@ -546,107 +592,6 @@
       text-align: center;
       margin-bottom: 30px;
     }
-
-     header {
-      text-align: center;
-      padding: 20px;
-      background: #007BFF;
-      color: white;
-    }
-
-    .logo {
-      max-width: 100px;
-      height: auto;
-      vertical-align: middle;
-    }
-
-    header h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      display: inline-block;
-      vertical-align: middle;
-      margin: 0 10px;
-    }
-
-    header p {
-      font-size: 1.1rem;
-      margin-top: 10px;
-    }
-
-    /* Navigation Styles */
-    nav {
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 12px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 1rem;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    .burger {
-      display: none;
-      cursor: pointer;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .burger div {
-      width: 25px;
-      height: 3px;
-      background: white;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-
-    @media (max-width: 768px) {
-      nav a {
-        color: #333;
-        display: none;
-        width: 100%;
-        padding: 12px 0;
-        border-top: 1px solid rgba(255,255,255,0.2);
-        justify-content: center;
-      }
-
-      nav a.active {
-        display: flex;
-      }
-
-      .burger {
-        display: flex;
-      }
-
-      nav {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .burger.active div:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
-      }
-
-      .burger.active div:nth-child(2) {
-        opacity: 0;
-      }
-
-      .burger.active div:nth-child(3) {
-        transform: rotate(-45deg) translate(5px, -5px);
-      }
-    }
   </style>
 </head>
 <body>
@@ -759,6 +704,14 @@
       </div>
     </section>
   </main>
+  <button id="back-to-top" aria-label="Back to top">↑ Top</button>
+<script>
+  const backToTopButton = document.getElementById('back-to-top');
+
+backToTopButton.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
       <footer>
     <div style="max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; text-align: left;">
       <div style="flex: 1; min-width: 200px; margin: 10px;">
