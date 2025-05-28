@@ -809,7 +809,7 @@
   background-image: inherit; /* inherit the background image */
   background-size: cover;
   background-position: center;
-  filter: blur(6px);
+  filter: blur(4px);
   z-index: 0;
   border-radius: 8px;
 }
@@ -1040,7 +1040,7 @@
       <img src="drive/_OK_9183.jpg" alt="Clinic interior" />
       <p><strong style="color:white">Our state-of-the-art clinic</strong></p>
     </div>
-    <div class="image-card" >
+    <div class="image-cardDr" >
       <img src="drive/_OK_9406.jpg" alt="Dr. Biren N. Yajnik" />
       <p><strong>Dr. Biren N. Yajnik</strong></p>
       <p>Vice President of UDA (2020–2022)</p>
@@ -1061,7 +1061,7 @@
       <img src="drive/_OK_9183.jpg" alt="Clinic interior" />
       <p style="color:white"><strong>Our state-of-the-art clinic</strong></p>
     </div>
-    <div class="image-card" >
+    <div class="image-cardDr" >
       <img src="drive/_OK_9406.jpg" alt="Dr. Biren N. Yajnik" />
       <p><strong>Dr. Biren N. Yajnik</strong></p>
       <p>Vice President of UDA (2020–2022)</p>
@@ -1080,6 +1080,31 @@
   </section>
   <style>
     .image-card img {
+      
+      width: 30%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 50%;
+}
+
+.image-card p {
+  position:relative;
+  left: 0;
+  right: 0;
+  bottom:-200px;
+  margin: 0;
+  padding: 12px 0 0 0;
+  background: rgba(0,0,0,0.55); /* semi-transparent for readability */
+  color: #fff;
+  font-size: 1rem;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  z-index: 2;
+  text-align: center;
+}
+
+  .image-cardDr img {
       width: 30%;
       height: auto;
       border-radius: 8px;
@@ -1265,7 +1290,7 @@
     <div style="max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; text-align: left;">
       <div style="flex: 1; min-width: 200px; margin: 10px;">
         <h3>Sterling Dental Clinic</h3>
-        <p>Providing exceptional dental care to Kampala since 2010.</p>
+        <p>Providing exceptional dental care to Kampala since 1997.</p>
       </div>
       <div style="flex: 1; min-width: 200px; margin: 10px;">
         <h3>Quick Links</h3>
@@ -1308,9 +1333,6 @@
   </script>
   
   <!-- Load Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  
-=======
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   // Initialize Supabase client
