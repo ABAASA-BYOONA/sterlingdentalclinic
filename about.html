@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Sterling Dental Clinic in Kampala offers expert dental care including general, cosmetic, and pediatric dentistry. Book your appointment today!" />
+  <title>Sterling Dental Clinic | Quality Dental Care in Kampala</title>
+  <link rel="icon" href="fav/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* General Reset and Base */
+   body {
+            background-image: url('drive/IMG-20250523-WA0263.webp');
+            background-repeat: repeat;
+            background-size: auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+        }
+        /* Transparent Background Overlay */
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: inherit;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+    a {
+      color: #007BFF;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover,
+    a:focus {
+      color: #0056b3;
+      text-decoration: underline;
+      outline: none;
+    }
+
+    /* Header */
+    header {
+      background-color: #005f99;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    header table {
+      margin: 0 auto;
+      border-collapse: collapse;
+      align-items: center;
+    }
+
+    header .logo {
+      max-height: 80px;
+      width: auto;
+      vertical-align: middle;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0 0 5px 15px;
+      font-weight: 700;
+      vertical-align: middle;
+      display: inline-block;
+      color: #fff;
+    }
+
+    header p {
+      margin: 5px 0 0;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: #cce4ff;
+    }
+
+    /* Navigation */
+    nav {
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    nav a {
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      background-color: #0056b3;
+      outline: none;
+    }
+
+    /* Burger menu */
+    .burger {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .burger div {
+      width: 25px;
+      height: 3px;
+      background: white;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      nav a {
+        display: none;
+        width: 100%;
+        padding: 12px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        justify-content: center;
+      }
+
+      nav a.active {
+        display: flex;
+      }
+
+      .burger {
+        display: flex;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .burger.active div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .burger.active div:nth-child(2) {
+      opacity: 0;
+    }
+
+    .burger.active div:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Main Section */
+    section#about {
+      background-image: url('drive/IMG-20250523-WA0263.webp');
+            background-repeat: repeat;
+            background-size: auto;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    section#about h2 {
+      color: #005f99;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    section#about p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      color: #333;
+      text-align: center;
+    }
+
+    section#about > div {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    section#about > div > div {
+      flex: 1 1 250px;
+      background-color: #e6f0ff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: inset 0 0 10px #cce4ff;
+      color: #004080;
+      text-align: center;
+    }
+
+    section#about h3 {
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+          .service-card {
+  position: relative;
+  background: #fff; /* fallback color */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  overflow: hidden;
+  color: #fff; /* text color for contrast */
+}
+
+/* Blurred background image layer */
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: inherit; /* inherit the background image */
+  background-size: cover;
+  background-position: center;
+  filter: blur(4px);
+  z-index: 0;
+  border-radius: 8px;
+}
+
+/* Dark overlay to dim the background */
+.service-card::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* stronger dim */
+  z-index: 1;
+  border-radius: 8px;
+}
+
+/* Make sure the content is above the overlay and blur */
+.service-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+    /* Opening Hours */
+    .hours {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 95, 153, 0.15);
+      color: #004080;
+      max-width: 400px;
+      margin: 0 auto 40px;
+    }
+
+    .hours h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: #005f99;
+    }
+
+    .hours ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .hours li {
+      margin-bottom: 8px;
+    }
+
+    /* WhatsApp Buttons */
+    .whatsapp {
+      position: fixed;
+      right: 30px;
+      display: flex;
+      align-items: center;
+      background-color: #25D366;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      z-index: 9999;
+      transition: background-color 0.3s ease;
+    }
+
+    .whatsapp:hover,
+    .whatsapp:focus {
+      background-color: #1ebe57;
+      outline: none;
+    }
+
+    .whatsapp:first-of-type {
+      bottom: 100px;
+    }
+
+    .whatsapp:nth-of-type(2) {
+      bottom: 160px;
+    }
+
+    .whatsapp svg {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+      fill: white;
+    }
+
+    /* AI Chat Styles */
+    #ai-chat-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      z-index: 10000;
+      transition: background-color 0.3s ease;
+    }
+
+    #ai-chat-button:hover,
+    #ai-chat-button:focus {
+      background-color: #0056b3;
+      outline: none;
+    }
+
+    #ai-chat-popup {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      width: 320px;
+      max-height: 400px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 10000;
+      font-family: Arial, sans-serif;
+    }
+
+    #ai-chat-header {
+      background-color: #007BFF;
+      color: white;
+      padding: 12px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    #ai-chat-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 14px;
+      color: #333;
+    }
+
+    #ai-chat-input-container {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+
+    #ai-chat-input {
+      flex: 1;
+      border: none;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    #ai-chat-input:focus {
+      outline: none;
+    }
+
+    #ai-chat-send {
+      background-color: #007BFF;
+      border: none;
+      color: white;
+      padding: 0 15px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    #ai-chat-send:hover,
+    #ai-chat-send:focus {
+      background-color: #0056b3;
+      outline: none;
+    }
+
+    .ai-message {
+      margin-bottom: 10px;
+      padding: 8px 12px;
+      border-radius: 15px;
+      max-width: 80%;
+      clear: both;
+      word-wrap: break-word;
+    }
+
+    .user-message {
+      background-color: #007BFF;
+      color: white;
+      float: right;
+      text-align: right;
+    }
+
+    .bot-message {
+      background-color: #f1f1f1;
+      color: #333;
+      float: left;
+      text-align: left;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <table>
+      <tr>
+        <td>
+          <img src="sterlinglogo.webp" alt="Sterling Dental Clinic Logo" class="logo" />
+        </td>
+        <td>
+          <h1>Sterling Dental Clinic</h1>
+        </td>
+      </tr>
+    </table>
+    <p>Your trusted partner for exceptional dental care in Kampala</p>
+    <nav>
+      <div class="burger" id="burger" aria-label="Toggle navigation menu" role="button" tabindex="0">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <a href="index.html"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
+      <a href="services.html"><i class="fas fa-teeth" aria-hidden="true"></i> Services</a>
+      <a href="index.html#contact"><i class="fas fa-phone-alt" aria-hidden="true"></i> Contact</a>
+      <a href="testimonials.html"><i class="fas fa-quote-right testimonial-icon" aria-hidden="true"></i> Testimonials</a>
+      <a href="gallery.html"><i class="fas fa-images" aria-hidden="true"></i> Gallery</a>
+      <a href="index.html#appointment"><i class="fas fa-calendar-check" aria-hidden="true"></i> Book Appointment</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about">
+      <h2>About Our Clinic</h2>
+      <p>
+        Sterling Dental Clinic has been serving the Kampala community since 1997. Our team of experienced dental professionals is committed to providing the highest quality care in a comfortable, modern environment.
+      </p>
+      <div>
+        <div>
+          <h3><i class="fas fa-certificate" aria-hidden="true" style="color: #007BFF;"></i> Our Mission</h3>
+          <p>To deliver exceptional dental care through personalized treatment plans, advanced technology, and compassionate service.</p>
+        </div>
+        <div>
+          <h3><i class="fas fa-eye" aria-hidden="true" style="color: #007BFF;"></i> Our Vision</h3>
+          <p>To be Kampala's most trusted dental clinic, transforming smiles and improving oral health for generations to come.</p>
+        </div>
+      </div>
+      <div class="hours" aria-label="Opening hours">
+        <h3><i class="fas fa-clock" aria-hidden="true" style="color: #007BFF;"></i> Opening Hours</h3>
+        <ul>
+          <li><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM</li>
+          <li><strong>Saturday:</strong> 9:00 AM - 3:00 PM</li>
+          <li><strong>Sunday:</strong> Emergency only</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- WhatsApp Floating Buttons -->
+    <a href="https://wa.me/256772488592" class="whatsapp" target="_blank" rel="noopener" aria-label="Chat on WhatsApp with 0772 488592">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.815 0 0012.05 0z"/>
+      </svg>
+      Chat with 0772 488592
+    </a>
+    <a href="https://wa.me/256701488592" class="whatsapp" target="_blank" rel="noopener" aria-label="Chat on WhatsApp with 0701 488592">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.776-8.457z"/>
+      </svg>
+      Chat with 0701 488592
+    </a>
+
+    <!-- AI Chat Button -->
+    <button id="ai-chat-button" aria-label="Open AI chat assistant" title="Chat with AI assistant">
+      <i class="fas fa-robot" aria-hidden="true"></i>
+    </button>
+
+    <!-- AI Chat Popup -->
+    <div id="ai-chat-popup" role="dialog" aria-modal="true" aria-labelledby="ai-chat-header">
+      <div id="ai-chat-header">Sterling Dental AI Assistant</div>
+      <div id="ai-chat-messages" aria-live="polite" aria-atomic="false"></div>
+      <form id="ai-chat-form" aria-label="Send message to AI assistant">
+        <input type="text" id="ai-chat-input" placeholder="Type your message..." autocomplete="off" aria-required="true" />
+        <button type="submit" id="ai-chat-send" aria-label="Send message"><i class="fas fa-paper-plane"></i></button>
+      </form>
+    </div>
+  </main>
+
+ <footer>
+    <div style="max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; text-align: left;">
+      <div style="flex: 1; min-width: 200px; margin: 10px;">
+        <h3>Sterling Dental Clinic</h3>
+        <p>Providing exceptional dental care to Kampala since 1997.</p>
+      </div>
+      <div style="flex: 1; min-width: 200px; margin: 10px;">
+        <h3>Quick Links</h3>
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="index.html" style="color: #fff; text-decoration: none;">Home</a></li>
+          <li><a href="services.html" style="color: #fff; text-decoration: none;">Services</a></li>
+          <li><a href="about.html" style="color: #fff; text-decoration: none;">About Us</a></li>
+          <li><a href="#contact" style="color: #fff; text-decoration: none;">Contact</a></li>
+        </ul>
+      </div>
+      <div style="flex: 1; min-width: 200px; margin: 10px;">
+        <h3>Contact Us</h3>
+        <p>
+          <i class="fas fa-map-marker-alt"></i> Garden City Mall, Kampala<br>
+          <i class="fas fa-phone-alt"></i> +256 772 488592<br>
+          <i class="fas fa-envelope"></i> info@kampalasterlingdentalclinic.com
+        </p>
+      </div>
+    </div>
+    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid;">
+      <p>© 2025 Sterling Dental Clinic. All rights reserved.</p>
+      <div style="margin-top: 10px;">
+        <a href="https://www.facebook.com/SterlingDentalPractice" style="color: #fff; margin: 0 10px; font-size: 20px;" title="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.twitter.com/yourprofile" style="color: #fff; margin: 0 10px; font-size: 20px;" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.linkedin.com/in/biren-yajnik-18a7a8358?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" style="color: #fff; margin: 0 10px; font-size: 20px;" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.instagram.com/sterlingdentalclinic?igsh=MjZpdXk1cWsxeHQ1" style="color: #fff; margin: 0 10px; font-size: 20px;" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.snapchat.com/add/sterlingdental?share_id=PbJexKFCMqA&locale=en-US" style="color: #fff; margin: 0 10px; font-size: 20px;" title="Snapchat"><i class="fab fa-snapchat"></i></a>
+        <a href="https://www.tiktok.com/@sterlingdentalclinic?_t=ZM-8wcxw0G6gEf&_r=1" style="color: #fff; margin: 0 10px; font-size: 20px;" title="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="https://wa.me/message/MGRPNC4UBTNFD1" style="color: #fff; margin: 0 10px; font-size: 20px;" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+  <script>
+    // Responsive burger menu toggle
+    const burger = document.getElementById('burger');
+    const navLinks = document.querySelectorAll('nav a');
+
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      navLinks.forEach(link => link.classList.toggle('active'));
+    });
+
+    burger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        burger.click();
+      }
+    });
+
+    // AI Chat functionality
+    const aiChatButton = document.getElementById('ai-chat-button');
+    const aiChatPopup = document.getElementById('ai-chat-popup');
+    const aiChatForm = document.getElementById('ai-chat-form');
+    const aiChatInput = document.getElementById('ai-chat-input');
+    const aiChatMessages = document.getElementById('ai-chat-messages');
+
+    aiChatButton.addEventListener('click', () => {
+      const isVisible = aiChatPopup.style.display === 'flex';
+      aiChatPopup.style.display = isVisible ? 'none' : 'flex';
+      if (!isVisible) {
+        aiChatInput.focus();
+      }
+    });
+
+    aiChatForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const userMessage = aiChatInput.value.trim();
+      if (!userMessage) return;
+
+      appendMessage(userMessage, 'user-message');
+      aiChatInput.value = '';
+      aiChatInput.disabled = true;
+
+      // Simulate AI response (replace with real AI API call)
+      appendMessage('Thinking...', 'bot-message', true);
+
+      try {
+        // Example: Replace this with actual API call to AI backend
+        const response = await fakeAIResponse(userMessage);
+        updateLastBotMessage(response);
+      } catch (error) {
+        updateLastBotMessage('Sorry, something went wrong. Please try again later.');
+      } finally {
+        aiChatInput.disabled = false;
+        aiChatInput.focus();
+      }
+    });
+
+    function appendMessage(text, className, isTemporary = false) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `ai-message ${className}`;
+      messageDiv.textContent = text;
+      if (isTemporary) {
+        messageDiv.dataset.temporary = 'true';
+      }
+      aiChatMessages.appendChild(messageDiv);
+      aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+    }
+
+    function updateLastBotMessage(text) {
+      const lastBotMessage = [...aiChatMessages.children].reverse().find(
+        el => el.classList.contains('bot-message') && el.dataset.temporary === 'true'
+      );
+      if (lastBotMessage) {
+        lastBotMessage.textContent = text;
+        delete lastBotMessage.dataset.temporary;
+      }
+      aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+    }
+
+    // Fake AI response for demonstration
+    function fakeAIResponse(userInput) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(`You said: "${userInput}". How can I assist you further with your dental care?`);
+        }, 1500);
+      });
+    }
+  </script>
+</body>
+</html>
