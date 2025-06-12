@@ -982,10 +982,37 @@
     <div class="smile-design">
         <div class="smile-mouth"></div>
     </div>
-<video controls poster="sterlinglogo.webp">
-        <source src="doc.webm" type="video/webm">
-        Your browser does not support the video tag.
-    </video>
+       <style>
+        /* Mobile-responsive video container */
+        .video-container {
+            width: 100%;
+            max-width: 600px; /* Adjust as needed */
+            margin: 0 auto;
+        }
+        video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+<div class="video-container">
+        <video controls poster="logo.webp">
+            <!-- Primary source (WebM for Chrome/Firefox) -->
+            <source src="doc.webm" type="video/webm">
+            <!-- Fallback (MP4 for Safari/iOS) -->
+            <source src="doc.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+    </div>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.querySelector('video');
+            video.addEventListener('error', function() {
+                console.error('Video error:', video.error);
+                alert('Error loading video. Check console for details.');
+            });
+        });
+    </script>
       </center>
   </section>
 
