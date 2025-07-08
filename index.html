@@ -983,37 +983,32 @@
     <div class="smile-design">
         <div class="smile-mouth"></div>
     </div>
-       <style>
-        /* Mobile-responsive video container */
-        .video-container {
-            width: 100%;
-            max-width: 600px; /* Adjust as needed */
-            margin: 0 auto;
-        }
-        video {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-    </style>
-<div class="video-container">
-        <video controls poster="sterlinglogo.webp">
-            <!-- Primary source (WebM for Chrome/Firefox) -->
-            <source src="doc.webm" type="video/webm">
-            <!-- Fallback (mov for Safari/iOS) -->
-            <source src="doc.mov" type="video/mp4">
-            Your browser does not support HTML5 video.
-        </video>
-    </div>
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const video = document.querySelector('video');
-            video.addEventListener('error', function() {
-                console.error('Video error:', video.error);
-                alert('Error loading video. Check console for details.');
-            });
-        });
-    </script>-->
+    
+  <style>
+
+    video {
+      width: 100%;
+      max-width: 720px;
+      height: auto;
+      border-radius: 12px;
+      border: 4px solid #00f5ff;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    }
+  </style>
+  <video id="myVideo" autoplay muted loop controls playsinline>
+    <source src="sterlin.webm" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <script>
+    const video = document.getElementById("myVideo");
+
+    // JS fallback if 'loop' doesn't work
+    video.addEventListener('ended', () => {
+      video.currentTime = 0;
+      video.play();
+    });
+  </script>
       </center>
   </section>
 
